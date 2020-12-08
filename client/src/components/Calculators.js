@@ -1,7 +1,4 @@
-
-
-
-function Register(props) {
+function Calculators(props) {
 
 
     return(
@@ -11,4 +8,4 @@ function Register(props) {
     )
 }
 
-export default Register
+export default Calculators

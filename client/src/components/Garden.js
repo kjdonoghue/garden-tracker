@@ -1,7 +1,6 @@
 
 
-
-function Register(props) {
+function Garden(props) {
 
 
     return(
@@ -11,4 +10,4 @@ function Register(props) {
     )
 }
 
-export default Register
+export default Garden

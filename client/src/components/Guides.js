@@ -1,7 +1,7 @@
 
 
 
-function Register(props) {
+function Guides(props) {
 
 
     return(
@@ -11,4 +11,4 @@ function Register(props) {
     )
 }
 
-export default Register
+export default Guides
