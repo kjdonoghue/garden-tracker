@@ -30,7 +30,34 @@ router.post('/register', (req, res) => {
 
 
 router.post('/login', (req, res) => {
+    let username = req.body.username
+    let password = req.body.password
+
+    db.any('SELECT username, password from users')
+    .then((users => { 
+        //see if there is a find one option
+        // users.forEach((user) => {
+            users.find((user) => {
+            if (username == user.username) {
+                bcrypt.compare(password, user.password, function(err, result) {
+                    if (result) {
+                        const token = jwt.sign({username: username}, process.env.JWT_CODE)
+                        res.json({token: token})                        
+                    } else {
+                        //username is correct & password is wrong
+                        res.json({sucess: false})
+                    }
+                })
+            } else {
+                res.json({succes: "no"})
+            } 
+        })
+
+    }))
+
+
     
+
 })
 
 
