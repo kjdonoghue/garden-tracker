@@ -5,9 +5,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import {TextField, Button} from '@material-ui/core/'
 import Select from '@material-ui/core/Select';
-import * as actionTypes from "../store/actions/actionTypes"
-import axios from "axios"
-import { setAuthenticationHeader} from '../utils/authHeaders'
 import {NavLink} from "react-router-dom"
 
 //For Material UI
@@ -42,8 +39,9 @@ function Register(props) {
            })
        }
 
+       //need to ensure all fields are filled out
        const handleSubmit = (e) => {
-           fetch('http://localhost:8080/register', {
+            fetch('http://localhost:8080/register', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(register)
@@ -51,8 +49,7 @@ function Register(props) {
             .then(result => {
                 if (result.success) 
                 props.history.push('/login')
-            })
-        
+            })        
         }
    
 

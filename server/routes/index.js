@@ -10,21 +10,28 @@ var bcrypt = require('bcryptjs')
 
 router.use(cors())
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
     let username = req.body.username
     let password = req.body.password
     let zone = parseInt(req.body.zone)
 
-    //need to add checks to see if user name exists & all fields are filled out
+    //need to ensure all fields are filled out - client side
 
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(password, salt, function(err, hash) {
-          db.none('INSERT INTO users (username, password, zone) VALUES ($1, $2, $3)', [username, hash, zone]
-        ).then(() => {
-            res.json({success: true})
+    const user = await db.any('SELECT username from users WHERE username = $1', [username])
+    
+    if (user.length > 0) {
+        //user already exists            
+        res.json({success: "false"})
+    } else  {
+        bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(password, salt, function(err, hash) {
+            db.none('INSERT INTO users (username, password, zone) VALUES ($1, $2, $3)', [username, hash, zone]
+            ).then(() => {
+                res.json({success: true})
+            })
         })
-     })
-    })
+        })
+    }
 
 })
 
