@@ -13,13 +13,13 @@ router.use(cors())
 router.post('/register', (req, res) => {
     let username = req.body.username
     let password = req.body.password
-    let zip = req.body.zip
+    let zone = parseInt(req.body.zone)
 
     //need to add checks to see if user name exists & all fields are filled out
 
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(password, salt, function(err, hash) {
-          db.none('INSERT INTO users (username, password, zip) VALUES ($1, $2, $3)', [username, hash, zip]
+          db.none('INSERT INTO users (username, password, zone) VALUES ($1, $2, $3)', [username, hash, zone]
         ).then(() => {
             res.json({success: true})
         })

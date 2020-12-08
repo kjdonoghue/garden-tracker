@@ -12,6 +12,7 @@ function Menu(props) {
       {/* Account is a stretch goal  */}
       <b>Account</b>
       {!props.isAuth ?<b><NavLink to = "/login">Login</NavLink></b> :null}
+      {!props.isAuth ?<b><NavLink to = "/register">Register</NavLink></b> :null}
       {props.isAuth ?<b><NavLink to = "/logout">Logout</NavLink></b> :null}
       {props.isAuth ?<b>Zone: {props.displayZone} <NavLink to = "/zone">change</NavLink></b>:null}
     </div>
