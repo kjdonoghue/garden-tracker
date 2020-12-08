@@ -14,9 +14,12 @@ import Garden from './components/Garden';
 import Guides from './components/Guides';
 import Tasks from './components/Tasks';
 import Zone from './components/Zone';
-import Calculators from './components/Calculators';
+import {setAuthenticationHeader} from './utils/authHeaders'
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const token = localStorage.getItem('jsonwebtoken')
+setAuthenticationHeader(token)
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -28,7 +31,6 @@ ReactDOM.render(
             <Route component = {Login} path='/login' />
             <Route component = {App} path='/' exact />
             <Route component = {Guides} path='/guides' />
-            <Route component = {Calculators} path='/calculators' />
             <Route component = {Garden} path='/garden' />
             <Route component = {Tasks} path='/tasks' />
             <Route component = {Zone} path='/zone' />
