@@ -17,7 +17,6 @@ function FindZone(props) {
     const handleOnClick = (zip) => {
         fetch(`https://phzmapi.org/${zip}.json`)
         .then(response => response.json())
-        // .then(result => props.onUpdateZone(result))
         .then(result => {
             setZone(result.zone)
         })
@@ -38,19 +37,5 @@ function FindZone(props) {
     </div>
   );
 }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     zoneInformation: state.growingZone
-//   }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     onUpdateZone: (zone) => dispatch({type: "ON_UPDATE_ZONE", payload: zone})
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(FindZone);
 
 export default FindZone
