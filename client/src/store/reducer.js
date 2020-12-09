@@ -1,5 +1,6 @@
 const initialState = {
     zone: "",
+    primary_garden: "",
     isGuest: false,
     isAuth: false
 }

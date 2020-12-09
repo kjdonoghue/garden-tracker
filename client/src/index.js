@@ -10,12 +10,27 @@ import reducer from './store/reducer'
 import BaseLayout from './components/BaseLayout';
 import Login from './components/Login';
 import Register from './components/Register';
-import Garden from './components/Garden';
+import DisplayGarden from './components/DisplayGarden';
 import Guides from './components/Guides';
 import Tasks from './components/Tasks';
 import Zone from './components/Zone';
 import {setAuthenticationHeader} from './utils/authHeaders'
 import requireAuth from './components/requireAuth'
+import { createMuiTheme, ThemeProvider } from "@material-ui/core"
+
+//change material ui colors
+const theme = createMuiTheme({
+  palette: {
+     primary: {
+        main: "#434c23" // dark green
+               },
+     secondary: {
+        main: "#ca912f" //yellow
+                }
+           },
+//fontFamily: font // as an aside, highly recommend importing roboto font for Material UI projects! Looks really nice
+});
+
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
@@ -37,15 +52,19 @@ ReactDOM.render(
     <BrowserRouter>
       <Provider store={store}>
         <Switch>
+        <ThemeProvider theme={theme}>
           <BaseLayout>
             <Route component = {Register} path='/register' />
             <Route component = {Login} path='/login' />
             <Route component = {App} path='/' exact />
             <Route component = {Guides} path='/guides' />
-            <Route component = {requireAuth(Garden)} path='/garden' />
-            <Route component = {requireAuth(Tasks)} path='/tasks' />
+            {/* <Route component = {requireAuth(DisplayGarden)} path='/garden' /> */}
+            <Route component = {DisplayGarden} path='/garden' />
+            {/* <Route component = {requireAuth(Tasks)} path='/tasks' /> */}
+            <Route component = {Tasks} path='/tasks' />
             <Route component = {Zone} path='/zone' />
           </BaseLayout>
+          </ThemeProvider>
         </Switch>
       </Provider>
     </BrowserRouter>

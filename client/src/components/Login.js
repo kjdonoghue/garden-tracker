@@ -61,6 +61,7 @@ function Login(props) {
                 label="Username"
                 variant="outlined"        
                 name="username"
+                color="secondary"
                 onChange={handleOnChange}
             />
             </form>
@@ -72,12 +73,13 @@ function Login(props) {
                 autoComplete="current-password"
                 variant="outlined"
                 name="password"
+                color="secondary"
                 onChange={handleOnChange}
                 />
         </form>
         </div>
         <div className={classes.root}>
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
+            <Button variant="contained" color="secondary" onClick={handleSubmit}>
                 Submit
             </Button>
         </div>
