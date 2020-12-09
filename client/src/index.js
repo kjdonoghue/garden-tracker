@@ -11,6 +11,7 @@ import BaseLayout from './components/BaseLayout';
 import Login from './components/Login';
 import Register from './components/Register';
 import DisplayGarden from './components/DisplayGarden';
+import AddGarden from './components/AddGarden'
 import Guides from './components/Guides';
 import Tasks from './components/Tasks';
 import Zone from './components/Zone';
@@ -61,6 +62,7 @@ ReactDOM.render(
             <Route component = {Guides} path='/guides' />
             {/* <Route component = {requireAuth(DisplayGarden)} path='/garden' /> */}
             <Route component = {DisplayGarden} path='/garden' />
+            <Route component = {AddGarden} path='/add-garden' />
             {/* <Route component = {requireAuth(Tasks)} path='/tasks' /> */}
             <Route component = {PlantDetails} path='/plant/:id' />
             <Route component = {Tasks} path='/tasks' />

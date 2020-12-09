@@ -60,6 +60,7 @@ function AddPlant(props) {
 
           if (success) {
            //reload add plant and garden
+           console.log("Success")
           } else {
               console.log("did not update")
               }

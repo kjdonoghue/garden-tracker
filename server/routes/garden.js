@@ -49,7 +49,6 @@ router.post('/save-new', (req, res) => {
     })
 })
 
-
 //save edited plant information from /plant/:id
 router.post('/save-edit', (req, res) => {
     let id = parseInt(req.body.data.id)
@@ -61,14 +60,30 @@ router.post('/save-edit', (req, res) => {
     let notes = req.body.data.notes
     let company = req.body.data.company
     let type = req.body.data.type
+
+    // (VALUES $1, $2, $3, $4, $5, $6, $7, $8, $9)
+    db.none('UPDATE garden_plants SET plant_name=$1, plant_family=$2, planting_date=$3, first_harvest=$4, last_harvest=$5, notes=$6, company=$7, type=$8 WHERE id=$9', [plant_name, plant_family, planting_date, first_harvest, last_harvest, notes, company, type, id])
+    .then(() => {
+        res.json({success: true})
+    })
+    // .catch(() => {
+    //     res.json({success: false})
+    // })
     
-    db.none('UPDATE garden_plants SET plant_name=$1, plant_family=$2, planting_date=$3, first_harvest=$4, last_harvest=$5, notes=$6, company=$7, type=$8 WHERE id=$9 VALUES $1, $2, $3, $4, $5, $6, $7, $8, $9', [plant_name, plant_family, planting_date, first_harvest, last_harvest, notes, company, type, id])
+})
+
+//delete plant from /plant/:id
+router.delete('/delete-plant/:id', (req, res) => {
+    
+    let id = parseInt(req.params.id)
+        
+    db.none('DELETE FROM garden_plants WHERE id=$1', [id])
     .then(() => {
         res.json({success: true})
     }).catch(() => {
         res.json({success: false})
     })
-    
+
 })
 
 //Plant Detail (from Garden Table Component) - get plant details from garden plants by plant id

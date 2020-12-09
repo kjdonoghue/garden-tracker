@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
+import {NavLink} from "react-router-dom"
 
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -71,15 +72,7 @@ function ChooseGarden(props) {
         return <MenuItem value={garden.id}>{garden.garden_name}</MenuItem>
     })
 
-    //pull primary garden id & zone when open the page
-    // share both of these with global
-    //pull garden information
-    //display primary garden name
-    //show other gardens by name (value=garden id) in drop down 
-    //option to change gardens - if change this needs to update the global state but not account info
-
-
-    return (
+        return (
         <div>
            <p>choose garden</p> 
 
@@ -88,13 +81,17 @@ function ChooseGarden(props) {
                 <Select
                 labelId="demo-simple-select-outlined-label"
                 id="demo-simple-select-outlined"
-                name="garden"                
+                name="garden" 
+                value={selectedGarden}               
                 onChange={handleOnChange}
                 label="garden"
                 >
                     {gardenList}
                 </Select>
             </FormControl>
+            <div>
+                <b><NavLink to = "/add-garden">Create a new Garden</NavLink></b>
+            </div>
         </div>
     )
 }
