@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import {connect} from 'react-redux'
+import axios from 'axios'
 import { DataGrid } from '@material-ui/data-grid';
 
 
 function GardenTable(props) {
     
-    let id = 1
-
     //sets plants for use in rows
     const [plants, setPlants] = useState([])
 
@@ -22,20 +22,19 @@ function GardenTable(props) {
     //sets table selection
     // const [selection, setSelection] = useState({})
 
-    useEffect(() => {        
-        fetchGarden(id)
-    }, [])
+    useEffect(() => {      
+        //gets plants in primary garden (in global state) when updated
+        fetchGarden(props.displayGarden)
+    }, [props.displayGarden])
     
+    //gets plants by garden id 
     const fetchGarden = (id) => {
-        fetch(`http://localhost:8080/gardens/${id}`)
-        .then(response => response.json())
-        .then(result => {
-            setPlants(result)
+        axios.get(`http://localhost:8080/garden/${id}`)
+        .then(response => {
+            setPlants(response.data)
         })
 
     }
-
-    // console.log(selection)
 
     return (
 
@@ -45,7 +44,8 @@ function GardenTable(props) {
             columns={column}
             rows={plants} 
             onSelectionChange={(newSelection) => {     
-                window.location.href = (`/plant/${id}/${newSelection.rowIds[0]}`)
+                window.location.href = (`/plant/${newSelection.rowIds[0]}`)
+                // window.location.href = (`/plant/${id}/${newSelection.rowIds[0]}`)
                 //garden id / plant id
                 }}                 
         />
@@ -57,6 +57,10 @@ function GardenTable(props) {
     );
 } 
 
+const mapStateToProps = (state) => {
+    return{
+        displayGarden: state.primary_garden
+    }
+}
 
-
-export default GardenTable
+export default connect(mapStateToProps)(GardenTable)
