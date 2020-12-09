@@ -31,6 +31,26 @@ router.get ('/list-gardens', authenticate, async (req, res) => {
 
 })
 
+//save new plant information
+router.post('/save-new', (req, res) => {
+    console.log("fired")
+    let garden_id = req.body.data.garden_id
+    let plant_name = req.body.data.plant_name
+    let plant_family = req.body.data.plant_family
+    let company = req.body.data.company
+    let type = req.body.data.type
+    let zone = req.body.data.zone
+    
+    db.none('INSERT INTO garden_plants (garden_id, plant_name, plant_family, company, type) VALUES ($1, $2, $3, $4, $5)', [garden_id, plant_name, plant_family, company, type])
+    .then(() => {
+        res.json({success: true})
+    }).catch(() => {
+        res.json({success: false})
+    })
+})
+
+
+//save edited plant information from /plant/:id
 router.post('/save-edit', (req, res) => {
     let id = parseInt(req.body.data.id)
     let plant_name = req.body.data.plant_name
@@ -40,19 +60,14 @@ router.post('/save-edit', (req, res) => {
     let last_harvest = req.body.data.last_harvest
     let notes = req.body.data.notes
     let company = req.body.data.company
-    let type = req.body.data.notestype
+    let type = req.body.data.type
     
-    console.log(id)
-
-    db.none('UPDATE garden_plants SET plant_name=$1, planting_date = $2 WHERE id = $3', [plant_name, planting_date, id])
-    // db.none('UPDATE garden_plants SET plant_name=$1, plant_family=$2, planting_date = $3, first_harvest = $4, last_harvest = $5, notes = $6, company = $7, type = $8 WHERE id = $9 VALUES $1, $2, $3, $4, $5, $6, $7, $8, $9', [plant_name, plant_family, planting_date, first_harvest, last_harvest, notes, company, type, id])
+    db.none('UPDATE garden_plants SET plant_name=$1, plant_family=$2, planting_date=$3, first_harvest=$4, last_harvest=$5, notes=$6, company=$7, type=$8 WHERE id=$9 VALUES $1, $2, $3, $4, $5, $6, $7, $8, $9', [plant_name, plant_family, planting_date, first_harvest, last_harvest, notes, company, type, id])
     .then(() => {
         res.json({success: true})
+    }).catch(() => {
+        res.json({success: false})
     })
-    
-    // .catch(() => {
-    //     res.json({success: false})
-    // })
     
 })
 

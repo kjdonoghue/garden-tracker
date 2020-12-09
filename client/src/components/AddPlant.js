@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import {connect} from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -9,6 +10,7 @@ import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
+import axios from "axios";
 
 
 //for material-ui select
@@ -29,122 +31,103 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-function AddPlant() {
-   //for material ui select
-   const classes = useStyles();
+function AddPlant(props) {
+    //for material ui select
+    const classes = useStyles();
 
-  const [plantName, setPlantName] = useState()
-  const [plantFamily, setPlantFamily] = useState()
-  const [sowDate, setSowDate] = useState(new Date('2021-04-07'));
-  //put lastfrost date in here
-
-  //calc sow date by veg family or send last frost through and calc on server
-  const handleDateChange = (date) => {
-    date.setDate(date.getDate() + 50)
-    console.log(date)
-    setSowDate(date);
-  };
-
-  const handleSelectFamily = (event) => {        
-    setPlantFamily(event.target.value)
-  };
-
-  const handlePlantName = (e) => {
-    setPlantName(e.target.value)
-  }
-
-  const onSaveToGarden = (id, name, family, sow_date) =>{
-    console.log(id)
-    console.log(name)
-    console.log(family)
-    console.log(sow_date)
-    fetch("url", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"},
-      body: JSON.stringify({
-        garden_id: id,
-        name: name,
-        family: family,
-        sow_date: sow_date
-
+    const [newPlant, setNewPlant] = useState({})
+    
+    useEffect(() => {
+      setNewPlant({...newPlant,
+        zone: props.displayZone,
+        garden_id: props.displayGardenID
       })
-  })
-  }
+    }, [props.displayGardenID])        
+    
+    
+    const handleOnChange = (e) => {
+        setNewPlant({...newPlant,
+          [e.target.name]: e.target.value
+        })
+    }
 
+    const onSaveToGarden = (plant) => {
+      axios.post('http://localhost:8080/garden/save-new',
+        {
+          data: newPlant
+        })
+        .then(response => {let success = response.data.success
 
-    return (
-      <div>
-          <p>Add Plant</p>
-          <div>
-          <TextField onChange={handlePlantName} id="standard-search" label="Plant Name" type="text" />
-          </div>
-          <div>
-          <FormControl className={classes.formControl}>            
-                <InputLabel id="demo-simple-select-label">Family</InputLabel>
-                <Select onChange={handleSelectFamily} labelId="demo-simple-select-label" id="demo-simple-select" value={plantFamily} >
-                    <MenuItem value={1}>Beans</MenuItem>
-                    <MenuItem value={2}>Beets</MenuItem>
-                    <MenuItem value={3}>Broccoli</MenuItem>
-                    <MenuItem value={4}>Cabbage</MenuItem>
-                    <MenuItem value={5}>Carrots</MenuItem>
-                    <MenuItem value={6}>Cauliflower</MenuItem>
-                    <MenuItem value={7}>Celery</MenuItem>
-                    <MenuItem value={8}>Corn</MenuItem>
-                    <MenuItem value={9}>Cowpeas</MenuItem>
-                    <MenuItem value={10}>Cucumbers</MenuItem>
-                    <MenuItem value={11}>Eggplant</MenuItem>
-                    <MenuItem value={13}>Greens</MenuItem>
-                    <MenuItem value={14}>Leeks</MenuItem>
-                    <MenuItem value={15}>Melons</MenuItem>
-                    <MenuItem value={16}>Okra</MenuItem>
-                    <MenuItem value={19}>Peanuts</MenuItem>
-                    <MenuItem value={20}>Peas</MenuItem>
-                    <MenuItem value={21}>Peppers</MenuItem>
-                    <MenuItem value={22}>Potatoes</MenuItem>
-                    <MenuItem value={24}>Summer Squash</MenuItem>
-                    <MenuItem value={25}>Winter Squash</MenuItem>
-                    <MenuItem value={26}>Sweet Potatoes</MenuItem>
-                    <MenuItem value={28}>Tomatoes</MenuItem>        
-                </Select>
-            </FormControl>
+          if (success) {
+           //reload add plant and garden
+          } else {
+              console.log("did not update")
+              }
+          })    
+    }
+
+    
+
+      return (
+        <div>
+            <p>Add Plant</p>
+            <div>
+            <TextField onChange={handleOnChange} name="plant_name" value={newPlant.plant_name} id="standard-search" label="Plant Name" type="text" />
             </div>
             <div>
-              <button onClick={() => onSaveToGarden(1, plantName, plantFamily, sowDate)}>Save</button>
-            </div>
-            {/* <div>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <Grid container justify="space-around">
-                <KeyboardDatePicker
-                  margin="normal"
-                  id="date-picker-dialog"
-                  label="Sow Seeds"
-                  format="MM/dd/yyyy"
-                  value={sowDate}
-                  onChange={handleDateChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                />                    
-              </Grid>
-            </MuiPickersUtilsProvider>
-            </div> */}
-          {/* input a plant name
-          select the plant family
-          get the information from the plant family
-          get last frost date from zone
-          post to the server
-            garden # - props
-            plant variety name - user input
-            plant family - select from drop down
-            last frost date - from zone - global state
-            sow_days - from plant family - maybe hardcode? */}
+            <FormControl className={classes.formControl}>            
+                  <InputLabel id="demo-simple-select-label">Family</InputLabel>
+                  <Select onChange={handleOnChange} labelId="demo-simple-select-label" id="demo-simple-select" name="plant_family" value={newPlant.plant_family} >
+                      <MenuItem value={1}>Beans</MenuItem>
+                      <MenuItem value={2}>Beets</MenuItem>
+                      <MenuItem value={3}>Broccoli</MenuItem>
+                      <MenuItem value={4}>Cabbage</MenuItem>
+                      <MenuItem value={5}>Carrots</MenuItem>
+                      <MenuItem value={6}>Cauliflower</MenuItem>
+                      <MenuItem value={7}>Celery</MenuItem>
+                      <MenuItem value={8}>Corn</MenuItem>
+                      <MenuItem value={9}>Cowpeas</MenuItem>
+                      <MenuItem value={10}>Cucumbers</MenuItem>
+                      <MenuItem value={11}>Eggplant</MenuItem>
+                      <MenuItem value={13}>Greens</MenuItem>
+                      <MenuItem value={14}>Leeks</MenuItem>
+                      <MenuItem value={15}>Melons</MenuItem>
+                      <MenuItem value={16}>Okra</MenuItem>
+                      <MenuItem value={19}>Peanuts</MenuItem>
+                      <MenuItem value={20}>Peas</MenuItem>
+                      <MenuItem value={21}>Peppers</MenuItem>
+                      <MenuItem value={22}>Potatoes</MenuItem>
+                      <MenuItem value={24}>Summer Squash</MenuItem>
+                      <MenuItem value={25}>Winter Squash</MenuItem>
+                      <MenuItem value={26}>Sweet Potatoes</MenuItem>
+                      <MenuItem value={28}>Tomatoes</MenuItem>        
+                  </Select>
+              </FormControl>                        
+              <TextField onChange={handleOnChange} name="company" id="standard-search" label="Company" type="text" value={newPlant.company} />
+              <FormControl className={classes.formControl}>            
+                  <InputLabel id="demo-simple-select-label">Start From</InputLabel>
+                  <Select onChange={handleOnChange} labelId="demo-simple-select-label" id="demo-simple-select" name="type" value={newPlant.type} >
+                      <MenuItem value="seed">Seed</MenuItem>
+                      <MenuItem value="plant">Plant</MenuItem>
+                      <MenuItem value="sets">Sets</MenuItem>
+                      <MenuItem value="slips">Slips</MenuItem>                   
+                  </Select>
+              </FormControl>
+              </div>
+              <div>
+                <button onClick={() => onSaveToGarden(newPlant)}>Save</button>
+              </div>          
+        </div>
 
-
-      </div>
-
-      
+        
     );
 } 
 
-export default AddPlant
+const mapStatesToProps = (state) =>  {
+  return {
+    displayZone: state.zone,
+    displayGardenID: state.primary_garden   
+  }
+}
+
+export default connect(mapStatesToProps)(AddPlant)
