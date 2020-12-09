@@ -22,8 +22,8 @@ router.get ('/defaults', authenticate, async (req, res) => {
 })
 
 //Choose Garden Component - get all user gardens from gardens
-router.get ('/list-gardens', async (req, res) => {
-    let id = 2
+router.get ('/list-gardens', authenticate, async (req, res) => {
+    let id = res.locals.id
     
     let gardens = await db.any('SELECT id, garden_name from gardens WHERE user_id = $1', [id])
     
@@ -31,12 +31,49 @@ router.get ('/list-gardens', async (req, res) => {
 
 })
 
+router.post('/save-edit', (req, res) => {
+    let id = parseInt(req.body.data.id)
+    let plant_name = req.body.data.plant_name
+    let plant_family = req.body.data.plant_family
+    let planting_date = req.body.data.planting_date
+    let first_harvest = req.body.data.first_harvest
+    let last_harvest = req.body.data.last_harvest
+    let notes = req.body.data.notes
+    let company = req.body.data.company
+    let type = req.body.data.notestype
+    
+    console.log(id)
+
+    db.none('UPDATE garden_plants SET plant_name=$1, planting_date = $2 WHERE id = $3', [plant_name, planting_date, id])
+    // db.none('UPDATE garden_plants SET plant_name=$1, plant_family=$2, planting_date = $3, first_harvest = $4, last_harvest = $5, notes = $6, company = $7, type = $8 WHERE id = $9 VALUES $1, $2, $3, $4, $5, $6, $7, $8, $9', [plant_name, plant_family, planting_date, first_harvest, last_harvest, notes, company, type, id])
+    .then(() => {
+        res.json({success: true})
+    })
+    
+    // .catch(() => {
+    //     res.json({success: false})
+    // })
+    
+})
+
+//Plant Detail (from Garden Table Component) - get plant details from garden plants by plant id
+router.get ('/plant/:id', async (req, res) => {
+    let plant_id = req.params.id
+    
+    //get zone and primary garden from users
+    let plantDetails = await db.any('SELECT id, plant_name, plant_family, planting_date, first_harvest, last_harvest, notes, company, type FROM garden_plants WHERE id = $1', [plant_id])
+    
+    res.json(plantDetails)
+
+})
+
+
 //Garden Table Component - get all plants from garden plants by garden id
 router.get ('/:id', async (req, res) => {
     let garden_id = req.params.id
     
     //get zone and primary garden from users
-    let plants = await db.any('SELECT id, plant_name, sow_date, first_harvest, last_harvest, notes FROM garden_plants WHERE garden_id = $1', [garden_id])
+    let plants = await db.any('SELECT id, plant_name, planting_date, first_harvest, last_harvest, notes, type FROM garden_plants WHERE garden_id = $1', [garden_id])
     
     res.json(plants)
 

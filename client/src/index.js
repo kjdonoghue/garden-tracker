@@ -14,6 +14,7 @@ import DisplayGarden from './components/DisplayGarden';
 import Guides from './components/Guides';
 import Tasks from './components/Tasks';
 import Zone from './components/Zone';
+import PlantDetails from './components/PlantDetails'
 import {setAuthenticationHeader} from './utils/authHeaders'
 import requireAuth from './components/requireAuth'
 import { createMuiTheme, ThemeProvider } from "@material-ui/core"
@@ -61,6 +62,7 @@ ReactDOM.render(
             {/* <Route component = {requireAuth(DisplayGarden)} path='/garden' /> */}
             <Route component = {DisplayGarden} path='/garden' />
             {/* <Route component = {requireAuth(Tasks)} path='/tasks' /> */}
+            <Route component = {PlantDetails} path='/plant/:id' />
             <Route component = {Tasks} path='/tasks' />
             <Route component = {Zone} path='/zone' />
           </BaseLayout>
