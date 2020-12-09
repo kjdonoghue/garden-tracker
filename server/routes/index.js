@@ -44,7 +44,7 @@ router.post('/login', async (req, res) => {
 
     if (user.length == 0) {
         //no user found
-        res.json({success: "user isnot found"})
+        res.json({success: "user is not found"})
     } else  {
         user.map(user => {
         bcrypt.compare(password, user.password, function(err, result) {

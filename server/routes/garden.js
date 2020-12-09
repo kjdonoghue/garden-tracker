@@ -7,12 +7,14 @@ const pgp = require("pg-promise")()
 const db = pgp(connectionsString)
 const jwt = require("jsonwebtoken")
 var bcrypt = require('bcryptjs')
+const authenticate = require('../authenticate')
+
 
 //Choose Garden Component - get zone and primary garden from users
-router.get ('/defaults', async (req, res) => {
-    let id = 2
+router.get ('/defaults', authenticate, async (req, res) => {
     
-    //
+    let id = res.locals.id
+     
     let defaults = await db.any('SELECT zone, primary_garden from users WHERE id = $1', [id])
     
     res.json(defaults)
