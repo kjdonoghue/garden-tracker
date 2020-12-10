@@ -40,9 +40,12 @@ function Login(props) {
         .then(response => {
                         
            const token = response.data.token
+           const zone = response.data.zone
+         
            if (token) {
                 localStorage.setItem("jsonwebtoken", token)
                 setAuthenticationHeader(token)
+                // props.updateZone(zone)
                 props.onLogIn()
                 props.history.push("/")
             } else {
@@ -90,7 +93,8 @@ function Login(props) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogIn: () => dispatch({type: actionTypes.LOGGED_IN})
+        onLogIn: () => dispatch({type: actionTypes.LOGGED_IN}),
+        // updateZone: (zone) => dispatch({type: 'SET_ZONE', payload: zone})
     }
 }
 

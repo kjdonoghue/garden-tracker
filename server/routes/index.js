@@ -40,7 +40,7 @@ router.post('/login', async (req, res) => {
     let username = req.body.username
     let password = req.body.password
 
-    const user = await db.any('SELECT id, username, password from users WHERE username = $1', [username])
+    const user = await db.any('SELECT id, username, password, zone from users WHERE username = $1', [username])
 
     if (user.length == 0) {
         //no user found
@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
         bcrypt.compare(password, user.password, function(err, result) {
             if (result) {
                 const token = jwt.sign({id: user.id}, process.env.JWT_CODE)
-                res.json({token: token})                        
+                res.json({token: token, zone: user.zone})                        
             } else {
                 //username is correct & password is wrong
                 res.json({sucess: "password is not valid"})

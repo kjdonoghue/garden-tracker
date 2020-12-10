@@ -4,8 +4,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
-
+import Zone from './Zone'
+import {connect} from 'react-redux'
 
 //for material-ui select
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function Guides() {
+function Guides(props) {
 
     //for material ui select
     const classes = useStyles();
@@ -63,6 +63,10 @@ function Guides() {
     return (
         <div>
             <h1>Growing Guides</h1>
+            <div>
+             <Zone/>         
+            </div>
+
             <FormControl className={classes.formControl}>
                 <InputLabel id="demo-simple-select-label">Vegetable</InputLabel>
                 <Select onChange={handleChange} labelId="demo-simple-select-label" id="demo-simple-select" value={plant} >
@@ -94,8 +98,17 @@ function Guides() {
         <div>        
             {guideItem}    
         </div>
+    
         </div>
     )
 }
 
-export default Guides
+const mapStateToProps = (state) => {
+    return{
+        isGuest: state.isGuest,
+        zone: state.zone
+    }
+}
+
+
+export default connect(mapStateToProps)(Guides)

@@ -9,7 +9,8 @@ const reducer = (state= initialState, action) => {
 
     if (action.type === 'LOGGED_IN') {
         return {...state,
-            isAuth: true
+            isAuth: true,
+            isGuest: true,
         }
     } else if (action.type === 'SET_GARDEN') {
         return{...state,
@@ -17,7 +18,12 @@ const reducer = (state= initialState, action) => {
         }
     }  else if (action.type === 'SET_ZONE') {
         return{...state,
-            zone: action.payload
+            zone: action.payload,
+            isGuest: true
+        }
+    } else if (action.type === 'NOT_GUEST') {
+        return{...state,
+            isGuest: false
         }
     } else {
         return state

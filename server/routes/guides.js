@@ -16,6 +16,12 @@ router.get('/:id', async (req, res) => {
 })
 
 
+router.get('/zone-information/:id', async (req, res) => {
+    let id = req.params.id
+    
+    let info = await db.any('SELECT * FROM zones WHERE zone_name=$1', [id])
 
+    res.json(info)
+})
 
 module.exports = router
