@@ -43,7 +43,7 @@ function AddPlant(props) {
         zone: props.displayZone,
         garden_id: props.displayGardenID
       })
-    }, [props.displayGardenID, ])        
+    }, [props.displayGardenID])        
     
     //update with information
     const handleOnChange = (e) => {

@@ -37,8 +37,7 @@ function AddTasks(props) {
 
     const [task, setTask] = useState({})
 
-    // add zone and garden id to plant info onload
- 
+     
     //update with information
     const handleOnChange = (e) => {
         setTask({...task,
@@ -46,7 +45,7 @@ function AddTasks(props) {
         })
     }
 
-    const handleSetDate = (date, e) => {
+    const handleSetDate = (date) => {
         date.setDate(date.getDate())
         console.log(date)
         setTask({
@@ -56,7 +55,7 @@ function AddTasks(props) {
       };
 
     const onSaveTasks= (task) => {
-      axios.post('http://localhost:8080/    ',
+      axios.post('http://localhost:8080/tasks/add-task',
         {
           data: task
         })

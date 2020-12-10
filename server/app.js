@@ -8,12 +8,14 @@ const pgp = require('pg-promise')()
 const db = pgp(connectionsString)
 const indexRouter = require('./routes/index')
 const gardenRouter = require('./routes/garden')
+const tasksRouter = require('./routes/tasks')
 
 app.use(express.json())
 app.use(cors())
 
 app.use('/', indexRouter)
 app.use('/garden', gardenRouter)
+app.use('/tasks', tasksRouter)
 
 
 app.listen(PORT, () => {

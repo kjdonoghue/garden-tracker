@@ -61,7 +61,7 @@ router.post('/save-edit', (req, res) => {
     let company = req.body.data.company
     let type = req.body.data.type
 
-    // (VALUES $1, $2, $3, $4, $5, $6, $7, $8, $9)
+    
     db.none('UPDATE garden_plants SET plant_name=$1, plant_family=$2, planting_date=$3, first_harvest=$4, last_harvest=$5, notes=$6, company=$7, type=$8 WHERE id=$9', [plant_name, plant_family, planting_date, first_harvest, last_harvest, notes, company, type, id])
     .then(() => {
         res.json({success: true})
