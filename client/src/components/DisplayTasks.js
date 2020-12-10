@@ -77,6 +77,21 @@ function DisplayTasks(props) {
         })
     }
 
+    //delete task by id number
+    const handleDelete = (id) => {
+      console.log("delete fired")
+      axios.delete(`http://localhost:8080/tasks/delete/${id}`)
+      .then(response => {
+        let success = response.data.success
+        if (success) {
+          fetchTasks()
+        } else {
+          console.log("did not update")
+        }
+      })
+
+    }
+
     //create task display
     const taskItems = tasks.map(task => {
         return <div key={task.id}>
@@ -84,7 +99,7 @@ function DisplayTasks(props) {
             {task.task_description}
             {task.task_date}
             <button>Complete</button>
-            <button>Delete</button>
+            <button onClick={() => handleDelete(task.id)}>Delete</button>
         </div>
     })
     

@@ -42,8 +42,9 @@ router.post('/add-task', (req, res) => {
 })
 
 //delete by task number
-router.delete('/', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     let id = parseInt(req.params.id)
+    console.log(id)
         
     db.none('DELETE FROM tasks WHERE id=$1', [id])
     .then(() => {
