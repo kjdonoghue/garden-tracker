@@ -32,26 +32,26 @@ function ChooseGarden(props) {
     const classes = useStyles();
 
     const [gardens, setGardens] = useState([])
-    const [selectedGarden, setSelectedGarden] = useState(props.displayGardenDefault)
+    const [selectedGarden, setSelectedGarden] = useState()
 
     useEffect(() => {
         // get user defaults
-        fetchUserGardenDefaults()
+        // fetchUserGardenDefaults()
 
         //get all garden options
         displayGardenOptions()
     }, [])
 
     // get user defaults - should this move to action creators?
-    const fetchUserGardenDefaults = () => {
-        axios.get('http://localhost:8080/garden/defaults')
-        .then(response => {
-            let zone = response.data[0].zone
-            let garden_id = response.data[0].primary_garden
-            props.onSetZoneDefault(zone)
-            props.onSetGardenDefault(garden_id)
-        })
-    }
+    // const fetchUserGardenDefaults = () => {
+    //     axios.get('http://localhost:8080/garden/defaults')
+    //     .then(response => {
+    //         let zone = response.data[0].zone
+    //         let garden_id = response.data[0].primary_garden
+    //         props.onSetZoneDefault(zone)
+    //         props.onSetGardenDefault(garden_id)
+    //     })
+    // }
 
     //get all garden options
     const displayGardenOptions = () => {
@@ -62,14 +62,15 @@ function ChooseGarden(props) {
     }
 
     const handleOnChange = (e) => {
-
+        
         props.onSetGardenDefault(e.target.value)
+        
     }
 
     //map through gardens and add them to drop down variables
 
     const gardenList = gardens.map(garden => {
-        return <MenuItem value={garden.id}>{garden.garden_name}</MenuItem>
+        return <MenuItem name={garden.garden_name} value={garden.id}>{garden.garden_name}</MenuItem>
     })
 
         return (
