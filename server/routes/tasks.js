@@ -9,6 +9,7 @@ const jwt = require("jsonwebtoken")
 var bcrypt = require('bcryptjs')
 const authenticate = require('../authenticate')
 
+//get tasks based on parameters - start, end, complete (false) or active(true)
 router.get('/display', async (req, res) => {
     let user_id = 2
     // let id = res.locals.id
@@ -22,6 +23,7 @@ router.get('/display', async (req, res) => {
 
 })
 
+//add a task
 router.post('/add-task', (req, res) => {
     let user_id = 2
     // let id = res.locals.id
@@ -37,6 +39,18 @@ router.post('/add-task', (req, res) => {
         res.json({success: false})
     })
 
+})
+
+//delete by task number
+router.delete('/', (req, res) => {
+    let id = parseInt(req.params.id)
+        
+    db.none('DELETE FROM tasks WHERE id=$1', [id])
+    .then(() => {
+        res.json({success: true})
+    }).catch(() => {
+        res.json({success: false})
+    })
 })
 
 
