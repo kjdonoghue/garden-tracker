@@ -38,13 +38,49 @@ router.post('/add-task', (req, res) => {
     }).catch(() => {
         res.json({success: false})
     })
+})
+
+//pull details for task edit
+router.get('/edit-task/:id', async (req, res) => {
+    let id = parseInt(req.params.id)
+
+    let taskItem = await db.any('SELECT * FROM tasks WHERE id=$1', [id])
+
+    res.json(taskItem)
 
 })
+
+router.post('/update-task/:id', (req, res) => {
+    let id = parseInt(req.params.id)
+    let task_name = req.body.data.task_name
+    let task_description = req.body.data.task_description
+    let task_date = req.body.data.task_date
+
+    db.none('UPDATE tasks SET task_name=$1, task_description=$2, task_date=$3 WHERE id=$4', [task_name, task_description, task_date, id])
+    .then(() => {
+        res.json({success: true})
+    }).catch(() => {
+        res.json({success: false})
+    })
+
+})
+
+//mark complete by task number
+router.post('/complete/:id', (req, res) => {
+    let id = parseInt(req.params.id)
+
+    db.none('UPDATE tasks SET complete=$1 WHERE id=$2',[true, id])
+    .then(() => {
+        res.json({success: true})
+    }).catch(() => {
+        res.json({success: false})
+    })
+}) 
+
 
 //delete by task number
 router.delete('/delete/:id', (req, res) => {
     let id = parseInt(req.params.id)
-    console.log(id)
         
     db.none('DELETE FROM tasks WHERE id=$1', [id])
     .then(() => {

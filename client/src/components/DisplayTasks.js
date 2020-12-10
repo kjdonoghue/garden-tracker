@@ -69,7 +69,6 @@ function DisplayTasks(props) {
 
     // fetch tasks from database based on user id(token), start date, end date, and status
     const fetchTasks = () => {
-        console.log("fired")
         axios.get('http://localhost:8080/tasks/display',
         {params: dates})
         .then(response => {
@@ -92,13 +91,31 @@ function DisplayTasks(props) {
 
     }
 
+
+    //change complete false to true in db
+    const handleComplete = (id) => {
+      
+      axios.post(`http://localhost:8080/tasks/complete/${id}`)
+      .then(response => {
+        let success = response.data.success
+        if (success) {
+          fetchTasks()
+        } else {
+          console.log("did not update")
+        }
+      })
+
+    }
+
     //create task display
     const taskItems = tasks.map(task => {
         return <div key={task.id}>
             {task.task_name}
             {task.task_description}
             {task.task_date}
-            <button>Complete</button>
+            <button onClick={() => handleComplete(task.id)}>Complete</button>
+            <a href={`/edit-tasks/${task.id}`} ><button>Edit</button></a>
+            
             <button onClick={() => handleDelete(task.id)}>Delete</button>
         </div>
     })

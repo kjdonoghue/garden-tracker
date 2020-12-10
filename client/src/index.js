@@ -19,6 +19,7 @@ import PlantDetails from './components/PlantDetails'
 import {setAuthenticationHeader} from './utils/authHeaders'
 import requireAuth from './components/requireAuth'
 import { createMuiTheme, ThemeProvider } from "@material-ui/core"
+import EditTasks from './components/EditTask';
 
 //change material ui colors
 const theme = createMuiTheme({
@@ -66,6 +67,7 @@ ReactDOM.render(
             {/* <Route component = {requireAuth(Tasks)} path='/tasks' /> */}
             <Route component = {PlantDetails} path='/plant/:id' />
             <Route component = {Tasks} path='/tasks' />
+            <Route component = {EditTasks} path='/edit-tasks/:id' />
             <Route component = {Zone} path='/zone' />
           </BaseLayout>
           </ThemeProvider>
