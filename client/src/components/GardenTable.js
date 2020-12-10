@@ -19,9 +19,7 @@ function GardenTable(props) {
         { field: 'last_harvest', headerName: 'Last Harvest', description: 'The date of the last harvest' }, 
         { field: 'notes', headerName: 'Notes'}]
 
-    //sets table selection
-    // const [selection, setSelection] = useState({})
-
+ 
     useEffect(() => {      
         //gets plants in primary garden (in global state) when updated
         fetchGarden(props.displayGarden)
@@ -44,9 +42,7 @@ function GardenTable(props) {
             columns={column}
             rows={plants} 
             onSelectionChange={(newSelection) => {     
-                window.location.href = (`/plant/${newSelection.rowIds[0]}`)
-                // window.location.href = (`/plant/${id}/${newSelection.rowIds[0]}`)
-                //garden id / plant id
+                    window.location.href = (`/plant/${newSelection.rowIds[0]}`)
                 }}                 
         />
 
