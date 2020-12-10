@@ -9,6 +9,18 @@ const jwt = require("jsonwebtoken")
 var bcrypt = require('bcryptjs')
 const authenticate = require('../authenticate')
 
+router.get('/display', async (req, res) => {
+    let user_id = 2
+    // let id = res.locals.id
+    let start_date = req.query.start_date
+    let end_date = req.query.end_date
+    let complete = req.query.complete    
+
+    let tasks = await db.any('SELECT * FROM tasks WHERE user_id = $1 AND task_date BETWEEN $2 AND $3 AND complete = $4', [user_id, start_date, end_date, complete])
+
+    res.json(tasks)
+
+})
 
 router.post('/add-task', (req, res) => {
     let user_id = 2
@@ -16,8 +28,9 @@ router.post('/add-task', (req, res) => {
     let task_name = req.body.data.task_name
     let task_description = req.body.data.task_description
     let task_date = req.body.data.task_date
+    let complete = false
 
-    db.none('INSERT INTO tasks (user_id, task_name, task_description, task_date) VALUES($1, $2, $3, $4)', [user_id, task_name, task_description, task_date])
+    db.none('INSERT INTO tasks (user_id, task_name, task_description, task_date, complete) VALUES($1, $2, $3, $4, $5)', [user_id, task_name, task_description, task_date, complete])
     .then(() => {
         res.json({success: true})
     }).catch(() => {
