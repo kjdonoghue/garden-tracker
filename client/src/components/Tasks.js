@@ -1,4 +1,4 @@
-
+import AddTasks from './AddTasks'
 
 
 function Tasks(props) {
@@ -6,6 +6,8 @@ function Tasks(props) {
 
     return(
         <div>
+            <AddTasks />
+            {/* <DisplayTasks /> */}
             
         </div>
     )
