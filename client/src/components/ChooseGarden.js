@@ -33,6 +33,7 @@ function ChooseGarden(props) {
 
     const [gardens, setGardens] = useState([])
     const [selectedGarden, setSelectedGarden] = useState()
+    const [gardenName, setGardenName] = useState()
 
     useEffect(() => {
         // get user defaults
@@ -62,15 +63,23 @@ function ChooseGarden(props) {
     }
 
     const handleOnChange = (e) => {
-        
+            setGardenName({...gardenName,
+                [e.target.name]:  (e.target.value)
+
+            })
+
+        let key = [e.target.key] 
+        console.log(key)      
         props.onSetGardenDefault(e.target.value)
         
     }
 
+    console.log(gardenName)
+
     //map through gardens and add them to drop down variables
 
     const gardenList = gardens.map(garden => {
-        return <MenuItem name={garden.garden_name} value={garden.id}>{garden.garden_name}</MenuItem>
+        return <MenuItem name={garden.garden_name} value={garden.id} key={garden.id}>{garden.garden_name}</MenuItem>
     })
 
         return (
@@ -82,8 +91,8 @@ function ChooseGarden(props) {
                 <Select
                 labelId="demo-simple-select-outlined-label"
                 id="demo-simple-select-outlined"
-                name="garden" 
-                value={selectedGarden}               
+                // name="Test"
+                // value={selectedGarden}               
                 onChange={handleOnChange}
                 label="garden"
                 >

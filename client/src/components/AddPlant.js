@@ -36,15 +36,16 @@ function AddPlant(props) {
     const classes = useStyles();
 
     const [newPlant, setNewPlant] = useState({})
-    
+
+    // add zone and garden id to plant info onload
     useEffect(() => {
       setNewPlant({...newPlant,
         zone: props.displayZone,
         garden_id: props.displayGardenID
       })
-    }, [props.displayGardenID])        
+    }, [props.displayGardenID, ])        
     
-    
+    //update with information
     const handleOnChange = (e) => {
         setNewPlant({...newPlant,
           [e.target.name]: e.target.value
@@ -60,7 +61,13 @@ function AddPlant(props) {
 
           if (success) {
            //reload add plant and garden
-           console.log("Success")
+           console.log("Success") 
+           setNewPlant({
+             plant_name: '',
+             plant_family: '',
+             company: '',
+             type: '',
+           })
           } else {
               console.log("did not update")
               }
@@ -79,29 +86,29 @@ function AddPlant(props) {
             <FormControl className={classes.formControl}>            
                   <InputLabel id="demo-simple-select-label">Family</InputLabel>
                   <Select onChange={handleOnChange} labelId="demo-simple-select-label" id="demo-simple-select" name="plant_family" value={newPlant.plant_family} >
-                      <MenuItem value={1}>Beans</MenuItem>
-                      <MenuItem value={2}>Beets</MenuItem>
-                      <MenuItem value={3}>Broccoli</MenuItem>
-                      <MenuItem value={4}>Cabbage</MenuItem>
-                      <MenuItem value={5}>Carrots</MenuItem>
-                      <MenuItem value={6}>Cauliflower</MenuItem>
-                      <MenuItem value={7}>Celery</MenuItem>
-                      <MenuItem value={8}>Corn</MenuItem>
-                      <MenuItem value={9}>Cowpeas</MenuItem>
-                      <MenuItem value={10}>Cucumbers</MenuItem>
-                      <MenuItem value={11}>Eggplant</MenuItem>
-                      <MenuItem value={13}>Greens</MenuItem>
-                      <MenuItem value={14}>Leeks</MenuItem>
-                      <MenuItem value={15}>Melons</MenuItem>
-                      <MenuItem value={16}>Okra</MenuItem>
-                      <MenuItem value={19}>Peanuts</MenuItem>
-                      <MenuItem value={20}>Peas</MenuItem>
-                      <MenuItem value={21}>Peppers</MenuItem>
-                      <MenuItem value={22}>Potatoes</MenuItem>
-                      <MenuItem value={24}>Summer Squash</MenuItem>
-                      <MenuItem value={25}>Winter Squash</MenuItem>
-                      <MenuItem value={26}>Sweet Potatoes</MenuItem>
-                      <MenuItem value={28}>Tomatoes</MenuItem>        
+                      <MenuItem value="beans">Beans</MenuItem>
+                      <MenuItem value="beets">Beets</MenuItem>
+                      <MenuItem value="broccoli">Broccoli</MenuItem>
+                      <MenuItem value="cabbage">Cabbage</MenuItem>
+                      <MenuItem value="carrots">Carrots</MenuItem>
+                      <MenuItem value="cauliflower">Cauliflower</MenuItem>
+                      <MenuItem value="celery">Celery</MenuItem>
+                      <MenuItem value="corn">Corn</MenuItem>
+                      <MenuItem value="cowpeas">Cowpeas</MenuItem>
+                      <MenuItem value="cucumbers">Cucumbers</MenuItem>
+                      <MenuItem value="eggplant">Eggplant</MenuItem>
+                      <MenuItem value="greens">Greens</MenuItem>
+                      <MenuItem value="leeks">Leeks</MenuItem>
+                      <MenuItem value="melons">Melons</MenuItem>
+                      <MenuItem value="okra">Okra</MenuItem>
+                      <MenuItem value="peanuts">Peanuts</MenuItem>
+                      <MenuItem value="peas">Peas</MenuItem>
+                      <MenuItem value="peppers">Peppers</MenuItem>
+                      <MenuItem value="potatoes">Potatoes</MenuItem>
+                      <MenuItem value="summer squash">Summer Squash</MenuItem>
+                      <MenuItem value="winter squash">Winter Squash</MenuItem>
+                      <MenuItem value="sweet potatoes">Sweet Potatoes</MenuItem>
+                      <MenuItem value="tomatoes">Tomatoes</MenuItem>        
                   </Select>
               </FormControl>                        
               <TextField onChange={handleOnChange} name="company" id="standard-search" label="Company" type="text" value={newPlant.company} />
