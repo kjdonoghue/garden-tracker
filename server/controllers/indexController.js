@@ -9,10 +9,10 @@ class IndexController {
 
     registerUser = async (req, res) => {
 
-        let username = req.body.username
-        let password = req.body.password
-        let zone = req.body.zone
-    
+        let username = req.body.data.username
+        let password = req.body.data.password
+        let zone = req.body.data.zone
+
         // check to ensure username does not already exist
         const user = await db.any('SELECT username from users WHERE username = $1', [username])
         
@@ -34,8 +34,11 @@ class IndexController {
     }
 
     loginUser = async (req, res) => {
-        let username = req.body.username
-        let password = req.body.password
+        // let username = req.body.username
+        // let password = req.body.password
+
+        let username = req.body.data.username
+        let password = req.body.data.password
     
         //check to see if user is in db
         const user = await db.any('SELECT id, username, password, zone from users WHERE username = $1', [username])

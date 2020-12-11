@@ -11,7 +11,6 @@ import BaseLayout from './components/BaseLayout';
 import Login from './components/Login';
 import Register from './components/Register';
 import DisplayGarden from './components/DisplayGarden';
-import AddGarden from './components/AddGarden'
 import Guides from './components/Guides';
 import Tasks from './components/Tasks';
 import Zone from './components/Zone';
@@ -25,15 +24,12 @@ import EditTasks from './components/EditTask';
 //change material ui colors
 const theme = createMuiTheme({
   palette: {
-     primary: {
-        main: "#434c23" // dark green
-               },
-     secondary: {
-        main: "#ca912f" //yellow
-                }
-           },
-//fontFamily: font // as an aside, highly recommend importing roboto font for Material UI projects! Looks really nice
-});
+    // dark green
+     primary: {main: "#434c23"},
+     //yellow
+     secondary: {main: "#ca912f"}
+    },
+  });
 
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
@@ -63,8 +59,7 @@ ReactDOM.render(
             <Route component = {App} path='/' exact />
             <Route component = {Guides} path='/guides' />
             {/* <Route component = {requireAuth(DisplayGarden)} path='/garden' /> */}
-            <Route component = {DisplayGarden} path='/garden' />
-            <Route component = {AddGarden} path='/add-garden' />
+            <Route component = {DisplayGarden} path='/garden' />        
             {/* <Route component = {requireAuth(Tasks)} path='/tasks' /> */}
             <Route component = {PlantDetails} path='/plant/:id' />
             <Route component = {AddPlant} path='/add-plant' />

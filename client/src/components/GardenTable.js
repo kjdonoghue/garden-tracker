@@ -28,7 +28,7 @@ function GardenTable(props) {
         //gets plants in primary garden (in global state) updated when choose garden componet updates primary garden in redux
         fetchGarden(props.displayGarden)
     }, [props.displayGarden])
-  
+
 
     //gets plants by garden id 
     const fetchGarden = (id) => {
@@ -38,10 +38,28 @@ function GardenTable(props) {
             })
     }
 
+
+    const handleDelete = (id) => {
+        axios.delete(`http://localhost:8080/garden/delete-garden/${id}`)
+        .then(response => {
+
+            let success = response.data.success
+    
+            if (success) {
+                props.updateGardenLists()
+                setPlants([])
+              
+            } else {
+              console.log("did not update")
+            }
+        })
+    }
+
     return (
 
         <div>
-            <h2>{props.displayGardenName}</h2>
+            <h2>{props.displayGardenName}</h2> 
+            <button onClick={() => handleDelete(props.displayGarden)}>Delete</button>
             <div>
                 {props.displayGarden ? <b><NavLink to="/add-plant"><button>Add Plant</button></NavLink></b> : null}
             </div>
@@ -62,9 +80,18 @@ function GardenTable(props) {
 
 const mapStateToProps = (state) => {
     return {
+        // this is the garden id:
         displayGarden: state.primary_garden,
+
+        //this is the garden name:
         displayGardenName: state.primary_garden_name,
     }
 }
 
-export default connect(mapStateToProps)(GardenTable)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateGardenLists: () => dispatch({type:'DELETE_GARDEN'})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GardenTable)

@@ -1,5 +1,6 @@
 const initialState = {
     zone: '',
+    garden_list: [],
     primary_garden: '',
     primary_garden_name: '',
     new_garden: '',
@@ -37,6 +38,17 @@ const reducer = (state= initialState, action) => {
         return{...state,
             new_plant: action.payload
         } 
+    } else if (action.type === 'SET_GARDEN_LIST') {
+        return{...state, 
+            garden_list: action.payload
+        }
+    } else if (action.type === 'DELETE_GARDEN') {
+        return{...state,
+            primary_garden: '',
+            primary_garden_name: '',
+            //new garden is just to trigger update for choose garden component
+            new_garden: ''
+        }
     } else {
         return state
     }

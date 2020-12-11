@@ -8,7 +8,7 @@ const db = pgp(connectionsString)
 
 //fetch guide by selected veggie id provided in guides component
 router.get('/:id', async (req, res) => {
-    let id = parseInt(req.params.id)
+    let id = req.params.id
     
     let guide = await db.any('SELECT * FROM vegetables WHERE id = $1', [id])
     

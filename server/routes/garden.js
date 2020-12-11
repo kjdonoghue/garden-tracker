@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 require('dotenv').config()
-const cors = require('cors')
+// const cors = require('cors')
 const connectionsString = process.env.CONNECTION_STRING
 const pgp = require("pg-promise")()
 const db = pgp(connectionsString)
@@ -11,7 +11,7 @@ const authenticate = require('../authenticate')
 
 //Choose Garden Component - get all user gardens from gardens db
 router.get ('/list-gardens', authenticate, async (req, res) => {
-    let id = res.locals.id
+    let id = parseInt(res.locals.id)
     
     let gardens = await db.any('SELECT id, garden_name from gardens WHERE user_id = $1', [id])
     
@@ -23,10 +23,9 @@ router.get ('/list-gardens', authenticate, async (req, res) => {
 
 })
 
-//save new garden information
-router.post('/new-garden', (req, res) => {
-    // let user_id = res.locals.id
-    let user_id = 2
+//save new garden name
+router.post('/new-garden', authenticate, (req, res) => {
+    let user_id = res.locals.id
     let garden_name = req.body.data.garden_name
 
     db.none('INSERT INTO gardens (user_id, garden_name) VALUES ($1, $2)', [user_id, garden_name])
@@ -36,12 +35,11 @@ router.post('/new-garden', (req, res) => {
         res.json({success: false})
     })
 
-
 })
 
 //save new plant information
 router.post('/save-new', (req, res) => {
-    let user_id = res.locals.id
+    let user_id = parseInt(res.locals.id)
     let garden_id = req.body.data.garden_id
     let plant_name = req.body.data.plant_name
     let plant_family = req.body.data.plant_family
@@ -83,7 +81,6 @@ async function createSeedStartingTask(user_id, zone, plant_name, plant_family) {
         console.log("else")
     }
 
-
 }
 
 //save edited plant information from /plant/:id
@@ -108,23 +105,36 @@ router.post('/save-edit', (req, res) => {
     
 })
 
-//delete plant from /plant/:id
-router.delete('/delete-plant/:id', (req, res) => {
+//delete garden from /garden/:id
+router.delete('/delete-garden/:id/', (req, res) => {
     
     let id = parseInt(req.params.id)
         
-    db.none('DELETE FROM garden_plants WHERE id=$1', [id])
+    db.none("DELETE FROM gardens WHERE id=$1", [id])
     .then(() => {
         res.json({success: true})
     }).catch(() => {
         res.json({success: false})
     })
+})
 
+
+//delete plant from /plant/:id
+router.delete('/delete-plant/:id/', (req, res) => {
+    
+    let id = parseInt(req.params.id)
+        
+    db.none("DELETE FROM garden_plants WHERE id=$1", [id])
+    .then(() => {
+        res.json({success: true})
+    }).catch(() => {
+        res.json({success: false})
+    })
 })
 
 //Plant Detail (from Garden Table Component) - get plant details from garden plants by plant id
 router.get ('/plant/:id', async (req, res) => {
-    let plant_id = req.params.id
+    let plant_id = parseInt(req.params.id)
     
     //get zone and primary garden from users
     let plantDetails = await db.any('SELECT id, plant_name, plant_family, planting_date, first_harvest, last_harvest, notes, company, type FROM garden_plants WHERE id = $1', [plant_id])

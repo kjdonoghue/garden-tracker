@@ -38,7 +38,8 @@ function AddPlant(props) {
     useEffect(() => {
       setNewPlant({...newPlant,
         zone: props.displayZone,
-        garden_id: props.displayGardenID
+        garden_id: props.displayGardenID,
+        plant_name: ''
       })
     }, [])        
     
@@ -49,28 +50,33 @@ function AddPlant(props) {
         })
     }
 
+    //save new plant to db
     const onSaveToGarden = (plant) => {
-      axios.post('http://localhost:8080/garden/save-new',
-        {
-          data: newPlant
-        })
-        .then(response => {
-          
-          let success = response.data.success
+      if (newPlant.plant_name == '') {
+        alert('You must enter a plant variety')
+      } else {
+        axios.post('http://localhost:8080/garden/save-new',
+          {
+            data: newPlant
+          })
+          .then(response => {
+            
+            let success = response.data.success
 
-          if (success) {         
-           props.history.push('/garden')
-          } else {
-              console.log("did not update")
-              }
-          })    
+            if (success) {         
+            props.history.push('/garden')
+            } else {
+                console.log("did not update")
+                }
+            })   
+        } 
     }
 
       return (
         <div>
             <p>Add Plant</p>
             <div>
-            <TextField onChange={handleOnChange} name="plant_name" value={newPlant.plant_name} id="standard-search" label="Plant Name" type="text" />
+            <TextField onChange={handleOnChange} name="plant_name" value={newPlant.plant_name} id="standard-search" label="Variety" type="text" />
             </div>
             <div>
             <FormControl className={classes.formControl}>            

@@ -67,8 +67,7 @@ function PlantDetails(props) {
   // handle change to first harvest date
   const handleFirstHarvestChange = (date) => {
     date.setDate(date.getDate())
-    console.log(date)
-    setPlantDetails({
+       setPlantDetails({
       ...plantDetails,
       first_harvest: date
     })
@@ -77,8 +76,7 @@ function PlantDetails(props) {
   // handle change to last harvest date
   const handleLastHarvestChange = (date, e) => {
     date.setDate(date.getDate())
-    console.log(date)
-    setPlantDetails({
+      setPlantDetails({
       ...plantDetails,
       last_harvest: date
     })

@@ -1,7 +1,6 @@
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-
 
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -31,8 +30,8 @@ function ChooseGarden(props) {
     //for material ui
     const classes = useStyles();
 
-    const [gardens, setGardens] = useState([])
-    const [gardenName, setGardenName] = useState({})
+    // const [gardens, setGardens] = useState([])
+    // const [gardenName, setGardenName] = useState({})
 
     useEffect(() => {
         displayGardenOptions()
@@ -43,41 +42,28 @@ function ChooseGarden(props) {
     const displayGardenOptions = () => {
         axios.get('http://localhost:8080/garden/list-gardens')
         .then(response => {
-            setGardens(response.data)
+            // setGardens(response.data)
+            props.onSetGardenList(response.data)
         })
     }
 
     const handleOnChange = (name, value) => {
-            // setGardenName({...gardenName,
-            //     name: name,
-            //     value: value
-
-            // })
-
         props.onSetGardenDefault({garden_name: name, garden_id: value})
-        
     }
 
-    console.log(gardenName)
-
     //map through gardens and add them to drop down variables
-
-    const gardenList = gardens.map(garden => {
+    // const gardenList = gardens.map(garden => {
+    const gardenList = props.displayGardenList.map(garden => {    
         return <MenuItem onClick={() => handleOnChange(garden.garden_name, garden.id)} name={garden.garden_name} value={garden.id} key={garden.id}>{garden.garden_name}</MenuItem>
     })
 
+
+    //display
         return (
         <div>
            <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel id="demo-simple-select-outlined-label">Garden</InputLabel>
-                <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
-                //name="Test"
-                // value={selectedGarden}               
-                // onChange={handleOnChange}
-                label="garden"
-                >
+                <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" label="garden">
                     {gardenList}
                 </Select>
             </FormControl>
@@ -87,17 +73,18 @@ function ChooseGarden(props) {
 
 const mapStatesToProps = (state) => {
     return {
-        displayGardenDefault: state.primary_garden,
-        displayZoneDefault: state.zone,
+        // displayGardenDefault: state.primary_garden,
+        displayGardenList: state.garden_list,
+        // update gardens propts the list to update after adding new garden
         updateGardens: state.new_garden
-
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onSetGardenDefault: (garden) => dispatch({type: 'SET_GARDEN', payload: garden}),
-        onSetZoneDefault: (zone) => dispatch({type: 'SET_ZONE', payload: zone})         
+        onSetGardenList: (gardenList) => dispatch({type: 'SET_GARDEN_LIST', payload: gardenList })
+        // onSetZoneDefault: (zone) => dispatch({type: 'SET_ZONE', payload: zone})         
     }
 }
 

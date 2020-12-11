@@ -6,6 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Zone from './Zone'
 import './css/guides.css'
+import axios from "axios";
 
 //for material-ui select
 const useStyles = makeStyles((theme) => ({
@@ -33,11 +34,9 @@ function Guides(props) {
  
     //fetch plants from db based on plant id
     const fetchGuide = (id) => {
-
-        fetch(`http://localhost:8080/guides/${id}`)
-        .then(response => response.json())
-        .then(result => {
-            setGuides(result)
+        axios.get(`http://localhost:8080/guides/${id}`)
+        .then(response => {
+            setGuides(response.data)
         })
     }
 

@@ -38,10 +38,9 @@ function Login(props) {
         if (login.username == '' || login.password == '') {
             alert("Please enter a username and password")
         } else {
-
+        
         axios.post('http://localhost:8080/login', {
-            username: login.username,
-            password: login.password,            
+            data: login         
         })
         .then(response => {
                         
