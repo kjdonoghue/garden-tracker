@@ -32,24 +32,12 @@ function ChooseGarden(props) {
     const classes = useStyles();
 
     const [gardens, setGardens] = useState([])
-    //const [selectedGarden, setSelectedGarden] = useState()
-   const [gardenName, setGardenName] = useState(props.displayGardenDefault)
+    const [gardenName, setGardenName] = useState({})
 
     useEffect(() => {
         displayGardenOptions()
     }, [props.updateGardens])
 
-  
-    // get user defaults - should this move to action creators?
-    // const fetchUserGardenDefaults = () => {
-    //     axios.get('http://localhost:8080/garden/defaults')
-    //     .then(response => {
-    //         let zone = response.data[0].zone
-    //         let garden_id = response.data[0].primary_garden
-    //         props.onSetZoneDefault(zone)
-    //         props.onSetGardenDefault(garden_id)
-    //     })
-    // }
 
     //get all garden options
     const displayGardenOptions = () => {
@@ -59,15 +47,14 @@ function ChooseGarden(props) {
         })
     }
 
-    const handleOnChange = (e) => {
-        //     setGardenName({...gardenName,
-        //         [e.target.name]:  (e.target.value)
+    const handleOnChange = (name, value) => {
+            // setGardenName({...gardenName,
+            //     name: name,
+            //     value: value
 
-        //     })
+            // })
 
-        // let key = [e.target.key] 
-        // console.log(key)      
-        props.onSetGardenDefault(e.target.value)
+        props.onSetGardenDefault({garden_name: name, garden_id: value})
         
     }
 
@@ -76,21 +63,19 @@ function ChooseGarden(props) {
     //map through gardens and add them to drop down variables
 
     const gardenList = gardens.map(garden => {
-        return <MenuItem name={garden.garden_name} value={garden.id} key={garden.id}>{garden.garden_name}</MenuItem>
+        return <MenuItem onClick={() => handleOnChange(garden.garden_name, garden.id)} name={garden.garden_name} value={garden.id} key={garden.id}>{garden.garden_name}</MenuItem>
     })
 
         return (
         <div>
-           <p>choose garden</p> 
-
            <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel id="demo-simple-select-outlined-label">Garden</InputLabel>
                 <Select
                 labelId="demo-simple-select-outlined-label"
                 id="demo-simple-select-outlined"
-                // name="Test"
+                //name="Test"
                 // value={selectedGarden}               
-                onChange={handleOnChange}
+                // onChange={handleOnChange}
                 label="garden"
                 >
                     {gardenList}
@@ -111,7 +96,7 @@ const mapStatesToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSetGardenDefault: (garden_id) => dispatch({type: 'SET_GARDEN', payload: garden_id}),
+        onSetGardenDefault: (garden) => dispatch({type: 'SET_GARDEN', payload: garden}),
         onSetZoneDefault: (zone) => dispatch({type: 'SET_ZONE', payload: zone})         
     }
 }

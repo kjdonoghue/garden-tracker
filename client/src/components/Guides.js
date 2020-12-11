@@ -5,7 +5,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Zone from './Zone'
-import {connect} from 'react-redux'
 import './css/guides.css'
 
 //for material-ui select
@@ -27,11 +26,12 @@ function Guides(props) {
     const [plant, setPlant] = useState("1")
     const [guides, setGuides] = useState([])
     
+    
     useEffect(() => {
         fetchGuide(plant)
     }, [plant])
  
-    // need to get zone information
+    //fetch plants from db based on plant id
     const fetchGuide = (id) => {
 
         fetch(`http://localhost:8080/guides/${id}`)
@@ -41,7 +41,7 @@ function Guides(props) {
         })
     }
 
-
+    //map through guides to set layout
     const guideItem = guides.map(guide => {
         return <div key={guide.id} className="guide"><b>{guide.vegetable}</b>
             <label>{guide.description}</label>
@@ -57,9 +57,6 @@ function Guides(props) {
             <label><b>Water Requirements:</b> {guide.water_req}" per week</label>
             </div>
     })
-
-    
- 
 
     const handleChange = (event) => {        
         setPlant(event.target.value)
@@ -89,8 +86,7 @@ function Guides(props) {
                     <MenuItem value="13">Greens</MenuItem>
                     <MenuItem value="14">Leeks</MenuItem>
                     <MenuItem value="15">Melons</MenuItem>
-                    <MenuItem value="16">Okra</MenuItem>
-                    <MenuItem value="19">Peanuts</MenuItem>
+                    <MenuItem value="16">Okra</MenuItem>        
                     <MenuItem value="20">Peas</MenuItem>
                     <MenuItem value="21">Peppers</MenuItem>
                     <MenuItem value="22">Potatoes</MenuItem>
@@ -108,12 +104,4 @@ function Guides(props) {
     )
 }
 
-const mapStateToProps = (state) => {
-    return{
-        isGuest: state.isGuest,
-        zone: state.zone
-    }
-}
-
-
-export default connect(mapStateToProps)(Guides)
+export default Guides

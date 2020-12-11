@@ -9,18 +9,6 @@ const jwt = require("jsonwebtoken")
 var bcrypt = require('bcryptjs')
 const authenticate = require('../authenticate')
 
-
-//Choose Garden Component - get zone and primary garden from users - this may not be needed
-router.get ('/defaults', authenticate, async (req, res) => {
-    
-    let id = res.locals.id
-     
-    let defaults = await db.any('SELECT zone, primary_garden from users WHERE id = $1', [id])
-    
-    res.json(defaults)
-
-})
-
 //Choose Garden Component - get all user gardens from gardens db
 router.get ('/list-gardens', authenticate, async (req, res) => {
     let id = res.locals.id

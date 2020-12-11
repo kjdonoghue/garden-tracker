@@ -10,8 +10,6 @@ function Menu(props) {
       <b><NavLink to = "/guides" className="links">Guides </NavLink></b>
       <b><NavLink to = "/garden" className="links">Garden </NavLink></b>
       <b><NavLink to = "/tasks" className="links">Tasks </NavLink></b>
-      {/* Account is a stretch goal  */}
-      <b><NavLink to = "/" className="links">Account </NavLink></b>
       <b>{!props.isAuth ? <NavLink to = "/login" className="links">Login</NavLink> :null}</b>
       <b>{!props.isAuth ?<NavLink to = "/register" className="links">Register</NavLink> :null}</b>
       <b>{props.isAuth ? <NavLink to = "/logout" className="links">Logout</NavLink> :null}</b>

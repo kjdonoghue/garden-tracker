@@ -15,6 +15,7 @@ import AddGarden from './components/AddGarden'
 import Guides from './components/Guides';
 import Tasks from './components/Tasks';
 import Zone from './components/Zone';
+import AddPlant from './components/AddPlant';
 import PlantDetails from './components/PlantDetails'
 import {setAuthenticationHeader} from './utils/authHeaders'
 import requireAuth from './components/requireAuth'
@@ -66,6 +67,7 @@ ReactDOM.render(
             <Route component = {AddGarden} path='/add-garden' />
             {/* <Route component = {requireAuth(Tasks)} path='/tasks' /> */}
             <Route component = {PlantDetails} path='/plant/:id' />
+            <Route component = {AddPlant} path='/add-plant' />
             <Route component = {Tasks} path='/tasks' />
             <Route component = {EditTasks} path='/edit-tasks/:id' />
             <Route component = {Zone} path='/zone' />

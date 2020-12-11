@@ -7,9 +7,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import 'date-fns';
-// import Grid from '@material-ui/core/Grid';
-// import DateFnsUtils from '@date-io/date-fns';
-// import { MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import axios from "axios";
 
 
@@ -43,7 +40,7 @@ function AddPlant(props) {
         zone: props.displayZone,
         garden_id: props.displayGardenID
       })
-    }, [props.displayGardenID])        
+    }, [])        
     
     //update with information
     const handleOnChange = (e) => {
@@ -61,23 +58,13 @@ function AddPlant(props) {
           
           let success = response.data.success
 
-          if (success) {
-           //reload add plant and garden
-           console.log("Success") 
-           props.updateGardenTable(newPlant)
-           setNewPlant({
-             plant_name: '',
-             plant_family: '',
-             company: '',
-             type: '',
-           })
+          if (success) {         
+           props.history.push('/garden')
           } else {
               console.log("did not update")
               }
           })    
     }
-
-    
 
       return (
         <div>
@@ -141,10 +128,4 @@ const mapStatesToProps = (state) =>  {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateGardenTable: (plant) => dispatch({type: 'UPDATE_TABLE', payload: plant})
-  }
-}
-
-export default connect(mapStatesToProps, mapDispatchToProps)(AddPlant)
+export default connect(mapStatesToProps)(AddPlant)

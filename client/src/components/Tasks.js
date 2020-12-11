@@ -9,7 +9,6 @@ function Tasks(props) {
         <div>
             <AddTasks />
             <DisplayTasks />
-            
         </div>
     )
 }
