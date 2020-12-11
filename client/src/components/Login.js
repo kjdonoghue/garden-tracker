@@ -35,6 +35,10 @@ function Login(props) {
 
     //handles log in save to send info to db for verification
     const handleSubmit = (e) => {
+        if (login.username == '' || login.password == '') {
+            alert("Please enter a username and password")
+        } else {
+
         axios.post('http://localhost:8080/login', {
             username: login.username,
             password: login.password,            
@@ -51,9 +55,10 @@ function Login(props) {
                 props.onLogIn()
                 props.history.push("/")
             } else {
-                console.log("your entry was not accepted")
+                alert(response.data.message)
            }
         })
+        }   
     }
 
     return(

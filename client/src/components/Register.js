@@ -31,7 +31,7 @@ function Register(props) {
        const classes = useStyles();
 
        // sets registration information prior to sending to db
-       const [register, setRegister] = useState({})
+       const [register, setRegister] = useState({username: '', password: '', zone:''})
    
        //handles on change event to user input for reg information
        const handleOnChange = (e) => {
@@ -45,17 +45,24 @@ function Register(props) {
        
        //handles the save - sending info to database to create user
        const handleSubmit = (e) => {
-            fetch('http://localhost:8080/register', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(register)
-            }).then (response => response.json())
-            .then(result => {
-                if (result.success) 
-                props.history.push('/login')
-            })        
+            if (register.username == ''|| register.password == '' || register.zone == '') {
+                alert("you must enter a username, password, and growing zone to create an account")
+            }
+            else {   
+                fetch('http://localhost:8080/register', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(register)
+                }).then (response => response.json())
+                .then(result => {
+                    if (result.success) {
+                    props.history.push('/login')
+                } else {
+                    alert(result.message)
+                }
+                })        
         }
-   
+    }
 
     return(
         <div>

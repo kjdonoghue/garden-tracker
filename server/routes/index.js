@@ -20,18 +20,19 @@ router.post('/register', async (req, res) => {
     
     if (user.length > 0) {
         //user already exists            
-        res.json({message: "This username already exists"})
+        res.json({message: "This user name has already been taken"})
     } else  {
         bcrypt.genSalt(10, function(err, salt) {
             bcrypt.hash(password, salt, function(err, hash) {
             db.none('INSERT INTO users (username, password, zone) VALUES ($1, $2, $3)', [username, hash, zone]
             ).then(() => {
                 res.json({success: true})
+            }).catch(() => {
+                res.json({message: "There was an error processing your request, please try again"}) 
             })
         })
         })
     }
-
 })
 
 
@@ -44,7 +45,7 @@ router.post('/login', async (req, res) => {
 
     if (user.length == 0) {
         //no user found
-        res.json({message: "user is not found"})
+        res.json({message: "Your user name is not valid"})
     } else  {
         user.map(user => {
         bcrypt.compare(password, user.password, function(err, result) {
@@ -53,7 +54,7 @@ router.post('/login', async (req, res) => {
                 res.json({token: token, zone: user.zone})                        
             } else {
                 //username is correct & password is wrong
-                res.json({message: "password is not valid"})
+                res.json({message: "Your password is not valid"})
             }
         }) 
         }) 
