@@ -17,7 +17,7 @@ router.get('/display', async (req, res) => {
     let end_date = req.query.end_date
     let complete = req.query.complete    
 
-    let tasks = await db.any('SELECT * FROM tasks WHERE user_id = $1 AND task_date BETWEEN $2 AND $3 AND complete = $4', [user_id, start_date, end_date, complete])
+    let tasks = await db.any("SELECT id, task_name, task_description, TO_CHAR(task_date, 'MM/DD/YYYY') as task_date FROM tasks WHERE user_id = $1 AND task_date BETWEEN $2 AND $3 AND complete = $4", [user_id, start_date, end_date, complete])
 
     res.json(tasks)
 

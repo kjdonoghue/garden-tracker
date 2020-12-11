@@ -1,20 +1,21 @@
 import React from "react"
 import {NavLink} from "react-router-dom";
 import {connect} from "react-redux"
+import './css/menu.css'
 
 function Menu(props) {
   return (
-    <div className="MenuContainer">
-      <b><NavLink to = "/">Home </NavLink> </b>
-      <b><NavLink to = "/guides">Guides </NavLink></b>
-      <b><NavLink to = "/garden">Garden </NavLink></b>
-      <b><NavLink to = "/tasks">Tasks </NavLink></b>
+    <div className="menuContainer">
+      <b><NavLink to = "/" className="links">Home </NavLink> </b>
+      <b><NavLink to = "/guides" className="links">Guides </NavLink></b>
+      <b><NavLink to = "/garden" className="links">Garden </NavLink></b>
+      <b><NavLink to = "/tasks" className="links">Tasks </NavLink></b>
       {/* Account is a stretch goal  */}
-      <b>Account</b>
-      {!props.isAuth ?<b><NavLink to = "/login">Login</NavLink></b> :null}
-      {!props.isAuth ?<b><NavLink to = "/register">Register</NavLink></b> :null}
-      {props.isAuth ?<b><NavLink to = "/logout">Logout</NavLink></b> :null}
-      <b>Zone: {props.displayZone} <NavLink to = "/zone">update</NavLink></b>
+      <b><NavLink to = "/" className="links">Account </NavLink></b>
+      <b>{!props.isAuth ? <NavLink to = "/login" className="links">Login</NavLink> :null}</b>
+      <b>{!props.isAuth ?<NavLink to = "/register" className="links">Register</NavLink> :null}</b>
+      <b>{props.isAuth ? <NavLink to = "/logout" className="links">Logout</NavLink> :null}</b>
+      <b><NavLink to = "/zone" className="links">Zone: {props.displayZone}</NavLink></b>
     </div>
   )
 }

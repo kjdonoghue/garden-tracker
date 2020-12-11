@@ -1,6 +1,8 @@
 const initialState = {
     zone: '',
     primary_garden: '',
+    new_garden: '',
+    new_plant: '',
     isGuest: false,
     isAuth: false
 }
@@ -25,6 +27,14 @@ const reducer = (state= initialState, action) => {
         return{...state,
             isGuest: false
         }
+    } else if (action.type === 'UPDATE_GARDEN') {
+        return{...state,
+            new_garden: action.payload
+        }
+    } else if (action.type === 'UPDATE_TABLE') {
+        return{...state,
+            new_plant: action.payload
+        } 
     } else {
         return state
     }

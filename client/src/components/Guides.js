@@ -6,6 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Zone from './Zone'
 import {connect} from 'react-redux'
+import './css/guides.css'
 
 //for material-ui select
 const useStyles = makeStyles((theme) => ({
@@ -43,13 +44,17 @@ function Guides(props) {
 
     const guideItem = guides.map(guide => {
         return <div key={guide.id} className="guide"><b>{guide.vegetable}</b>
+            <label>{guide.description}</label>
+            <label>{guide.description_two}</label>
+            <label>{guide.description_three}</label>
             <label><b>Days to Maturity:</b> {guide.days_maturity}</label>
+            <label><b>Sow Method:</b> {guide.sow_method}</label>
             <label><b>Sow Time:</b> {guide.sow_time}</label>
-            <label><b>Sun Requirements:</b> {guide.sun_req}</label>
-            <label><b>Water Requirements:</b> {guide.water_req}" per week</label>
+            <label><b>Plant Spacing:</b> {guide.seed_spacing}</label>
             <label><b>Spread:</b> {guide.spread}"</label>
             <label><b>Height:</b> {guide.height}"</label>
-            <label><b>Sow Method:</b> {guide.sow_method}</label>
+            <label><b>Sun Requirements:</b> {guide.sun_req}</label>
+            <label><b>Water Requirements:</b> {guide.water_req}" per week</label>
             </div>
     })
 

@@ -87,15 +87,26 @@ function Register(props) {
                 onChange={handleOnChange}
                 label="Zone"
                 >
-                <MenuItem value={1}>1</MenuItem>
-                <MenuItem value={2}>2</MenuItem>
-                <MenuItem value={3}>3</MenuItem>
-                <MenuItem value={4}>4</MenuItem>
-                <MenuItem value={5}>5</MenuItem>
-                <MenuItem value={6}>6</MenuItem>
-                <MenuItem value={7}>7</MenuItem>
-                <MenuItem value={8}>8</MenuItem>
-                <MenuItem value={9}>9</MenuItem>
+                <MenuItem value="1a">1a</MenuItem>
+                <MenuItem value="1b">1b</MenuItem>
+                <MenuItem value="2a">2a</MenuItem>
+                <MenuItem value="2b">2b</MenuItem>
+                <MenuItem value="3a">3a</MenuItem>
+                <MenuItem value="3b">3b</MenuItem>
+                <MenuItem value="4a">4a</MenuItem>
+                <MenuItem value="4b">4b</MenuItem>
+                <MenuItem value="5a">5a</MenuItem>
+                <MenuItem value="5b">5b</MenuItem>
+                <MenuItem value="6a">6a</MenuItem>
+                <MenuItem value="6b">6b</MenuItem>
+                <MenuItem value="7a">7a</MenuItem>
+                <MenuItem value="7b">7b</MenuItem>
+                <MenuItem value="8a">8a</MenuItem>
+                <MenuItem value="8b">8b</MenuItem>
+                <MenuItem value="9a">9a</MenuItem>
+                <MenuItem value="9b">9b</MenuItem>
+                <MenuItem value="10a">10a</MenuItem>
+                <MenuItem value="10b">10b</MenuItem>
                 </Select>
             </FormControl>
             <b><NavLink to = "/zone"> Don't know your zone? Find it here</NavLink></b>

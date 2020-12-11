@@ -57,11 +57,14 @@ function AddPlant(props) {
         {
           data: newPlant
         })
-        .then(response => {let success = response.data.success
+        .then(response => {
+          
+          let success = response.data.success
 
           if (success) {
            //reload add plant and garden
            console.log("Success") 
+           props.updateGardenTable(newPlant)
            setNewPlant({
              plant_name: '',
              plant_family: '',
@@ -138,4 +141,10 @@ const mapStatesToProps = (state) =>  {
   }
 }
 
-export default connect(mapStatesToProps)(AddPlant)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateGardenTable: (plant) => dispatch({type: 'UPDATE_TABLE', payload: plant})
+  }
+}
+
+export default connect(mapStatesToProps, mapDispatchToProps)(AddPlant)

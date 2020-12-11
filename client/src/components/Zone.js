@@ -11,8 +11,8 @@ function FindZone(props) {
 
    }, [props.setZone])
 
-
-   //get zone info based on zone id
+ 
+  //  get zone info based on zone id
    const fetchZoneInformation = (id) => {
      fetch(`http://localhost:8080/guides/zone-information/${id}`)
      .then(response => response.json())
@@ -20,8 +20,6 @@ function FindZone(props) {
        setZone(result)
      })
    }
-
-   console.log(zone)
 
     //handle on change for entering zip code to get zone
     const handleOnChange = (e) => {
@@ -38,6 +36,7 @@ function FindZone(props) {
         .then(response => response.json())
         .then(result => {
             props.updateZone(result.zone)
+            fetchZoneInformation(result.zone)
         })
       }
 
@@ -49,9 +48,9 @@ function FindZone(props) {
     //maps through zone db information
     let ZoneItem = zone.map(zone => {
       return <div>
-        <label>Last Frost: {zone.last_front}</label>
-        <label>First Frost: {zone.first_front}</label>
-        <label>Low Temp Range: Need to update this in db</label>
+        <label>Last Frost: {zone.last_frost}</label>
+        <label>First Frost: {zone.first_frost}</label>
+        <label>Avg Extreme Min Temp: {zone.temp}F</label>
         </div>
     })
     

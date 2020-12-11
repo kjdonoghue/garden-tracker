@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {NavLink} from "react-router-dom"
+
 
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -32,17 +32,14 @@ function ChooseGarden(props) {
     const classes = useStyles();
 
     const [gardens, setGardens] = useState([])
-    const [selectedGarden, setSelectedGarden] = useState()
-    const [gardenName, setGardenName] = useState()
+    //const [selectedGarden, setSelectedGarden] = useState()
+   const [gardenName, setGardenName] = useState(props.displayGardenDefault)
 
     useEffect(() => {
-        // get user defaults
-        // fetchUserGardenDefaults()
-
-        //get all garden options
         displayGardenOptions()
-    }, [])
+    }, [props.updateGardens])
 
+  
     // get user defaults - should this move to action creators?
     // const fetchUserGardenDefaults = () => {
     //     axios.get('http://localhost:8080/garden/defaults')
@@ -63,13 +60,13 @@ function ChooseGarden(props) {
     }
 
     const handleOnChange = (e) => {
-            setGardenName({...gardenName,
-                [e.target.name]:  (e.target.value)
+        //     setGardenName({...gardenName,
+        //         [e.target.name]:  (e.target.value)
 
-            })
+        //     })
 
-        let key = [e.target.key] 
-        console.log(key)      
+        // let key = [e.target.key] 
+        // console.log(key)      
         props.onSetGardenDefault(e.target.value)
         
     }
@@ -99,9 +96,6 @@ function ChooseGarden(props) {
                     {gardenList}
                 </Select>
             </FormControl>
-            <div>
-                <b><NavLink to = "/add-garden">Create a new Garden</NavLink></b>
-            </div>
         </div>
     )
 }
@@ -109,7 +103,8 @@ function ChooseGarden(props) {
 const mapStatesToProps = (state) => {
     return {
         displayGardenDefault: state.primary_garden,
-        displayZoneDefault: state.zone
+        displayZoneDefault: state.zone,
+        updateGardens: state.new_garden
 
     }
 }

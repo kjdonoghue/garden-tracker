@@ -10,7 +10,7 @@ var bcrypt = require('bcryptjs')
 const authenticate = require('../authenticate')
 
 
-//Choose Garden Component - get zone and primary garden from users
+//Choose Garden Component - get zone and primary garden from users - this may not be needed
 router.get ('/defaults', authenticate, async (req, res) => {
     
     let id = res.locals.id
@@ -28,6 +28,22 @@ router.get ('/list-gardens', authenticate, async (req, res) => {
     let gardens = await db.any('SELECT id, garden_name from gardens WHERE user_id = $1', [id])
     
     res.json(gardens)
+
+})
+
+//save new garden information
+router.post('/new-garden', (req, res) => {
+    // let user_id = res.locals.id
+    let user_id = 2
+    let garden_name = req.body.data.garden_name
+
+    db.none('INSERT INTO gardens (user_id, garden_name) VALUES ($1, $2)', [user_id, garden_name])
+    .then(() => {
+        res.json({success: true})
+    }).catch(() => {
+        res.json({success: false})
+    })
+
 
 })
 
@@ -65,10 +81,9 @@ router.post('/save-edit', (req, res) => {
     db.none('UPDATE garden_plants SET plant_name=$1, plant_family=$2, planting_date=$3, first_harvest=$4, last_harvest=$5, notes=$6, company=$7, type=$8 WHERE id=$9', [plant_name, plant_family, planting_date, first_harvest, last_harvest, notes, company, type, id])
     .then(() => {
         res.json({success: true})
+    }).catch(() => {
+        res.json({success: false})
     })
-    // .catch(() => {
-    //     res.json({success: false})
-    // })
     
 })
 
@@ -103,8 +118,7 @@ router.get ('/:id', async (req, res) => {
     let garden_id = req.params.id
     
     //get zone and primary garden from users
-    let plants = await db.any('SELECT id, plant_name, planting_date, first_harvest, last_harvest, notes, type FROM garden_plants WHERE garden_id = $1', [garden_id])
-    
+    let plants = await db.any('SELECT id, plant_name, planting_date, first_harvest, last_harvest, notes, type FROM garden_plants WHERE garden_id = $1', [garden_id])    
     res.json(plants)
 
 })
