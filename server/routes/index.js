@@ -13,15 +13,14 @@ router.use(cors())
 router.post('/register', async (req, res) => {
     let username = req.body.username
     let password = req.body.password
-    let zone = parseInt(req.body.zone)
+    let zone = req.body.zone
 
-    //need to ensure all fields are filled out - client side
-
+    // check to ensure username does not already exist
     const user = await db.any('SELECT username from users WHERE username = $1', [username])
     
     if (user.length > 0) {
         //user already exists            
-        res.json({success: "false"})
+        res.json({message: "This username already exists"})
     } else  {
         bcrypt.genSalt(10, function(err, salt) {
             bcrypt.hash(password, salt, function(err, hash) {
@@ -40,11 +39,12 @@ router.post('/login', async (req, res) => {
     let username = req.body.username
     let password = req.body.password
 
+    //check to see if user is in db
     const user = await db.any('SELECT id, username, password, zone from users WHERE username = $1', [username])
 
     if (user.length == 0) {
         //no user found
-        res.json({success: "user is not found"})
+        res.json({message: "user is not found"})
     } else  {
         user.map(user => {
         bcrypt.compare(password, user.password, function(err, result) {
@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
                 res.json({token: token, zone: user.zone})                        
             } else {
                 //username is correct & password is wrong
-                res.json({sucess: "password is not valid"})
+                res.json({message: "password is not valid"})
             }
         }) 
         }) 

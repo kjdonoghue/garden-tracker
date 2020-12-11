@@ -22,8 +22,10 @@ function Login(props) {
       //for textboxes & button
       const classes = useStyles();
 
+    //sets login information proir to sending to db  
     const [login, setLogin] = useState({})
 
+    //handles chnage events as user inputs login info
     const handleOnChange = (e) => {
         setLogin ({
             ...login,
@@ -31,11 +33,11 @@ function Login(props) {
         })
     }
 
+    //handles log in save to send info to db for verification
     const handleSubmit = (e) => {
         axios.post('http://localhost:8080/login', {
             username: login.username,
-            password: login.password,
-            zip: login.zip
+            password: login.password,            
         })
         .then(response => {
                         
@@ -45,7 +47,7 @@ function Login(props) {
            if (token) {
                 localStorage.setItem("jsonwebtoken", token)
                 setAuthenticationHeader(token)
-                // props.updateZone(zone)
+                props.updateZone(zone)
                 props.onLogIn()
                 props.history.push("/")
             } else {
@@ -94,7 +96,7 @@ function Login(props) {
 const mapDispatchToProps = (dispatch) => {
     return {
         onLogIn: () => dispatch({type: actionTypes.LOGGED_IN}),
-        // updateZone: (zone) => dispatch({type: 'SET_ZONE', payload: zone})
+        updateZone: (zone) => dispatch({type: 'SET_ZONE', payload: zone})
     }
 }
 

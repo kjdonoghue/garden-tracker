@@ -21,13 +21,17 @@ router.get ('/defaults', authenticate, async (req, res) => {
 
 })
 
-//Choose Garden Component - get all user gardens from gardens
+//Choose Garden Component - get all user gardens from gardens db
 router.get ('/list-gardens', authenticate, async (req, res) => {
     let id = res.locals.id
     
     let gardens = await db.any('SELECT id, garden_name from gardens WHERE user_id = $1', [id])
     
-    res.json(gardens)
+    if (gardens) {
+        res.json(gardens)
+    } else {
+        res.json({message: "Your request could not be processed"})
+    }
 
 })
 
@@ -49,13 +53,17 @@ router.post('/new-garden', (req, res) => {
 
 //save new plant information
 router.post('/save-new', (req, res) => {
-    console.log("fired")
+    let user_id = res.locals.id
     let garden_id = req.body.data.garden_id
     let plant_name = req.body.data.plant_name
     let plant_family = req.body.data.plant_family
     let company = req.body.data.company
     let type = req.body.data.type
     let zone = req.body.data.zone
+
+    if (type == "seed" || type == "set") {
+        createSeedStartingTask(user_id, zone, plant_name, plant_family)
+    }
     
     db.none('INSERT INTO garden_plants (garden_id, plant_name, plant_family, company, type) VALUES ($1, $2, $3, $4, $5)', [garden_id, plant_name, plant_family, company, type])
     .then(() => {
@@ -64,6 +72,31 @@ router.post('/save-new', (req, res) => {
         res.json({success: false})
     })
 })
+
+async function createSeedStartingTask(user_id, zone, plant_name, plant_family) {
+    let last_frost = await db.any('SELECT last_frost FROM zones where zone_name=$1', [zone])
+
+    if (plant_family == "winter squash" || plant_family == "beets" || plant_family == "carrots" ) {
+        console.log("1")
+
+    } else if (plant_family == "greens" || plant_family == "potatoes" ) {
+
+        console.log("2")
+    } else if (plant_family == "broccoli" || plant_family == "leeks") {
+        console.log("3")
+
+    } else if (plant_family == "peppers" || plant_family == "tomatoes" || plant_family == "eggplant" ) {
+        console.log("4")
+
+    } else if (plant_family == "cabbage" || plant_family == "cauliflower" || plant_family == "celery") {
+        console.log("5")
+    } else {
+
+        console.log("else")
+    }
+
+
+}
 
 //save edited plant information from /plant/:id
 router.post('/save-edit', (req, res) => {

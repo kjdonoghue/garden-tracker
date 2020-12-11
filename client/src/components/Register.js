@@ -30,8 +30,10 @@ function Register(props) {
        //for textboxes & button
        const classes = useStyles();
 
+       // sets registration information prior to sending to db
        const [register, setRegister] = useState({})
    
+       //handles on change event to user input for reg information
        const handleOnChange = (e) => {
            setRegister ({
                ...register,
@@ -40,6 +42,8 @@ function Register(props) {
        }
 
        //need to ensure all fields are filled out
+       
+       //handles the save - sending info to database to create user
        const handleSubmit = (e) => {
             fetch('http://localhost:8080/register', {
                 method: 'POST',
@@ -109,7 +113,9 @@ function Register(props) {
                 <MenuItem value="10b">10b</MenuItem>
                 </Select>
             </FormControl>
-            <b><NavLink to = "/zone"> Don't know your zone? Find it here</NavLink></b>
+            <div>
+                <b><NavLink to = "/zone"> Don't know your zone? Find it here</NavLink></b>
+            </div>    
         </div>
         <div className={classes.root}>
             <Button variant="contained" color="primary" onClick={handleSubmit}>

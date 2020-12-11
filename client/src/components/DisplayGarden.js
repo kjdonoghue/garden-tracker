@@ -10,9 +10,8 @@ function DisplayGarden(props) {
 
     return(
         <div>
-            <DisplayGardenName />
+           
             <ChooseGarden />
-            <AddGarden />
             <AddPlant />
             <GardenTable />
             
