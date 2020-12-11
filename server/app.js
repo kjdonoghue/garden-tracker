@@ -10,12 +10,13 @@ const indexRouter = require('./routes/index')
 const gardenRouter = require('./routes/garden')
 const tasksRouter = require('./routes/tasks')
 const guidesRouter = require('./routes/guides')
+const authenticate = require('./authenticate')
 
 app.use(express.json())
 app.use(cors())
 
 app.use('/', indexRouter)
-app.use('/garden', gardenRouter)
+app.use('/garden', authenticate, gardenRouter)
 app.use('/tasks', tasksRouter)
 app.use('/guides', guidesRouter)
 
