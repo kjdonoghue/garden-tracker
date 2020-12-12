@@ -6,7 +6,7 @@ import {connect} from "react-redux"
 import * as actionTypes from "../store/actions/actionTypes"
 import axios from "axios"
 import { setAuthenticationHeader} from '../utils/authHeaders'
-
+import * as actionCreators from '../store/actions/actionCreators'
 
 //For Material UI
 const useStyles = makeStyles((theme) => ({
@@ -99,8 +99,8 @@ function Login(props) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogIn: () => dispatch({type: actionTypes.LOGGED_IN}),
-        updateZone: (zone) => dispatch({type: 'SET_ZONE', payload: zone})
+        onLogIn: () => dispatch(actionCreators.loggedIn()),
+        updateZone: (zone) => dispatch(actionCreators.setZone(zone))
     }
 }
 

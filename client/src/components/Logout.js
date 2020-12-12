@@ -1,4 +1,5 @@
 import {connect} from 'react-redux'
+import * as actionCreators from '../store/actions/actionCreators'
 
 function Logout(props) {
 
@@ -17,7 +18,7 @@ function Logout(props) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        isAuth: () => dispatch({type: 'ON_LOGOUT'})
+        isAuth: () => dispatch(actionCreators.loggedOut())
     }
 }
 

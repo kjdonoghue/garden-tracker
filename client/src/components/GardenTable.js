@@ -69,10 +69,10 @@ function GardenTable(props) {
 const mapStateToProps = (state) => {
     return {
         // this is the garden id:
-        displayGarden: state.primary_garden,
+        displayGarden: state.gardenReducer.primary_garden,
 
         //this is the garden name:
-        displayGardenName: state.primary_garden_name,
+        displayGardenName: state.gardenReducer.primary_garden_name,
     }
 }
 

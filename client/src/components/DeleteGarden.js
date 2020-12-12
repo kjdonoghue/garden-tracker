@@ -4,6 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios'
 import {connect} from 'react-redux'
+import * as actionCreators from '../store/actions/actionCreators'
 
 //for material ui
 const useStyles = makeStyles((theme) => ({
@@ -48,7 +49,7 @@ function DeleteGarden(props) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateGardenLists: () => dispatch({type:'DELETE_GARDEN'})
+        updateGardenLists: () => dispatch(actionCreators.onDeleteGarden)
     }
 }
 

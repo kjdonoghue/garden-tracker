@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
 import axios from "axios"
+import * as actionCreators from '../store/actions/actionCreators'
 
 function FindZone(props) {
 
@@ -83,15 +84,15 @@ function FindZone(props) {
 
 const mapStateToProps = (state) => {
   return {
-    setZone: state.zone,
-    isGuest: state.isGuest
+    setZone: state.zoneReducer.zone,
+    isGuest: state.zoneReducer.isGuest
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateZone: (zone) => dispatch({ type: 'SET_ZONE', payload: zone }),
-    notGuest: () => dispatch({ type: 'NOT_GUEST' })
+    updateZone: (zone) => dispatch(actionCreators.setZone(zone)),
+    notGuest: () => dispatch(actionCreators.notGuest())
   }
 }
 

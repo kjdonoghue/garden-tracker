@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios'
-import {connect} from 'react-redux'
 
 
 //for material ui
@@ -51,11 +50,6 @@ function DeletePlant(props) {
 
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        // updateGardenLists: () => dispatch({type:'DELETE_GARDEN'})
-    }
-}
 
 
-export default connect(null, mapDispatchToProps)(DeletePlant)
+export default DeletePlant

@@ -37,17 +37,17 @@ function AddPlant(props) {
   //for material ui select
   const classes = useStyles();
 
-  const [newPlant, setNewPlant] = useState({})
+  const [newPlant, setNewPlant] = useState({garden_id: props.displayGardenID,
+    plant_name: ''})
 
-  // add zone and garden id to plant info onload
-  useEffect(() => {
-    setNewPlant({
-      ...newPlant,
-      zone: props.displayZone,
-      garden_id: props.displayGardenID,
-      plant_name: ''
-    })
-  }, [])
+  // garden id to plant info onload
+  // useEffect(() => {
+  //   setNewPlant({
+  //     ...newPlant,
+  //     garden_id: props.displayGardenID,
+  //     plant_name: ''
+  //   })
+  // }, [])
 
   //update local state with information
   const handleOnChange = (e) => {
@@ -192,8 +192,7 @@ function AddPlant(props) {
 
 const mapStatesToProps = (state) => {
   return {
-    displayZone: state.zone,
-    displayGardenID: state.primary_garden
+    displayGardenID: state.gardenReducer.primary_garden
   }
 }
 

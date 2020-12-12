@@ -1,6 +1,7 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
+import * as actionCreators from '../store/actions/actionCreators'
 
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -30,8 +31,7 @@ function ChooseGarden(props) {
     //for material ui
     const classes = useStyles();
 
-    // const [gardens, setGardens] = useState([])
-    // const [gardenName, setGardenName] = useState({})
+    const [gardens, setGardens] = useState([])
 
     useEffect(() => {
         displayGardenOptions()
@@ -42,19 +42,18 @@ function ChooseGarden(props) {
     const displayGardenOptions = () => {
         axios.get('http://localhost:8080/garden/list-gardens')
         .then(response => {
-            // setGardens(response.data)
-            props.onSetGardenList(response.data)
+            setGardens(response.data)
         })
     }
 
-    const handleOnChange = (name, value) => {
-        props.onSetGardenDefault({garden_name: name, garden_id: value})
+    //prompts table to update through redux
+    const handleOnClick = (name, id) => {
+        props.onSetGardenDefault({garden_name: name, garden_id: id})
     }
 
     //map through gardens and add them to drop down variables
-    // const gardenList = gardens.map(garden => {
-    const gardenList = props.displayGardenList.map(garden => {    
-        return <MenuItem onClick={() => handleOnChange(garden.garden_name, garden.id)} name={garden.garden_name} value={garden.id} key={garden.id}>{garden.garden_name}</MenuItem>
+        const gardenList = gardens.map(garden => {  
+        return <MenuItem onClick={() => handleOnClick(garden.garden_name, garden.id)} name={garden.garden_name} value={garden.id} key={garden.id}>{garden.garden_name}</MenuItem>
     })
 
 
@@ -73,18 +72,15 @@ function ChooseGarden(props) {
 
 const mapStatesToProps = (state) => {
     return {
-        // displayGardenDefault: state.primary_garden,
-        displayGardenList: state.garden_list,
+
         // update gardens propts the list to update after adding new garden
-        updateGardens: state.new_garden
+        updateGardens: state.gardenReducer.new_garden
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSetGardenDefault: (garden) => dispatch({type: 'SET_GARDEN', payload: garden}),
-        onSetGardenList: (gardenList) => dispatch({type: 'SET_GARDEN_LIST', payload: gardenList })
-        // onSetZoneDefault: (zone) => dispatch({type: 'SET_ZONE', payload: zone})         
+        onSetGardenDefault: (garden) => dispatch(actionCreators.setSelectedGarden(garden)),
     }
 }
 

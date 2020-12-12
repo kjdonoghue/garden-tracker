@@ -3,6 +3,8 @@ import axios from 'axios'
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
+import * as actionTypes from '../store/actions/actionTypes'
+import * as actionCreators from '../store/actions/actionCreators'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -71,7 +73,7 @@ function AddGarden(props) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateDisplayGarden: (name) => dispatch({ type: "UPDATE_GARDEN", payload: name })
+    updateDisplayGarden: (name) => dispatch(actionCreators.updateDisplay(name))
   }
 
 }

@@ -63,8 +63,8 @@ function NavMenu(props) {
 
 const mapStateToProps = (state) => {
   return {
-    isAuth: state.isAuth,
-    displayZone: state.zone
+    isAuth: state.authenticatedReducer.isAuth,
+    displayZone: state.zoneReducer.zone
   }
 }
 
