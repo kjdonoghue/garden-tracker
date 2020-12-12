@@ -43,6 +43,7 @@ function Guides(props) {
     //map through guides to set layout
     const guideItem = guides.map(guide => {
         return <div key={guide.id} className="guide"><b>{guide.vegetable}</b>
+            <div><img src={`./images/${guide.vegetable}.jpeg`}/></div>
             <label>{guide.description}</label>
             <label>{guide.description_two}</label>
             <label>{guide.description_three}</label>
@@ -77,9 +78,9 @@ function Guides(props) {
                     <MenuItem value="4">Cabbage</MenuItem>
                     <MenuItem value="5">Carrots</MenuItem>
                     <MenuItem value="6">Cauliflower</MenuItem>
-                    <MenuItem value="7">Celery</MenuItem>
+                    {/* <MenuItem value="7">Celery</MenuItem> */}
                     <MenuItem value="8">Corn</MenuItem>
-                    <MenuItem value="9">Cowpeas</MenuItem>
+                    {/* <MenuItem value="9">Cowpeas</MenuItem> */}
                     <MenuItem value="10">Cucumbers</MenuItem>
                     <MenuItem value="11">Eggplant</MenuItem>
                     <MenuItem value="13">Greens</MenuItem>
@@ -89,9 +90,9 @@ function Guides(props) {
                     <MenuItem value="20">Peas</MenuItem>
                     <MenuItem value="21">Peppers</MenuItem>
                     <MenuItem value="22">Potatoes</MenuItem>
-                    <MenuItem value="24">Summer Squash</MenuItem>
-                    <MenuItem value="25">Winter Squash</MenuItem>
-                    <MenuItem value="26">Sweet Potatoes</MenuItem>
+                    {/* <MenuItem value="24">Summer Squash</MenuItem> */}
+                    {/* <MenuItem value="25">Winter Squash</MenuItem> */}
+                    {/* <MenuItem value="26">Sweet Potatoes</MenuItem> */}
                     <MenuItem value="28">Tomatoes</MenuItem>        
                 </Select>
             </FormControl>

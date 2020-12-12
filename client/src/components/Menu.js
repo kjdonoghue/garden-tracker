@@ -1,28 +1,71 @@
 import React from "react"
-import {NavLink} from "react-router-dom";
-import {connect} from "react-redux"
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux"
 import './css/menu.css'
+//for mobile menu
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
-function Menu(props) {
+
+
+function NavMenu(props) {
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
   return (
-    <div className="menuContainer">
-      <b><NavLink to = "/" className="links">Home </NavLink> </b>
-      <b><NavLink to = "/guides" className="links">Guides </NavLink></b>
-      <b><NavLink to = "/garden" className="links">Garden </NavLink></b>
-      <b><NavLink to = "/tasks" className="links">Tasks </NavLink></b>
-      <b>{!props.isAuth ? <NavLink to = "/login" className="links">Login</NavLink> :null}</b>
-      <b>{!props.isAuth ?<NavLink to = "/register" className="links">Register</NavLink> :null}</b>
-      <b>{props.isAuth ? <NavLink to = "/logout" className="links">Logout</NavLink> :null}</b>
-      <b><NavLink to = "/zone" className="links">Zone: {props.displayZone}</NavLink></b>
+    <div>
+      <div className="menuContainer">
+        <b><NavLink to="/" className="links">Home </NavLink> </b>
+        <b><NavLink to="/guides" className="links">Guides </NavLink></b>
+        <b><NavLink to="/garden" className="links">Garden </NavLink></b>
+        <b>{!props.isAuth ? <NavLink to="/login" className="links">Login</NavLink> : null}</b>
+        <b>{!props.isAuth ? <NavLink to="/register" className="links">Register</NavLink> : null}</b>
+        <b>{props.isAuth ? <NavLink to="/logout" className="links">Logout</NavLink> : null}</b>
+        <b><NavLink to="/zone" className="links">Zone: {props.displayZone}</NavLink></b>
+      </div>
+
+      <div className="mobileMenu">
+      <div>
+      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+        Menu
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}><b><NavLink to="/" className="mobileLinks">Home </NavLink></b></MenuItem>
+        <MenuItem onClick={handleClose}><b><NavLink to="/guides" className="mobileLinks">Guides </NavLink></b></MenuItem>
+        <MenuItem onClick={handleClose}><b><NavLink to="/garden" className="mobileLinks">Garden </NavLink></b></MenuItem>
+        {!props.isAuth ? <MenuItem onClick={handleClose}><b><NavLink to="/login" className="mobileLinks">Login</NavLink></b></MenuItem> : null}
+        {!props.isAuth ? <MenuItem onClick={handleClose}><b><NavLink to="/register" className="mobileLinks">Register</NavLink></b></MenuItem> : null}
+        {props.isAuth ? <MenuItem onClick={handleClose}><b><NavLink to="/logout" className="mobileLinks">Logout</NavLink></b></MenuItem> : null}
+        <MenuItem onClick={handleClose}><b><NavLink to="/zone" className="mobileLinks">Zone: {props.displayZone}</NavLink></b></MenuItem>
+      </Menu>
+    </div>
+
+      </div>
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  return{
-  isAuth: state.isAuth,
-  displayZone: state.zone
+  return {
+    isAuth: state.isAuth,
+    displayZone: state.zone
   }
 }
 
-export default connect(mapStateToProps)(Menu)
+export default connect(mapStateToProps)(NavMenu)
