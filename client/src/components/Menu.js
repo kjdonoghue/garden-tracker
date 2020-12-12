@@ -6,7 +6,7 @@ import './css/menu.css'
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import Logout from "./Logout";
 
 
 function NavMenu(props) {
@@ -30,7 +30,7 @@ function NavMenu(props) {
         <b><NavLink to="/garden" className="links">Garden </NavLink></b>
         <b>{!props.isAuth ? <NavLink to="/login" className="links">Login</NavLink> : null}</b>
         <b>{!props.isAuth ? <NavLink to="/register" className="links">Register</NavLink> : null}</b>
-        <b>{props.isAuth ? <NavLink to="/logout" className="links">Logout</NavLink> : null}</b>
+        <b>{props.isAuth ?  <Logout />  : null}</b>       
         <b><NavLink to="/zone" className="links">Zone: {props.displayZone}</NavLink></b>
       </div>
 
@@ -51,7 +51,7 @@ function NavMenu(props) {
         <MenuItem onClick={handleClose}><b><NavLink to="/garden" className="mobileLinks">Garden </NavLink></b></MenuItem>
         {!props.isAuth ? <MenuItem onClick={handleClose}><b><NavLink to="/login" className="mobileLinks">Login</NavLink></b></MenuItem> : null}
         {!props.isAuth ? <MenuItem onClick={handleClose}><b><NavLink to="/register" className="mobileLinks">Register</NavLink></b></MenuItem> : null}
-        {props.isAuth ? <MenuItem onClick={handleClose}><b><NavLink to="/logout" className="mobileLinks">Logout</NavLink></b></MenuItem> : null}
+        {props.isAuth ?  <Logout />  : null}
         <MenuItem onClick={handleClose}><b><NavLink to="/zone" className="mobileLinks">Zone: {props.displayZone}</NavLink></b></MenuItem>
       </Menu>
     </div>

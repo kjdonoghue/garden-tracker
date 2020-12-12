@@ -16,12 +16,16 @@ const reducer = (state= initialState, action) => {
             isAuth: true,
             isGuest: true,
         }
-    } else if (action.type === 'SET_GARDEN') {
+    } else if (action.type === 'ON_LOGOUT') {
+        return{...state,
+            isAuth: false
+        }
+    }  else if (action.type === 'SET_GARDEN') {
         return{...state,
             primary_garden: action.payload.garden_id,
             primary_garden_name: action.payload.garden_name
         }
-    }  else if (action.type === 'SET_ZONE') {
+    } else if (action.type === 'SET_ZONE') {
         return{...state,
             zone: action.payload,
             isGuest: true
