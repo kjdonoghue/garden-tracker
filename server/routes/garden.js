@@ -26,31 +26,10 @@ router.post('/save-new', gardenController.saveNewPlant)
 router.post('/save-edit', gardenController.saveEditedPlantInfo)
 
 //delete garden from /garden/:id
-router.delete('/delete-garden/:id/', (req, res) => {
-    
-    let id = parseInt(req.params.id)
-        
-    db.none("DELETE FROM gardens WHERE id=$1", [id])
-    .then(() => {
-        res.json({success: true})
-    }).catch(() => {
-        res.json({success: false})
-    })
-})
-
+router.delete('/delete-garden/:id/', gardenController.deleteUserGarden)
 
 //delete plant from /plant/:id
-router.delete('/delete-plant/:id/', (req, res) => {
-    
-    let id = parseInt(req.params.id)
-        
-    db.none("DELETE FROM garden_plants WHERE id=$1", [id])
-    .then(() => {
-        res.json({success: true})
-    }).catch(() => {
-        res.json({success: false})
-    })
-})
+router.delete('/delete-plant/:id/', gardenController.deletePlant)
 
 //Plant Detail (from Garden Table Component) - get plant details from garden plants by plant id
 router.get('/plant/:id', gardenController.fetchPlantDetails)

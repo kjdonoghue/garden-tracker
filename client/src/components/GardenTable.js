@@ -38,7 +38,6 @@ function GardenTable(props) {
             })
     }
 
-
     const handleDelete = (id) => {
         axios.delete(`http://localhost:8080/garden/delete-garden/${id}`)
         .then(response => {
@@ -48,7 +47,6 @@ function GardenTable(props) {
             if (success) {
                 props.updateGardenLists()
                 setPlants([])
-              
             } else {
               console.log("did not update")
             }
@@ -60,6 +58,8 @@ function GardenTable(props) {
         <div>
             <h2>{props.displayGardenName}</h2> 
             <button onClick={() => handleDelete(props.displayGarden)}>Delete</button>
+            
+            
             <div>
                 {props.displayGarden ? <b><NavLink to="/add-plant"><button>Add Plant</button></NavLink></b> : null}
             </div>
