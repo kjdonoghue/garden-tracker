@@ -61,7 +61,7 @@ ReactDOM.render(
             {/* <Route component = {requireAuth(DisplayGarden)} path='/garden' /> */}
             <Route component = {DisplayGarden} path='/garden' />        
             {/* <Route component = {requireAuth(Tasks)} path='/tasks' /> */}
-            <Route component = {PlantDetails} path='/plant/:id' />
+            <Route component = {PlantDetails} path='/detail/:id' />
             <Route component = {AddPlant} path='/add-plant' />
             <Route component = {Tasks} path='/tasks' />
             <Route component = {EditTasks} path='/edit-tasks/:id' />

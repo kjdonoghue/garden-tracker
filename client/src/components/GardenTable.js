@@ -4,7 +4,9 @@ import axios from 'axios'
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
 import { NavLink } from "react-router-dom";
-
+import history from '.././utils/history'
+import DeleteGarden from './DeleteGarden';
+import SetPrimaryGarden from './SetPrimaryGarden';
 
 function GardenTable(props) {
 
@@ -15,6 +17,7 @@ function GardenTable(props) {
     const column = [
         { field: 'id', hide: true },
         { field: 'plant_name', headerName: 'Vegetable' },
+        { field: 'quantity', headerName: 'Quantity' },
         { field: 'type', headerName: 'Started As' },
         { field: 'sow_date', headerName: 'Sow Date', description: 'The date you planted your seeds' },
         { field: 'planting_date', headerName: 'Planting Date', description: 'The date you planted the plant in the garden' },
@@ -37,29 +40,13 @@ function GardenTable(props) {
                 setPlants(response.data)
             })
     }
-
-    const handleDelete = (id) => {
-        axios.delete(`http://localhost:8080/garden/delete-garden/${id}`)
-        .then(response => {
-
-            let success = response.data.success
-    
-            if (success) {
-                props.updateGardenLists()
-                setPlants([])
-            } else {
-              console.log("did not update")
-            }
-        })
-    }
-
+      
     return (
 
         <div>
             <h2>{props.displayGardenName}</h2> 
-            <button onClick={() => handleDelete(props.displayGarden)}>Delete</button>
-            
-            
+            {props.displayGarden ? <DeleteGarden id={props.displayGarden}/> : null}
+            {props.displayGarden ? <SetPrimaryGarden id={props.displayGarden} name={props.displayGardenName}/> : null}
             <div>
                 {props.displayGarden ? <b><NavLink to="/add-plant"><button>Add Plant</button></NavLink></b> : null}
             </div>
@@ -68,8 +55,9 @@ function GardenTable(props) {
                     columns={column}
                     rows={plants}
                     onSelectionChange={(newSelection) => {
-                        window.location.href = (`/plant/${newSelection.rowIds[0]}`)
-                        // `/plant/${newSelection.rowIds[0]}`
+                        //history.push(`/detail/${newSelection.rowIds[0]}`)
+                        window.location.href = (`/detail/${newSelection.rowIds[0]}`)
+                       
                     }}
                 />
             </div>
@@ -88,10 +76,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateGardenLists: () => dispatch({type:'DELETE_GARDEN'})
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(GardenTable)
+export default connect(mapStateToProps)(GardenTable)

@@ -6,6 +6,8 @@ import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import DeletePlant from "./DeletePlant";
+import history from '.././utils/history'
 
 
 //for material-ui select
@@ -31,6 +33,7 @@ function PlantDetails(props) {
   const classes = useStyles();
 
   const [plantDetails, setPlantDetails] = useState([])
+  let id = props.match.params.id
 
   useEffect(() => {
     let id = props.match.params.id
@@ -54,7 +57,17 @@ function PlantDetails(props) {
 
   }
 
-  //   // handle change to planting date
+    // handle change to sow date
+    const handleSowChange = (date) => {
+      date.setDate(date.getDate())
+      console.log(date)
+      setPlantDetails({
+        ...plantDetails,
+        sow_date: date
+      })
+    };
+
+  // handle change to planting date
   const handlePlantingChange = (date) => {
     date.setDate(date.getDate())
     console.log(date)
@@ -99,20 +112,20 @@ function PlantDetails(props) {
       })
   }
 
-  const handleDelete = () => {
-    let id = props.match.params.id
-    axios.delete(`http://localhost:8080/garden/delete-plant/${id}`)
-      .then(response => {
+  // const handleDelete = () => {
+  //   let id = props.match.params.id
+  //   axios.delete(`http://localhost:8080/garden/delete-plant/${id}`)
+  //     .then(response => {
 
-        let success = response.data.success
+  //       let success = response.data.success
 
-        if (success) {
-          props.history.push('/garden')
-        } else {
-          console.log("did not update")
-        }
-      })
-  }
+  //       if (success) {
+  //         props.history.push('/garden')
+  //       } else {
+  //         console.log("did not update")
+  //       }
+  //     })
+  // }
 
   return (
     <div>
@@ -120,8 +133,27 @@ function PlantDetails(props) {
 
       <label> Plant: <TextField onChange={handleOnChange} id="standard-search" value={plantDetails.plant_name} name="plant_name" type="text" /> </label>
       <label> Plant Family: <TextField onChange={handleOnChange} id="standard-search" value={plantDetails.plant_family} name="plant_family" type="text" /> </label>
-      <label> Start From: <TextField onChange={handleOnChange} id="standard-search" value={plantDetails.type} name="company" type="text" /> </label>
+      <label> Start From: <TextField onChange={handleOnChange} id="standard-search" value={plantDetails.type} name="type" type="text" /> </label>
+      <label> Quantity: <TextField onChange={handleOnChange} id="standard-search" value={plantDetails.quantity} name="quantity" type="text" /> </label>
       <label> Supplier: <TextField onChange={handleOnChange} id="standard-search" value={plantDetails.company} name="company" type="text" /> </label>
+
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Grid container justify="space-around">
+          <KeyboardDatePicker
+            margin="normal"
+            id="date-picker-dialog"
+            label="Sow Date"
+            format="MM/dd/yyyy"
+            name="sow_date"
+            value={plantDetails.sow_date}
+            onChange={handleSowChange}
+            KeyboardButtonProps={{
+              'aria-label': 'change date',
+            }}
+          />
+        </Grid>
+      </MuiPickersUtilsProvider>
+
 
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Grid container justify="space-around">
@@ -178,7 +210,8 @@ function PlantDetails(props) {
 
       <button onClick={handleSave}>Save Changes</button>
 
-      <button onClick={handleDelete}>Delete</button>
+      {/* <button onClick={handleDelete}>Delete</button> */}
+      <DeletePlant id={id} />
 
     </div>
   )
