@@ -1,0 +1,11 @@
+.zoneNum{
+    margin: 10px;
+}
+
+.zoneDetails {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+

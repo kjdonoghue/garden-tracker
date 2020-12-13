@@ -7,11 +7,16 @@ import { NavLink } from "react-router-dom";
 import history from '.././utils/history'
 import DeleteGarden from './DeleteGarden';
 import SetPrimaryGarden from './SetPrimaryGarden';
+import DeletePlant from './DeletePlant';
+import GardenTableMobile from './GardenTableMobile';
+import './css/garden.css'
+
 
 function GardenTable(props) {
 
     //sets plants for use in rows
     const [plants, setPlants] = useState([])
+    const [selectedPlant, setSelectedPlant] = useState()
 
     //sets columns
     const column = [
@@ -30,7 +35,7 @@ function GardenTable(props) {
     useEffect(() => {
         //gets plants in primary garden (in global state) updated when choose garden componet updates primary garden in redux
         fetchGarden(props.displayGarden)
-    }, [props.displayGarden])
+    }, [props.displayGarden, props.updateOnDelete])
 
 
     //gets plants by garden id 
@@ -40,27 +45,35 @@ function GardenTable(props) {
                 setPlants(response.data)
             })
     }
-      
-    return (
 
+    return (
         <div>
-            <h2>{props.displayGardenName}</h2> 
-            {props.displayGarden ? <DeleteGarden id={props.displayGarden}/> : null}
-            {props.displayGarden ? <SetPrimaryGarden id={props.displayGarden} name={props.displayGardenName}/> : null}
-            <div>
-                {props.displayGarden ? <b><NavLink to="/add-plant"><button>Add Plant</button></NavLink></b> : null}
+            <div className="desktopGardenContainer">
+                <h2>{props.displayGardenName}</h2>
+                {props.displayGarden ? <div>
+                    <DeleteGarden id={props.displayGarden} />
+                    <SetPrimaryGarden id={props.displayGarden} name={props.displayGardenName} />
+                    <NavLink to={`/detail/${selectedPlant}`}><button>Edit</button></NavLink>
+                    <b><NavLink to="/add-plant"><button>Add Plant</button></NavLink></b>
+                    <DeletePlant id={selectedPlant} /> 
+                </div> : null}
+               
+              
+                <div style={{ height: 250, width: '100%' }}>
+                    <DataGrid
+                        columns={column}
+                        rows={plants}
+                        checkboxSelection
+                        onSelectionChange={(newSelection) => {
+                            setSelectedPlant(newSelection.rowIds[0])
+                        }}
+                    />
+                    </div>
             </div>
-            <div style={{ height: 250, width: '100%' }}>
-                <DataGrid
-                    columns={column}
-                    rows={plants}
-                    onSelectionChange={(newSelection) => {
-                        //history.push(`/detail/${newSelection.rowIds[0]}`)
-                        window.location.href = (`/detail/${newSelection.rowIds[0]}`)
-                       
-                    }}
-                />
+            <div className='mobileGardenContainer'>
+                <GardenTableMobile plants={plants} />
             </div>
+
         </div>
 
     );
@@ -73,7 +86,12 @@ const mapStateToProps = (state) => {
 
         //this is the garden name:
         displayGardenName: state.gardenReducer.primary_garden_name,
+
+        //this update the table when a plant is deleted
+        updateOnDelete: state.gardenReducer.table_update
     }
 }
+
+
 
 export default connect(mapStateToProps)(GardenTable)

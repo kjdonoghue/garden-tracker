@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Switch} from "react-router-dom"
 import {createStore, combineReducers} from "redux"
 import {Provider} from "react-redux"
-import reducer from './store/reducer'
 import BaseLayout from './components/BaseLayout';
 import Login from './components/Login';
 import Register from './components/Register';

@@ -3,12 +3,13 @@ const initialState = {
     primary_garden: '',
     primary_garden_name: '',
     new_garden: '',
-    new_plant: '',
+    table_update: '',
 }
 
 const reducer = (state= initialState, action) => {
     
     if (action.type === 'SET_GARDEN') {
+        console.log(action.payload)
         return{...state,
             primary_garden: action.payload.garden_id,
             primary_garden_name: action.payload.garden_name
@@ -21,7 +22,7 @@ const reducer = (state= initialState, action) => {
     } else if (action.type === 'UPDATE_TABLE') {
         return{...state,
             //triggers garden table to upload
-            new_plant: action.payload
+            table_update: action.payload
         } 
     } else if (action.type === 'SET_GARDEN_LIST') {
         return{...state, 

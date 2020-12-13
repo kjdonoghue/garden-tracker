@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import {TextField, Button} from '@material-ui/core/'
 import {NavLink} from "react-router-dom"
 import {connect} from "react-redux"
-import * as actionTypes from "../store/actions/actionTypes"
 import axios from "axios"
 import { setAuthenticationHeader} from '../utils/authHeaders'
 import * as actionCreators from '../store/actions/actionCreators'
+import LoginTest from './LoginTest'
 
 //For Material UI
 const useStyles = makeStyles((theme) => ({
@@ -37,22 +37,25 @@ function Login(props) {
     const handleSubmit = (e) => {
         if (login.username == '' || login.password == '') {
             alert("Please enter a username and password")
+            
         } else {
         
         axios.post('http://localhost:8080/login', {
             data: login         
         })
         .then(response => {
-                        
            const token = response.data.token
            const zone = response.data.zone
+           const garden_name = response.data.garden_name
+           const garden_id = response.data.garden_id
          
            if (token) {
                 localStorage.setItem("jsonwebtoken", token)
                 setAuthenticationHeader(token)
+                props.updatePrimaryGarden({garden_name, garden_id})
                 props.updateZone(zone)
                 props.onLogIn()
-                props.history.push("/")
+                props.history.push("/garden")
             } else {
                 alert(response.data.message)
            }
@@ -92,7 +95,8 @@ function Login(props) {
                 Submit
             </Button>
         </div>
-        <b><NavLink to = "/register">Register For An Account</NavLink></b>
+        <b><NavLink to = "/register">Don't have an account? Sign Up</NavLink></b>   
+        <LoginTest />
     </div>
     )
 }
@@ -100,7 +104,8 @@ function Login(props) {
 const mapDispatchToProps = (dispatch) => {
     return {
         onLogIn: () => dispatch(actionCreators.loggedIn()),
-        updateZone: (zone) => dispatch(actionCreators.setZone(zone))
+        updateZone: (zone) => dispatch(actionCreators.setZone(zone)),
+        updatePrimaryGarden: (garden) => dispatch(actionCreators.setSelectedGarden(garden))
     }
 }
 

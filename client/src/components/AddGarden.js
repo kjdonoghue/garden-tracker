@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
 import * as actionTypes from '../store/actions/actionTypes'
 import * as actionCreators from '../store/actions/actionCreators'
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -65,8 +66,9 @@ function AddGarden(props) {
     <div>
       <p>create a new garden</p>
       <TextField onChange={handleOnChange} name="garden_name" value={name.garden_name} id="standard-search" label="Garden Name" type="text" />
-      <button onClick={saveNewGarden}>Save</button>
-      
+      <Button onClick={saveNewGarden} variant="contained" color="primary" href="#contained-buttons">
+        Save
+      </Button>
     </div>
   )
 }

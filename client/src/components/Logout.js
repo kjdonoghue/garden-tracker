@@ -11,7 +11,7 @@ function Logout(props) {
 
     return(
         <div>
-            <b onClick={() => handleLogout()}>Logout</b>
+            <label onClick={() => handleLogout()}>LOGOUT</label>
        </div>
     )
 }

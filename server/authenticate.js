@@ -1,8 +1,4 @@
 const jwt = require('jsonwebtoken')
-require('dotenv').config()
-const connectionsString = process.env.CONNECTION_STRING
-const pgp = require("pg-promise")()
-const db = pgp(connectionsString)
 
 
 async function authenticate(req, res, next) {

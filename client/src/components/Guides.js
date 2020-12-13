@@ -63,12 +63,9 @@ function Guides(props) {
     };
 
     return (
-        <div>
+        <div className='guideContainer'>
             <h1>Growing Guides</h1>
-            <div>
-             <Zone/>         
-            </div>
-
+            
             <FormControl className={classes.formControl}>
                 <InputLabel id="demo-simple-select-label">Vegetable</InputLabel>
                 <Select onChange={handleChange} labelId="demo-simple-select-label" id="demo-simple-select" value={plant} >
@@ -77,10 +74,8 @@ function Guides(props) {
                     <MenuItem value="3">Broccoli</MenuItem>
                     <MenuItem value="4">Cabbage</MenuItem>
                     <MenuItem value="5">Carrots</MenuItem>
-                    <MenuItem value="6">Cauliflower</MenuItem>
-                    {/* <MenuItem value="7">Celery</MenuItem> */}
-                    <MenuItem value="8">Corn</MenuItem>
-                    {/* <MenuItem value="9">Cowpeas</MenuItem> */}
+                    <MenuItem value="6">Cauliflower</MenuItem>            
+                    <MenuItem value="8">Corn</MenuItem>                  
                     <MenuItem value="10">Cucumbers</MenuItem>
                     <MenuItem value="11">Eggplant</MenuItem>
                     <MenuItem value="13">Greens</MenuItem>
@@ -89,10 +84,7 @@ function Guides(props) {
                     <MenuItem value="16">Okra</MenuItem>        
                     <MenuItem value="20">Peas</MenuItem>
                     <MenuItem value="21">Peppers</MenuItem>
-                    <MenuItem value="22">Potatoes</MenuItem>
-                    {/* <MenuItem value="24">Summer Squash</MenuItem> */}
-                    {/* <MenuItem value="25">Winter Squash</MenuItem> */}
-                    {/* <MenuItem value="26">Sweet Potatoes</MenuItem> */}
+                    <MenuItem value="22">Potatoes</MenuItem>            
                     <MenuItem value="28">Tomatoes</MenuItem>        
                 </Select>
             </FormControl>

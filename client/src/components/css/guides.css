@@ -1,4 +1,22 @@
 .guide {
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+  
+}
+
+.zoneGuides {
+    display: none;
+}
+
+@media only screen and (min-width: 600px) {
+
+    .zoneGuides {
+        display: flex;
+    }
+
+    img {
+        width: 75%;
+        align-self: center
+    }
+
 }

@@ -1,7 +1,7 @@
-require('dotenv').config()
-const connectionsString = process.env.CONNECTION_STRING
-const pgp = require("pg-promise")()
-const db = pgp(connectionsString)
+// require('dotenv').config()
+// const connectionsString = process.env.CONNECTION_STRING
+// const pgp = require("pg-promise")()
+// const db = pgp(connectionsString)
 
 class GuidesController {
 

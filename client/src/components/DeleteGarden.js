@@ -49,7 +49,7 @@ function DeleteGarden(props) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateGardenLists: () => dispatch(actionCreators.onDeleteGarden)
+        updateGardenLists: () => dispatch(actionCreators.onDeleteGarden())
     }
 }
 

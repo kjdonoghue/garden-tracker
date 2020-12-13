@@ -1,17 +1,48 @@
-.menuContainer {
-    background-color: #20140c;
-    color: white;
-    height: 65px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    font-size: 18px;
-    
-
+.desktopMenu {
+    display: none;
 }
 
-.links {
+
+.mobileMenu {
+    background-color: #20140c;
     color: white;
-    margin: 10px;
+}
+
+.menuButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mobileMenu button {
+    color: white
+}
+
+.mobileLinks {
     text-decoration: none;
+    color: black
+}
+
+@media only screen and (min-width: 600px) {
+
+    .desktopMenu {
+        background-color: #20140c;
+        color: white;
+        height: 65px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        font-size: 18px;
+    }
+    
+    .links {
+        color: white;
+        margin: 10px;
+        text-decoration: none;
+    }
+
+    .mobileMenu {
+        display: none
+    }
+
+
 }

@@ -1,31 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const GardenController = require('../controllers/gardenController')
-const { decodeBase64 } = require('bcryptjs')
 const gardenController = new GardenController
-
-require('dotenv').config()
-const connectionsString = process.env.CONNECTION_STRING
-const pgp = require("pg-promise")()
-const db = pgp(connectionsString)
-const jwt = require("jsonwebtoken")
-var bcrypt = require('bcryptjs')
-const authenticate = require('../authenticate')
-
-// require('dotenv').config()
-
-// const connectionsString = process.env.CONNECTION_STRING
-// const pgp = require("pg-promise")()
-// const db = pgp(connectionsString)
-// const jwt = require("jsonwebtoken")
-// var bcrypt = require('bcryptjs')
-// const authenticate = require('../authenticate')
 
 //set primary garden
 router.post('/set-primary', gardenController.setPrimaryGarden)
-
-//getprimary garden
-router.get('/fetch-primary', gardenController.fetchPrimaryGarden)
 
 //Choose Garden Component - get all user gardens from gardens db
 router.get('/list-gardens', gardenController.fetchAllUserGardens)

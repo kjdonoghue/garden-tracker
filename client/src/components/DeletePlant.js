@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios'
+import {connect} from 'react-redux'
+import * as actionCreators from '../store/actions/actionCreators'
 
 
 //for material ui
@@ -27,10 +29,11 @@ function DeletePlant(props) {
             let success = response.data.success
     
             if (success) {
-            //   props.history.push('/garden')
-            window.location.href = (`/garden`)
+              props.onDeleted("update table")
+            // props.history.push('/garden')
+            // window.location.href = (`/garden`)
             } else {
-              console.log("did not update")
+              alert("did not update")
             }
           })
       }
@@ -50,6 +53,11 @@ function DeletePlant(props) {
 
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDeleted: (plant) => dispatch(actionCreators.onDeletePlant(plant))
+  }
+}
 
 
-export default DeletePlant
+export default connect(null, mapDispatchToProps)(DeletePlant)

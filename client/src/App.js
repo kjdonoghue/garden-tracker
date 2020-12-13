@@ -3,6 +3,7 @@ import './App.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import greenhouse from './components/images/greenhouse.png'
+import {NavLink} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,13 +30,13 @@ function App() {
           <p>and here</p>
           <div className='buttonContainer'>
             <div className="buttonItem">
-              <Button className="button" variant="contained" color="primary" href="/register"> Sign Up </Button>
+              <NavLink to='/register'><Button className="button" variant="contained" color="primary"> Sign Up </Button></NavLink>
             </div>
             <div className="buttonItem">
-              <Button className="button" variant="contained" color="primary" href="/login"> LogIn </Button>
+            <NavLink to='/login'><Button className="button" variant="contained" color="primary"> LogIn </Button></NavLink>
             </div>
             <div className="buttonItem">
-              <Button className="button" variant="contained" color="primary" href="/guides"> Go to the Guides </Button>
+            <NavLink to='/guides'><Button className="button" variant="contained" color="primary"> Go to the Guides </Button></NavLink>
             </div>
           </div>
 

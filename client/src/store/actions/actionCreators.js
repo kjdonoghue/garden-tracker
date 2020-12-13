@@ -51,3 +51,11 @@ export const onDeleteGarden = (garden) => {
         type: actionTypes.DELETE_GARDEN
     }
 }
+
+//on DeletePlant Component
+export const onDeletePlant = (plant) => {
+    return {
+        type: actionTypes.UPDATE_TABLE,
+        payload: plant
+    }
+}

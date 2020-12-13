@@ -16,5 +16,8 @@ export const SET_ZONE = 'SET_ZONE'
 //Logout Component
 export const ON_LOGOUT = 'ON_LOGOUT' 
 
-//Zone Component - change zones button
+//Zone Component - "change zones" button
 export const NOT_GUEST = 'NOT_GUEST'
+
+//DELETE PLANT - Update garden table after delete plant
+export const UPDATE_TABLE = 'UPDATE_TABLE'
