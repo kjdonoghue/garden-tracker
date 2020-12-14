@@ -12,8 +12,10 @@ import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
-
-
+import Button from '@material-ui/core/Button';
+import './css/addPlant.css'
+import Container from '@material-ui/core/Container'
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 //for material-ui select
 const useStyles = makeStyles((theme) => ({
@@ -92,14 +94,16 @@ function AddPlant(props) {
   }
 
   return (
-    <div>
-      <p>Add Plant</p>
-      <div>
-        <TextField onChange={handleOnChange} name="plant_name" value={newPlant.plant_name} id="standard-search" label="Variety" type="text" />
+    <Container component="main" maxWidth="xs">
+            <CssBaseline />
+    <div className='addPlantContainer'>
+      <h2>ADD A PLANT </h2>
+      <div >
+        <label className='addInput'>Variety: <TextField fullWidth onChange={handleOnChange} name="plant_name" value={newPlant.plant_name} id="standard-search" label="" type="text" /> </label>
       </div>
       <div>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Family</InputLabel>
+      <label className='addInput'>Plant Family:<FormControl fullWidth className={classes.formControl}>
+          <InputLabel id="demo-simple-select-label"></InputLabel>
           <Select onChange={handleOnChange} labelId="demo-simple-select-label" id="demo-simple-select" name="plant_family" value={newPlant.plant_family} >
             <MenuItem value="beans">Beans</MenuItem>
             <MenuItem value="beets">Beets</MenuItem>
@@ -126,10 +130,18 @@ function AddPlant(props) {
             <MenuItem value="tomatoes">Tomatoes</MenuItem>
           </Select>
         </FormControl>
-        <TextField onChange={handleOnChange} name="quantity" value={newPlant.quantity} id="standard-search" label="Quantity" type="text" />
-        <TextField onChange={handleOnChange} name="company" id="standard-search" label="Company" type="text" value={newPlant.company} />
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Start From</InputLabel>
+        </label>
+        </div>
+        <div>
+        <label className='addInput'>Quantity: <TextField fullWidth onChange={handleOnChange} name="quantity" value={newPlant.quantity} id="standard-search" label="" type="text" /> </label>
+        </div>
+        <div>
+        <label className='addInput'>Company: <TextField fullWidth onChange={handleOnChange} name="company" id="standard-search" label="" type="text" value={newPlant.company} /> </label>
+        </div>
+        <div>
+        <label className='addInput'>Start From: 
+        <FormControl fullWidth className={classes.formControl}>
+          <InputLabel id="demo-simple-select-label"></InputLabel>
           <Select onChange={handleOnChange} labelId="demo-simple-select-label" id="demo-simple-select" name="type" value={newPlant.type} >
             <MenuItem value="seed">Seed</MenuItem>
             <MenuItem value="plant">Plant</MenuItem>
@@ -137,13 +149,17 @@ function AddPlant(props) {
             <MenuItem value="slips">Slips</MenuItem>
           </Select>
         </FormControl>
-
+        </label>
+        </div>
+        <div>
+        <label className='addInput'> 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Grid container justify="space-around">
-            <KeyboardDatePicker
+        Sow Date:
+          <Grid  container justify="space-around">
+             <KeyboardDatePicker
               margin="normal"
               id="date-picker-dialog"
-              label="Sow Date"
+              label=""
               format="MM/dd/yyyy"
               name="sow_date"
               value={newPlant.sow_date}
@@ -151,17 +167,20 @@ function AddPlant(props) {
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}
+              fullWidth
             />
           </Grid>
         </MuiPickersUtilsProvider>
-
-
+        </label>
+              </div>
+              <div>
+              <label className='addInput'>Planting Date: 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <Grid container justify="space-around">
             <KeyboardDatePicker
               margin="normal"
               id="date-picker-dialog"
-              label="Plant Outside"
+              label=""
               format="MM/dd/yyyy"
               name="planting_date"
               value={newPlant.planting_date}
@@ -169,15 +188,19 @@ function AddPlant(props) {
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}
+              fullWidth
             />
           </Grid>
         </MuiPickersUtilsProvider>
+        </label>
       </div>
-      <div>
-        <button onClick={() => onSaveToGarden(newPlant)}>Save</button>
+      <div className='saveNewPlant'>
+      <Button fullWidth onClick={() => onSaveToGarden(newPlant)} variant="contained" color="primary" href="#contained-buttons" >
+        Save
+      </Button>      
       </div>
     </div>
-
+    </Container>   
 
   );
 }

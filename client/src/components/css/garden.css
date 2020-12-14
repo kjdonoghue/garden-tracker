@@ -9,6 +9,10 @@
     text-decoration: none;
 }
 
+.mobileAdd {
+    display:flex;
+}
+
 .desktopGardenContainer {
     display: none;
 

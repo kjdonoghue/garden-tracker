@@ -1,0 +1,28 @@
+.addPlantContainer {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.addInput {
+    display: flex;
+    align-items: baseline;
+    margin-right: 5px;
+    padding: 10px;
+
+}
+
+.saveNewPlant {
+    margin: 10px;
+}
+
+h2 {
+    margin-top: 25px;
+    align-self: center;
+}
+
+.saveNewPlant {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
