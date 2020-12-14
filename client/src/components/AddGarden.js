@@ -63,10 +63,9 @@ function AddGarden(props) {
   }
 
   return (
-    <div>
-      <p>create a new garden</p>
-      <TextField onChange={handleOnChange} name="garden_name" value={name.garden_name} id="standard-search" label="Garden Name" type="text" />
-      <Button onClick={saveNewGarden} variant="contained" color="primary" href="#contained-buttons">
+    <div>      
+      <TextField onChange={handleOnChange} name="garden_name" value={name.garden_name} id="standard-search" label="Add a New Garden" type="text" />
+      <Button onClick={saveNewGarden} size='small' variant="contained" color="primary" href="#contained-buttons" >
         Save
       </Button>
     </div>

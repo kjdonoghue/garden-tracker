@@ -40,6 +40,7 @@ function ChooseGarden(props) {
 
     //get all garden options
     const displayGardenOptions = () => {
+        console.log("displayGarden")
         axios.get('http://localhost:8080/garden/list-gardens')
         .then(response => {
             setGardens(response.data)
@@ -59,10 +60,17 @@ function ChooseGarden(props) {
 
     //display
         return (
-        <div>
-           <FormControl variant="outlined" className={classes.formControl}>
+        <div>        
+           {/* <FormControl variant="outlined" className={classes.formControl}>
                 <InputLabel id="demo-simple-select-outlined-label">Garden</InputLabel>
                 <Select labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" label="garden">
+                    {gardenList}
+                </Select>
+            </FormControl> */}
+
+            <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">Select A Garden</InputLabel>
+                <Select labelId="demo-simple-select-label" id="demo-simple-select" >
                     {gardenList}
                 </Select>
             </FormControl>

@@ -69,6 +69,7 @@ class GardenController {
         let id = parseInt(req.body.data.id)
         let plant_name = req.body.data.plant_name
         let plant_family = req.body.data.plant_family
+        let sow_date = req.body.data.sow_date
         let planting_date = req.body.data.planting_date
         let first_harvest = req.body.data.first_harvest
         let last_harvest = req.body.data.last_harvest
@@ -77,7 +78,7 @@ class GardenController {
         let type = req.body.data.type
         let quantity = req.body.data.quantity
 
-        db.none('UPDATE garden_plants SET plant_name=$1, plant_family=$2, planting_date=$3, first_harvest=$4, last_harvest=$5, notes=$6, company=$7, type=$8, quantity=$9 WHERE id=$10', [plant_name, plant_family, planting_date, first_harvest, last_harvest, notes, company, type, quantity, id])
+        db.none('UPDATE garden_plants SET plant_name=$1, plant_family=$2, planting_date=$3, first_harvest=$4, last_harvest=$5, notes=$6, company=$7, type=$8, quantity=$9, sow_date=$10 WHERE id=$11', [plant_name, plant_family, planting_date, first_harvest, last_harvest, notes, company, type, quantity, sow_date, id])
             .then(() => {
                 res.json({ success: true })
             }).catch(() => {
@@ -134,9 +135,9 @@ class GardenController {
     fetchPlantsForTable = async (req, res) => {
         let garden_id = req.params.id
 
-
-        let plants = await db.any('SELECT * FROM garden_plants WHERE garden_id = $1', [garden_id])
-
+        console.log()
+        let plants = await db.any("SELECT id, garden_id, plant_name, plant_family, TO_CHAR(sow_date, 'MM/DD/YYYY') as sow_date, TO_CHAR(planting_date, 'MM/DD/YYYY') as planting_date, TO_CHAR(first_harvest, 'MM/DD/YYYY') as first_harvest, TO_CHAR(last_harvest, 'MM/DD/YYYY') as last_harvest, notes, company, type, quantity FROM garden_plants WHERE garden_id=$1", [garden_id])
+        
         if (plants) {
             res.json(plants)
         } else {

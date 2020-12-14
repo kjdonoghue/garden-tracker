@@ -36,10 +36,7 @@ function GardenTableMobile(props) {
       <Divider />
     </div>
   })
-
-
-  console.log(plantList)
-
+  
   return (
     <div className='listContainer'>
     <div className={classes.root}>

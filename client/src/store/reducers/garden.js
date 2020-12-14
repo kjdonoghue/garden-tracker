@@ -9,7 +9,6 @@ const initialState = {
 const reducer = (state= initialState, action) => {
     
     if (action.type === 'SET_GARDEN') {
-        console.log(action.payload)
         return{...state,
             primary_garden: action.payload.garden_id,
             primary_garden_name: action.payload.garden_name

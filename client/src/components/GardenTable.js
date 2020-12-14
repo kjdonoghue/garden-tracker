@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { DataGrid } from '@material-ui/data-grid';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { NavLink } from "react-router-dom";
-// import history from '.././utils/history'
 import DeleteGarden from './DeleteGarden';
 import SetPrimaryGarden from './SetPrimaryGarden';
 import DeletePlant from './DeletePlant';
@@ -18,18 +19,20 @@ function GardenTable(props) {
     const [plants, setPlants] = useState([])
     const [selectedPlant, setSelectedPlant] = useState()
 
+    console.log(plants)
+
     //sets columns
     const column = [
         { field: 'id', hide: true },
         { field: 'plant_name', headerName: 'Vegetable' },
         { field: 'quantity', headerName: 'Quantity' },
         { field: 'type', headerName: 'Started As' },
-        { field: 'sow_date', headerName: 'Sow Date', description: 'The date you planted your seeds' },
-        { field: 'planting_date', headerName: 'Planting Date', description: 'The date you planted the plant in the garden' },
-        { field: 'first_harvest', headerName: 'First Harvest', description: 'The date of the first harvest' },
-        { field: 'last_harvest', headerName: 'Last Harvest', description: 'The date of the last harvest' },
-        { field: 'company', headerName: 'Company' },
-        { field: 'notes', headerName: 'Notes' }]
+        { field: 'sow_date', headerName: 'Sow Date', description: 'The date you planted your seeds',  width: 150 },
+        { field: 'planting_date', headerName: 'Planting Date', description: 'The date you planted the plant in the garden',  width: 150  },
+        { field: 'first_harvest', headerName: 'First Harvest', description: 'The date of the first harvest',  width: 150 },
+        { field: 'last_harvest', headerName: 'Last Harvest', description: 'The date of the last harvest',  width: 150 },
+        { field: 'company', headerName: 'Company', width: 150},
+        { field: 'notes', headerName: 'Notes', width: 400}]
 
 
     useEffect(() => {
@@ -40,6 +43,7 @@ function GardenTable(props) {
 
     //gets plants by garden id 
     const fetchGarden = (id) => {
+        console.log('fired')
         axios.get(`http://localhost:8080/garden/${id}`)
             .then(response => {
                 setPlants(response.data)
@@ -48,14 +52,20 @@ function GardenTable(props) {
 
     return (
         <div>
+             {props.displayGarden ? <div className='nameContainer'>
+                 <h2>{props.displayGardenName}</h2> 
+                 <SetPrimaryGarden id={props.displayGarden} name={props.displayGardenName} />
+             </div> : null}
+
             <div className="desktopGardenContainer">
-                <h2>{props.displayGardenName}</h2>
-                {props.displayGarden ? <div>
-                    <DeleteGarden id={props.displayGarden} />
-                    <SetPrimaryGarden id={props.displayGarden} name={props.displayGardenName} />
-                    <NavLink to={`/detail/${selectedPlant}`}><button>Edit</button></NavLink>
-                    <b><NavLink to="/add-plant"><button>Add Plant</button></NavLink></b>
-                    <DeletePlant id={selectedPlant} /> 
+                    {props.displayGarden ? <div className="plantButtons"> 
+                    <div className='addEdit'> 
+                    <span><NavLink to="/add-plant"><IconButton aria-label="add"> <AddCircleIcon /> </IconButton></NavLink></span>               
+                    <span><NavLink to={`/detail/${selectedPlant}`}><IconButton aria-label="edit"> <EditIcon /> </IconButton></NavLink></span>
+                    </div>
+                    <div className='deletePlant'>
+                    <span><DeletePlant id={selectedPlant} /></span>
+                    </div>
                 </div> : null}
                
               
@@ -67,12 +77,16 @@ function GardenTable(props) {
                         onSelectionChange={(newSelection) => {
                             setSelectedPlant(newSelection.rowIds[0])
                         }}
+                        hideFooter
                     />
                     </div>
             </div>
             <div className='mobileGardenContainer'>
                 <GardenTableMobile plants={plants} />
             </div>
+            {props.displayGarden ? <div className='deleteContainer'>
+                 <DeleteGarden id={props.displayGarden} />
+                 </div> : null}
 
         </div>
 

@@ -1,3 +1,5 @@
+
+/* Garden Table */
 .mobileGardenContainer {
     display: flex;
     
@@ -13,10 +15,34 @@
 }
 
 
+.nameContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.deleteContainer {
+    float: right;
+}
+
+/* Display Garden */
+
+h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.selectNewGarden {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Choose Garden */
+
 @media only screen and (min-width: 600px) {
 
-    
-
+    /* Garden Table */
     .mobileGardenContainer {
         display: none;
     
@@ -24,6 +50,42 @@
     
     .desktopGardenContainer {
         display: flex;
+        flex-direction: column;
+        margin: 25px
     
     }
+
+    .nameContainer {
+        display: flex;
+        margin: 25px;
+    }
+
+    .addEdit{
+       float: left
+    }
+
+    .deletePlant {
+        float: right
+
+    }
+
+    /* Display Garden */
+    h1 {
+        display: flex;
+        justify-content: center;
+    }
+    
+    h4 {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .selectNewGarden {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    /* Choose Garden */
+
 }    

@@ -1,26 +1,16 @@
+import React, {useState} from 'react'
 import axios from "axios";
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 
-//for material ui
-const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-  }));
-  
 
-function setPrimaryGarden(props) {
+function SetPrimaryGarden(props) {
 
-    // //for material ui
-    // const classes = useStyles();
+    //to change folor of favorite icon when set to favorite
+    const [primaryColor, setPrimaryColor] = useState('')
 
     const updatePrimaryGarden = (id, name) => {
 
-        console.log(id)
         axios.post('http://localhost:8080/garden/set-primary', {
             data: {
                 garden_id: id,
@@ -28,7 +18,7 @@ function setPrimaryGarden(props) {
             }
         }).then(response => {
             if (response.data.success) {
-                alert("Your primary garden has been set")
+                setPrimaryColor('secondary')    
             } else {
                 alert("Your primary garden did not save")
             }
@@ -37,16 +27,11 @@ function setPrimaryGarden(props) {
     }
 
     return (
-        <div>
-        {/* <IconButton onClick={() => updatePrimaryGarden(props.id, props.name)} aria-label="delete" disabled color="primary">
-            <FavoriteIcon />
-        </IconButton> */}
-        <button onClick={() => updatePrimaryGarden(props.id, props.name)}>Set Primary Garden</button>
-        </div>
+            <IconButton onClick={() => updatePrimaryGarden(props.id, props.name)} aria-label="favorite"> <FavoriteIcon color={primaryColor}/> </IconButton>
     )
 
 }
 
 
 
-export default setPrimaryGarden
+export default SetPrimaryGarden
