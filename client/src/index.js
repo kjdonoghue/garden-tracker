@@ -46,12 +46,6 @@ const token = localStorage.getItem('jsonwebtoken')
 //set header for axios
 setAuthenticationHeader(token)
 
-// keep user logged in even if restart
-// if(token) {
-//   store.dispatch({
-//     type: 'LOGGED_IN'
-//   })
-// }
 
 ReactDOM.render(
   <React.StrictMode>
@@ -64,11 +58,9 @@ ReactDOM.render(
             <Route component = {Login} path='/login' />
             <Route component = {App} path='/' exact />
             <Route component = {Guides} path='/guides' />
-            {/* <Route component = {requireAuth(DisplayGarden)} path='/garden' /> */}
-            <Route component = {DisplayGarden} path='/garden' />        
-            {/* <Route component = {requireAuth(Tasks)} path='/tasks' /> */}
-            <Route component = {PlantDetails} path='/detail/:id' />
-            <Route component = {AddPlant} path='/add-plant' />  
+            <Route component = {requireAuth(DisplayGarden)} path='/garden' />        
+             <Route component = {requireAuth(PlantDetails)} path='/detail/:id' />
+            <Route component = {requireAuth(AddPlant)} path='/add-plant' />  
             <Route component = {Zone} path='/zone' />
           </BaseLayout>
           </ThemeProvider>

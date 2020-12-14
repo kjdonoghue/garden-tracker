@@ -19,8 +19,6 @@ function GardenTable(props) {
     const [plants, setPlants] = useState([])
     const [selectedPlant, setSelectedPlant] = useState()
 
-    console.log(plants)
-
     //sets columns
     const column = [
         { field: 'id', hide: true },
@@ -43,7 +41,7 @@ function GardenTable(props) {
 
     //gets plants by garden id 
     const fetchGarden = (id) => {
-        console.log('fired')
+       
         axios.get(`http://localhost:8080/garden/${id}`)
             .then(response => {
                 setPlants(response.data)

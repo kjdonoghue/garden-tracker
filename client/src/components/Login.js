@@ -99,9 +99,9 @@ function Login(props) {
                 if (token) {
                     localStorage.setItem("jsonwebtoken", token)
                     setAuthenticationHeader(token)
-                    props.updatePrimaryGarden({ garden_name, garden_id })
-                    props.updateZone(zone)
                     props.onLogIn()
+                    props.updatePrimaryGarden({ garden_name, garden_id })
+                    props.updateZone(zone)                    
                     props.history.push("/garden")
                 } else {
                     setMessage(response.data.message)

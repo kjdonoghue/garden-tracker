@@ -1,13 +1,35 @@
+.selectGuide {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
 .guide {
     display: flex;
     flex-direction: column;
+    margin-top: 25px;
   
+}
+
+.guide label {
+    margin: 5px;
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+
 }
 
 .zoneGuides {
     display: none;
 }
 
+.description {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;;
+}
 @media only screen and (min-width: 600px) {
 
     .zoneGuides {
@@ -15,8 +37,8 @@
     }
 
     img {
+        max-width: 500px;
         width: 75%;
-        align-self: center
     }
 
 }

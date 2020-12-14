@@ -7,6 +7,8 @@ import Select from '@material-ui/core/Select';
 import Zone from './Zone'
 import './css/guides.css'
 import axios from "axios";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
 
 //for material-ui select
 const useStyles = makeStyles((theme) => ({
@@ -42,9 +44,10 @@ function Guides(props) {
 
     //map through guides to set layout
     const guideItem = guides.map(guide => {
-        return <div key={guide.id} className="guide"><b>{guide.vegetable}</b>
-            <div><img src={`./images/${guide.vegetable}.jpeg`}/></div>
-            <label>{guide.description}</label>    
+        return <div key={guide.id} className="guide">
+            <div className='imgContainer'><img src={`./images/${guide.vegetable}.jpeg`}/></div>
+            <h2>{guide.vegetable}</h2>
+            <label className='description'>{guide.description}</label>    
             <label><b>Days to Maturity:</b> {guide.days_maturity}</label>
             <label><b>Sow Method:</b> {guide.sow_method}</label>
             <label><b>Sow Time:</b> {guide.sow_time}</label>
@@ -61,11 +64,14 @@ function Guides(props) {
     };
 
     return (
+        <Container component="main" maxWidth="sm">
+        <CssBaseline />
         <div className='guideContainer'>
-            <h1>Growing Guides</h1>
-            
+            <h1>GROWING GUIDES</h1>
+            <div className='selectGuide'> 
+                <label>Select a Guide: </label>
             <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-label">Vegetable</InputLabel>
+                <InputLabel id="demo-simple-select-label"></InputLabel>
                 <Select onChange={handleChange} labelId="demo-simple-select-label" id="demo-simple-select" value={plant} >
                     <MenuItem value="1">Beans</MenuItem>
                     <MenuItem value="3">Broccoli</MenuItem>
@@ -78,11 +84,12 @@ function Guides(props) {
                     <MenuItem value="28">Tomatoes</MenuItem>        
                 </Select>
             </FormControl>
+            </div>
         <div>        
             {guideItem}    
         </div>
-    
         </div>
+        </Container>
     )
 }
 
