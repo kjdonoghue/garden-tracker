@@ -43,25 +43,21 @@ function NavMenu(props) {
 
   return (
     <div>
-      
-      
       <div className="desktopMenu">
-
-      <div className='dtMenuTitle'>
-      <Typography variant="h6" className={classes.title}>
-                  GARDEN TRACKER
-                </Typography>
-      </div>
-      <div className="dtMenuLinks">
-        <NavLink to="/" className="links">HOME </NavLink>
-        <NavLink to="/guides" className="links">GUIDES </NavLink>
-        <NavLink to="/zone" className="links">ZONE FINDER</NavLink>
-        <NavLink to="/garden" className="links">GARDEN </NavLink>
-        {!props.isAuth ? <NavLink to="/login" className="links">LOGIN</NavLink> : null}
-        {!props.isAuth ? <NavLink to="/register" className="links">REGISTER</NavLink> : null}
-        {props.isAuth ? <Logout /> : null}
-
-      </div>
+        <div className='dtMenuTitle'>
+          <Typography variant="h6" className={classes.title}>
+            <NavLink to="/" className="links">GARDEN TRACKER</NavLink>
+          </Typography>
+        </div>
+        <div className="dtMenuLinks">
+          <NavLink to="/" className="links">HOME </NavLink>
+          <NavLink to="/guides" className="links">GUIDES </NavLink>
+          <NavLink to="/zone" className="links">ZONE FINDER</NavLink>
+          <NavLink to="/garden" className="links">GARDEN </NavLink>
+          {!props.isAuth ? <NavLink to="/login" className="links">LOGIN</NavLink> : null}
+          {!props.isAuth ? <NavLink to="/register" className="links">REGISTER</NavLink> : null}
+          {props.isAuth ? <Logout /> : null}
+        </div>
       </div>
 
       <div className="mobileMenu">
@@ -73,10 +69,10 @@ function NavMenu(props) {
                   <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" className={classes.title}>
-                  GARDEN TRACKER
+                <NavLink to="/" className="links">GARDEN TRACKER</NavLink>
                 </Typography>
                 {!props.isAuth ? <NavLink to="/login" className="links"><Button color="inherit">Login</Button> </NavLink> : null}
-                {props.isAuth ? <Button color="inherit"><Logout /></Button>  : null}
+                {props.isAuth ? <Button color="inherit"><Logout /></Button> : null}
               </Toolbar>
             </AppBar>
           </div>
@@ -94,7 +90,7 @@ function NavMenu(props) {
             <MenuItem onClick={handleClose}><b><NavLink to="/garden" className="mobileLinks">Garden </NavLink></b></MenuItem>
             {!props.isAuth ? <MenuItem onClick={handleClose}><b><NavLink to="/login" className="mobileLinks">Login</NavLink></b></MenuItem> : null}
             {!props.isAuth ? <MenuItem onClick={handleClose}><b><NavLink to="/register" className="mobileLinks">Register</NavLink></b></MenuItem> : null}
-            
+
           </Menu>
         </div>
       </div>

@@ -1,21 +1,11 @@
 
 import './App.css';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import greenhouse from './components/images/greenhouse.png'
 import {NavLink} from 'react-router-dom'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-}));
 
 function App() {
-  const classes = useStyles();
-
 
   return (
     <div className="App">
@@ -24,10 +14,13 @@ function App() {
           <img src={greenhouse} alt="greenhouse" className="image" />
         </div>
         <div className="textContainer">
-          <h2>Headline here</h2>
-          <p>lots of copy here</p>
-          <p> and here</p>
-          <p>and here</p>
+        <div className='appHeader'><h1>KEEP YOUR GARDEN ORGANIZED THIS SEASON!</h1></div>   
+        <div className='appCopy'>
+              
+            <p>Whether you’re an experienced green thumb or a gardening newbie, Garden Tracker will help you organize and track your seed starting dates and gardening success.</p>
+            <p> Our grid style layout makes it easy see all your plant information at once, and sort by name, planting and harvesting dates, and where you purchased your plants or seeds making planning for next a breeze. </p>
+              <p>Plus our gardening guide provide detailed information on the needs of each variety of vegetable to ensure a productive season.</p>
+            </div>
           <div className='buttonContainer'>
             <div className="buttonItem">
               <NavLink to='/register'><Button className="button" variant="contained" color="primary"> Sign Up </Button></NavLink>

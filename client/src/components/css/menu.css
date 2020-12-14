@@ -2,6 +2,11 @@
     display: none;
 }
 
+.links {
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+}
 
 .mobileMenu {
     background-color: #20140c;
@@ -31,12 +36,14 @@
         display: flex;
         align-items: center;
         font-size: 16px;
+        justify-content: space-between;
     }
 
     .dtMenuTitle {
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        margin-left: 25px;
 
     }
 
@@ -44,7 +51,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        
+        margin-right: 25px;
     }
     
     .links {

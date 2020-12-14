@@ -77,7 +77,7 @@ function FindZone(props) {
 
   //maps through zone db information
   let ZoneItem = zone.map(zone => {
-    return <div className="zoneDetails">
+    return <div key={zone.lat} className="zoneDetails">
       <label>Last Frost: {zone.last_frost}</label>
       <label>First Frost: {zone.first_frost}</label>
       <label>Avg Extreme Min Temp: {zone.temp}F</label>
@@ -89,9 +89,10 @@ function FindZone(props) {
             <CssBaseline />
     <div className="zoneContainer">
       <h2>GROWING ZONE INFORMATION</h2>
-      <img src='./images/zone_map.jpg' />
+      <img src='./images/zone_map.jpg' alt='map' />
       {!props.isGuest ? <div className='findZone'>
         <h3>Find Your Growing Zone</h3>
+        <p>The USDA divides North America into 11 separate planting zones; each growing zone is 10°F warmer (or colder) in an average winter than the adjacent zone. Knowing your growing zone allows you to estimate your first and last frosts so that you can better gauge when to start your seeds and plant outside. Additionally, it can help you determine the best plants and varieties to grow in your backyard.</p>
         <p>Enter your zip code to see detailed information about your growing zone</p>
         <form className={classes.root} noValidate autoComplete="off">
             <TextField name="zone" onChange={handleOnChange} id="outlined-basic" label="Zip Code" variant="outlined" />

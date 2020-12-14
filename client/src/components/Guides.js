@@ -4,7 +4,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Zone from './Zone'
 import './css/guides.css'
 import axios from "axios";
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -45,7 +44,7 @@ function Guides(props) {
     //map through guides to set layout
     const guideItem = guides.map(guide => {
         return <div key={guide.id} className="guide">
-            <div className='imgContainer'><img src={`./images/${guide.vegetable}.jpeg`}/></div>
+            <div className='imgContainer'><img src={`./images/${guide.vegetable}.jpeg`} alt={guide.vegetable}/></div>
             <h2>{guide.vegetable}</h2>
             <label className='description'>{guide.description}</label>    
             <label><b>Days to Maturity:</b> {guide.days_maturity}</label>
@@ -69,7 +68,7 @@ function Guides(props) {
         <div className='guideContainer'>
             <h1>GROWING GUIDES</h1>
             <div className='selectGuide'> 
-                <label>Select a Guide: </label>
+                <label><b>Select a Guide: </b></label>
             <FormControl className={classes.formControl}>
                 <InputLabel id="demo-simple-select-label"></InputLabel>
                 <Select onChange={handleChange} labelId="demo-simple-select-label" id="demo-simple-select" value={plant} >

@@ -32,7 +32,7 @@ const reducer = (state= initialState, action) => {
             primary_garden: '',
             primary_garden_name: '',
             //new garden is just to trigger update for choose garden component
-            new_garden: ''
+            new_garden: action.payload.garden
         }
     } else {
         return state

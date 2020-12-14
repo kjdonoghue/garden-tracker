@@ -23,14 +23,15 @@ function GardenTable(props) {
     const column = [
         { field: 'id', hide: true },
         { field: 'plant_name', headerName: 'Vegetable' },
-        { field: 'quantity', headerName: 'Quantity' },
+        { field: 'plant_family', headerName: 'Family' },
+        { field: 'quantity', headerName: 'Quantity'},
         { field: 'type', headerName: 'Started As' },
-        { field: 'sow_date', headerName: 'Sow Date', description: 'The date you planted your seeds',  width: 150 },
-        { field: 'planting_date', headerName: 'Planting Date', description: 'The date you planted the plant in the garden',  width: 150  },
-        { field: 'first_harvest', headerName: 'First Harvest', description: 'The date of the first harvest',  width: 150 },
-        { field: 'last_harvest', headerName: 'Last Harvest', description: 'The date of the last harvest',  width: 150 },
-        { field: 'company', headerName: 'Company', width: 150},
-        { field: 'notes', headerName: 'Notes', width: 400}]
+        { field: 'sow_date', headerName: 'Sow Date', description: 'The date you planted your seeds',  width: 125 },
+        { field: 'planting_date', headerName: 'Planting Date', description: 'The date you planted the plant in the garden',  width: 125},
+        { field: 'first_harvest', headerName: 'First Harvest', description: 'The date of the first harvest',  width: 125 },
+        { field: 'last_harvest', headerName: 'Last Harvest', description: 'The date of the last harvest',  width: 125 },
+        { field: 'company', headerName: 'Company', width: 100},
+        { field: 'notes', headerName: 'Notes', width: 200}]
 
 
     useEffect(() => {
@@ -64,8 +65,7 @@ function GardenTable(props) {
                     <div className='deletePlant'>
                     <span><DeletePlant id={selectedPlant} /></span>
                     </div>
-                </div> : null}
-               
+                </div> : null}               
               
                 <div style={{ height: 250, width: '100%' }}>
                     <DataGrid

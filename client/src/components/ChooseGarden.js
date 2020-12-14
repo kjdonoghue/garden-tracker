@@ -40,7 +40,7 @@ function ChooseGarden(props) {
 
     //get all garden options
     const displayGardenOptions = () => {
-        
+
         axios.get('http://localhost:8080/garden/list-gardens')
             .then(response => {
                 setGardens(response.data)

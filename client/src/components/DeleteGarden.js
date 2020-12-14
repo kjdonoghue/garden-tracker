@@ -21,14 +21,13 @@ function DeleteGarden(props) {
     const classes = useStyles();
 
     const handleDelete = (id) => {
-        console.log(id)
         axios.delete(`http://localhost:8080/garden/delete-garden/${id}`)
         .then(response => {
 
             let success = response.data.success
     
             if (success) {
-                props.updateGardenLists()                
+                props.updateGardenLists(id)                
             } else {
               console.log("did not update")
             }
@@ -49,7 +48,7 @@ function DeleteGarden(props) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateGardenLists: () => dispatch(actionCreators.onDeleteGarden())
+        updateGardenLists: (garden) => dispatch(actionCreators.onDeleteGarden(garden))
     }
 }
 

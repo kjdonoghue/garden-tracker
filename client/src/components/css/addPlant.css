@@ -4,6 +4,10 @@
     
 }
 
+.editHeader {
+    text-align: center;
+}
+
 .addInput {
     display: flex;
     align-items: baseline;
@@ -11,6 +15,7 @@
     padding: 10px;
 
 }
+
 
 .saveNewPlant {
     margin: 10px;

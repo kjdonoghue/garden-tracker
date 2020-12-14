@@ -48,7 +48,8 @@ export const setSelectedGarden = (garden) => {
 //on DeleteGarden Component
 export const onDeleteGarden = (garden) => {
     return {
-        type: actionTypes.DELETE_GARDEN
+        type: actionTypes.DELETE_GARDEN,
+        payload: garden
     }
 }
 

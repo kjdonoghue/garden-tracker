@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
@@ -11,27 +10,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import './css/addPlant.css'
 
-//for material-ui select
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-  }
-}));
-
 
 function PlantDetails(props) {
-  //for material ui select
-  const classes = useStyles();
+
 
   const [plantDetails, setPlantDetails] = useState([])
   let id = props.match.params.id
@@ -40,7 +21,7 @@ function PlantDetails(props) {
     let id = props.match.params.id
     fetchPlantDetails(id)
 
-  }, [])
+  }, [props.match.params.id])
 
   const fetchPlantDetails = (id) => {
     axios.get(`http://localhost:8080/garden/plant/${id}`)
@@ -118,7 +99,7 @@ function PlantDetails(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div>
-        <h2>EDIT</h2>
+        <h2 className='editHeader'>EDIT</h2>
         <label className='addInput'> Plant: <TextField fullWidth onChange={handleOnChange} id="standard-search" value={plantDetails.plant_name} name="plant_name" type="text" /> </label>
         <label className='addInput'> Plant Family: <TextField fullWidth onChange={handleOnChange} id="standard-search" value={plantDetails.plant_family} name="plant_family" type="text" /> </label>
         <label className='addInput'>  Start From: <TextField fullWidth onChange={handleOnChange} id="standard-search" value={plantDetails.type} name="type" type="text" /> </label>
@@ -131,7 +112,7 @@ function PlantDetails(props) {
               <KeyboardDatePicker
                 margin="normal"
                 id="date-picker-dialog"
-                label="Sow Date"
+                label=""
                 format="MM/dd/yyyy"
                 name="sow_date"
                 value={plantDetails.sow_date}
@@ -151,7 +132,7 @@ function PlantDetails(props) {
               <KeyboardDatePicker
                 margin="normal"
                 id="date-picker-dialog"
-                label="Plant Outside"
+                label=""
                 format="MM/dd/yyyy"
                 name="planting_date"
                 value={plantDetails.planting_date}
@@ -171,7 +152,7 @@ function PlantDetails(props) {
               <KeyboardDatePicker
                 margin="normal"
                 id="date-picker-dialog"
-                label="First Harvest"
+                label=""
                 format="MM/dd/yyyy"
                 name="first_harvest"
                 value={plantDetails.first_harvest}
@@ -191,7 +172,7 @@ function PlantDetails(props) {
               <KeyboardDatePicker
                 margin="normal"
                 id="date-picker-dialog"
-                label="Last Harvest"
+                label=""
                 format="MM/dd/yyyy"
                 name="last_harvest"
                 value={plantDetails.last_harvest}

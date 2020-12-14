@@ -1,32 +1,14 @@
 import { useState } from 'react'
 import axios from 'axios'
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux'
 // import * as actionTypes from '../store/actions/actionTypes'
 import * as actionCreators from '../store/actions/actionCreators'
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-  }
-}));
 
 function AddGarden(props) {
-  //for material ui select
-    const classes = useStyles();
-
+  
   const [name, setName] = useState({})
 
   const saveNewGarden = () => {
