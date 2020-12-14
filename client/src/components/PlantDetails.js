@@ -6,8 +6,8 @@ import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
-import DeletePlant from "./DeletePlant";
-import history from '.././utils/history'
+// import DeletePlant from "./DeletePlant";
+// import history from '.././utils/history'
 
 
 //for material-ui select
@@ -211,7 +211,7 @@ function PlantDetails(props) {
       <button onClick={handleSave}>Save Changes</button>
 
       {/* <button onClick={handleDelete}>Delete</button> */}
-      <DeletePlant id={id} />
+      {/* <DeletePlant id={id} /> */}
 
     </div>
   )

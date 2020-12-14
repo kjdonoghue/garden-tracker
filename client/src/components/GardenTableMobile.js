@@ -5,8 +5,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import SpaIcon from '@material-ui/icons/Spa';
 import { NavLink } from 'react-router-dom';
 import './css/garden.css'
@@ -27,7 +25,7 @@ function GardenTableMobile(props) {
   const classes = useStyles();
 
   let plantList = props.plants.map(plant => {
-    return <div> <NavLink to={`/detail/${plant.id}`}>
+    return <div key={plant.id}> <NavLink to={`/detail/${plant.id}`}>
       <ListItemLink>
         <ListItemIcon>
           <SpaIcon color='primary' />

@@ -29,9 +29,22 @@
         color: white;
         height: 65px;
         display: flex;
-        justify-content: flex-end;
         align-items: center;
         font-size: 18px;
+    }
+
+    .dtMenuTitle {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+    }
+
+    .dtMenuLinks {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        
     }
     
     .links {

@@ -44,9 +44,7 @@ function Guides(props) {
     const guideItem = guides.map(guide => {
         return <div key={guide.id} className="guide"><b>{guide.vegetable}</b>
             <div><img src={`./images/${guide.vegetable}.jpeg`}/></div>
-            <label>{guide.description}</label>
-            <label>{guide.description_two}</label>
-            <label>{guide.description_three}</label>
+            <label>{guide.description}</label>    
             <label><b>Days to Maturity:</b> {guide.days_maturity}</label>
             <label><b>Sow Method:</b> {guide.sow_method}</label>
             <label><b>Sow Time:</b> {guide.sow_time}</label>
@@ -70,21 +68,13 @@ function Guides(props) {
                 <InputLabel id="demo-simple-select-label">Vegetable</InputLabel>
                 <Select onChange={handleChange} labelId="demo-simple-select-label" id="demo-simple-select" value={plant} >
                     <MenuItem value="1">Beans</MenuItem>
-                    <MenuItem value="2">Beets</MenuItem>
                     <MenuItem value="3">Broccoli</MenuItem>
-                    <MenuItem value="4">Cabbage</MenuItem>
-                    <MenuItem value="5">Carrots</MenuItem>
-                    <MenuItem value="6">Cauliflower</MenuItem>            
-                    <MenuItem value="8">Corn</MenuItem>                  
-                    <MenuItem value="10">Cucumbers</MenuItem>
-                    <MenuItem value="11">Eggplant</MenuItem>
+                    <MenuItem value="5">Carrots</MenuItem>        
+                    <MenuItem value="10">Cucumbers</MenuItem>                   
                     <MenuItem value="13">Greens</MenuItem>
-                    <MenuItem value="14">Leeks</MenuItem>
-                    <MenuItem value="15">Melons</MenuItem>
-                    <MenuItem value="16">Okra</MenuItem>        
+                    <MenuItem value="15">Melons</MenuItem>                 
                     <MenuItem value="20">Peas</MenuItem>
-                    <MenuItem value="21">Peppers</MenuItem>
-                    <MenuItem value="22">Potatoes</MenuItem>            
+                    <MenuItem value="21">Peppers</MenuItem>                    
                     <MenuItem value="28">Tomatoes</MenuItem>        
                 </Select>
             </FormControl>

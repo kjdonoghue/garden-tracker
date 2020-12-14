@@ -68,8 +68,6 @@ function FindZone(props) {
     }
   }
 
-  console.log(message)
-
   //handle change to have option to update zone
   const handleOnChangeGuest = () => {
     props.notGuest()

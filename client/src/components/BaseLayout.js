@@ -1,4 +1,5 @@
 import Menu from "./Menu"
+import Footer from './Footer'
 
 function BaseLayout(props) {
 
@@ -7,6 +8,7 @@ function BaseLayout(props) {
         <div>
             <Menu />
             {props.children}
+            <Footer />
 
         </div>
     )

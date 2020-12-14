@@ -4,7 +4,7 @@ import axios from 'axios'
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
 import { NavLink } from "react-router-dom";
-import history from '.././utils/history'
+// import history from '.././utils/history'
 import DeleteGarden from './DeleteGarden';
 import SetPrimaryGarden from './SetPrimaryGarden';
 import DeletePlant from './DeletePlant';

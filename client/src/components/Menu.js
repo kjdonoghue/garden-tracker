@@ -43,7 +43,16 @@ function NavMenu(props) {
 
   return (
     <div>
+      
+      
       <div className="desktopMenu">
+
+      <div className='dtMenuTitle'>
+      <Typography variant="h6" className={classes.title}>
+                  Garden Tracker
+                </Typography>
+      </div>
+      <div className="dtMenuLinks">
         <NavLink to="/" className="links">HOME </NavLink>
         <NavLink to="/guides" className="links">GUIDES </NavLink>
         <NavLink to="/zone" className="links">ZONE FINDER</NavLink>
@@ -52,6 +61,7 @@ function NavMenu(props) {
         {!props.isAuth ? <NavLink to="/register" className="links">REGISTER</NavLink> : null}
         {props.isAuth ? <Logout /> : null}
 
+      </div>
       </div>
 
       <div className="mobileMenu">
@@ -63,7 +73,7 @@ function NavMenu(props) {
                   <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" className={classes.title}>
-                  Hello Spring!
+                  Garden Tracker
                 </Typography>
                 {!props.isAuth ? <NavLink to="/login" className="links"><Button color="inherit">Login</Button> </NavLink> : null}
                 {props.isAuth ? <Button color="inherit"><Logout /></Button>  : null}

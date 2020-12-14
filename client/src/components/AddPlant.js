@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -40,15 +40,7 @@ function AddPlant(props) {
   const [newPlant, setNewPlant] = useState({garden_id: props.displayGardenID,
     plant_name: ''})
 
-  // garden id to plant info onload
-  // useEffect(() => {
-  //   setNewPlant({
-  //     ...newPlant,
-  //     garden_id: props.displayGardenID,
-  //     plant_name: ''
-  //   })
-  // }, [])
-
+  
   //update local state with information
   const handleOnChange = (e) => {
     setNewPlant({

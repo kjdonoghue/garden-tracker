@@ -9,5 +9,8 @@ router.post('/register', indexController.registerUser)
 //login exiting user
 router.post('/login', indexController.loginUser)
 
+//login as guest
+router.post('/guestlogin', indexController.loginGuest)
+
 
 module.exports = router
