@@ -7,6 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Message from './Message'
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,8 +85,12 @@ function FindZone(props) {
   })
 
   return (
-    <div className="ZoneContainer">
-      {!props.isGuest ? <div>
+    <Container component="main" maxWidth="sm">
+            <CssBaseline />
+    <div className="zoneContainer">
+      <h2>GROWING ZONE INFORMATION</h2>
+      <img src='./images/zone_map.jpg' />
+      {!props.isGuest ? <div className='findZone'>
         <h3>Find Your Growing Zone</h3>
         <p>Enter your zip code to see detailed information about your growing zone</p>
         <form className={classes.root} noValidate autoComplete="off">
@@ -97,7 +103,8 @@ function FindZone(props) {
       </div> : null}
 
       {props.isGuest ? <div className='zoneNum'>
-        <p>Your Zone is: {props.setZone} </p>
+      
+        <h4>Your Zone is: {props.setZone} </h4>
         {ZoneItem}
         <Button onClick={handleOnChangeGuest} variant="contained" color="primary">
           Change Zone
@@ -105,6 +112,7 @@ function FindZone(props) {
       </div> : null}
 
     </div>
+    </Container>
   );
 }
 

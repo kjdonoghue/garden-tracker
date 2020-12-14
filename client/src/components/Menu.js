@@ -49,7 +49,7 @@ function NavMenu(props) {
 
       <div className='dtMenuTitle'>
       <Typography variant="h6" className={classes.title}>
-                  Garden Tracker
+                  GARDEN TRACKER
                 </Typography>
       </div>
       <div className="dtMenuLinks">
@@ -73,7 +73,7 @@ function NavMenu(props) {
                   <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" className={classes.title}>
-                  Garden Tracker
+                  GARDEN TRACKER
                 </Typography>
                 {!props.isAuth ? <NavLink to="/login" className="links"><Button color="inherit">Login</Button> </NavLink> : null}
                 {props.isAuth ? <Button color="inherit"><Logout /></Button>  : null}
@@ -81,11 +81,6 @@ function NavMenu(props) {
             </AppBar>
           </div>
 
-          {/* <div className="menuButtonContainer">
-            {/* <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-              Menu
-            </Button> */}
-          {/* </div> */} 
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
@@ -99,8 +94,7 @@ function NavMenu(props) {
             <MenuItem onClick={handleClose}><b><NavLink to="/garden" className="mobileLinks">Garden </NavLink></b></MenuItem>
             {!props.isAuth ? <MenuItem onClick={handleClose}><b><NavLink to="/login" className="mobileLinks">Login</NavLink></b></MenuItem> : null}
             {!props.isAuth ? <MenuItem onClick={handleClose}><b><NavLink to="/register" className="mobileLinks">Register</NavLink></b></MenuItem> : null}
-            {props.isAuth ? <Logout /> : null}
-
+            
           </Menu>
         </div>
       </div>

@@ -54,8 +54,6 @@ class GardenController {
         let sow_date = req.body.data.sow_date
         let planting_date = req.body.data.planting_date
 
-
-
         db.none('INSERT INTO garden_plants (garden_id, plant_name, plant_family, company, type, quantity, sow_date, planting_date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [garden_id, plant_name, plant_family, company, type, quantity, sow_date, planting_date])
             .then(() => {
                 res.json({ success: true })
@@ -137,7 +135,7 @@ class GardenController {
 
         console.log()
         let plants = await db.any("SELECT id, garden_id, plant_name, plant_family, TO_CHAR(sow_date, 'MM/DD/YYYY') as sow_date, TO_CHAR(planting_date, 'MM/DD/YYYY') as planting_date, TO_CHAR(first_harvest, 'MM/DD/YYYY') as first_harvest, TO_CHAR(last_harvest, 'MM/DD/YYYY') as last_harvest, notes, company, type, quantity FROM garden_plants WHERE garden_id=$1", [garden_id])
-        
+
         if (plants) {
             res.json(plants)
         } else {

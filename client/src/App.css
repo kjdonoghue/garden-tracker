@@ -1,42 +1,81 @@
 .App {
   
-  background-color: #d2dbb1;
-  width: 100%;
-  height: 100%;
+  background-color: none;
+
 }
+
 
 .appContainer {
   display: flex;
+  flex-direction: column;
 }
 
 .imageContainer {
-  width: 50%;
   display: flex;
   justify-content: center;
 }
 
 .image {
-  margin-top: 75px;
-  margin-bottom: 100px;
-  width: 80%;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  width: 100%;
   
 }
 
 .textContainer {
-  width: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .buttonContainer {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
+  width: 90%
 }
+
  .buttonItem {
   margin: 10px;
 
  }
 
  .button {
-  width: 40%;
+  width: 100%;
  }
 
- 
+
+@media only screen and (min-width: 600px) {
+
+  .App {
+    background-color: #d2dbb1;
+  }
+
+  .appContainer {
+    flex-direction: row;
+  }
+
+  .textContainer {
+    margin-top: 80px;
+    width: 50%;
+  }
+
+  .imageContainer {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .image {
+    margin-top: 75px;
+    margin-bottom: 100px;
+    width: 80%;
+    
+  }
+
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    width: 50%
+  }
+}
