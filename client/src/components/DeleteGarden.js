@@ -21,7 +21,7 @@ function DeleteGarden(props) {
     const classes = useStyles();
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:8080/garden/delete-garden/${id}`)
+        axios.delete(`https://tranquil-taiga-06770.herokuapp.com/garden/delete-garden/${id}`)
         .then(response => {
 
             let success = response.data.success

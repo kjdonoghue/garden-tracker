@@ -5,6 +5,11 @@
     
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 .mobileLinkItem {
     text-decoration: none;
 }

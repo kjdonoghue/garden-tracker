@@ -16,6 +16,7 @@ import Button from '@material-ui/core/Button';
 import './css/addPlant.css'
 import Container from '@material-ui/core/Container'
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Message from './Message'
 
 //for material-ui select
 const useStyles = makeStyles((theme) => ({
@@ -39,8 +40,12 @@ function AddPlant(props) {
   //for material ui select
   const classes = useStyles();
 
+  //plant object that will be sent to db
   const [newPlant, setNewPlant] = useState({garden_id: props.displayGardenID,
-    plant_name: ''})
+    plant_name: '', sow_date: null, planting_date: null })
+
+  //set error message if user forgets plant name
+  const[message, setMessage] = useState()
 
   
   //update local state with information
@@ -54,7 +59,7 @@ function AddPlant(props) {
   // handle change to sow date
   const handleSowChange = (date) => {
     date.setDate(date.getDate())
-    console.log(date)
+    
     setNewPlant({
       ...newPlant,
       sow_date: date
@@ -64,7 +69,7 @@ function AddPlant(props) {
   // handle change to planting date
   const handlePlantingChange = (date) => {
     date.setDate(date.getDate())
-    console.log(date)
+    
     setNewPlant({
       ...newPlant,
       planting_date: date
@@ -74,9 +79,9 @@ function AddPlant(props) {
   //save new plant to db
   const onSaveToGarden = (plant) => {
     if (newPlant.plant_name == '') {
-      alert('You must enter a plant variety')
+      setMessage('You must enter a plant variety')
     } else {
-      axios.post('http://localhost:8080/garden/save-new',
+      axios.post('https://tranquil-taiga-06770.herokuapp.com/garden/save-new',
         {
           data: newPlant
         })
@@ -87,7 +92,7 @@ function AddPlant(props) {
           if (success) {
             props.history.push('/garden')
           } else {
-            console.log("did not update")
+            setMessage("There was an error, please try again")
           }
         })
     }
@@ -182,7 +187,7 @@ function AddPlant(props) {
               id="date-picker-dialog"
               label=""
               format="MM/dd/yyyy"
-              name="planting_date"
+              name="planting_date"            
               value={newPlant.planting_date}
               onChange={handlePlantingChange}
               KeyboardButtonProps={{
@@ -197,8 +202,9 @@ function AddPlant(props) {
       <div className='saveNewPlant'>
       <Button fullWidth onClick={() => onSaveToGarden(newPlant)} variant="contained" color="primary" href="#contained-buttons" >
         Save
-      </Button>      
+      </Button>        
       </div>
+      <Message message={message} />   
     </div>
     </Container>   
 

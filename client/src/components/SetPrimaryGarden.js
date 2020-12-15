@@ -11,7 +11,7 @@ function SetPrimaryGarden(props) {
 
     const updatePrimaryGarden = (id, name) => {
 
-        axios.post('http://localhost:8080/garden/set-primary', {
+        axios.post('https://tranquil-taiga-06770.herokuapp.com/garden/set-primary', {
             data: {
                 garden_id: id,
                 garden_name: name

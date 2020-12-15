@@ -14,7 +14,7 @@ function App() {
           <img src={greenhouse} alt="greenhouse" className="image" />
         </div>
         <div className="textContainer">
-        <div className='appHeader'><h1>KEEP YOUR GARDEN ORGANIZED THIS SEASON!</h1></div>   
+        <div className='appHeader'><h1>ORGANIZE AND TRACK YOUR PLANTS FOR GARDENING SUCCESS!</h1></div>   
         <div className='appCopy'>
               
             <p>Whether you’re an experienced green thumb or a gardening newbie, Garden Tracker will help you organize and track your seed starting dates and gardening success.</p>

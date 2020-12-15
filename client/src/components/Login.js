@@ -63,7 +63,7 @@ function Login(props) {
 
         } else {
 
-            axios.post('http://localhost:8080/login', {
+            axios.post('https://tranquil-taiga-06770.herokuapp.com/login', {
                 data: login
             })
                 .then(response => {
@@ -88,7 +88,7 @@ function Login(props) {
     }
 
     const handleGuestLogin = () => {
-        axios.post('http://localhost:8080/guestlogin')
+        axios.post('https://tranquil-taiga-06770.herokuapp.com/guestlogin')
             .then(response => {
 
                 const token = response.data.token

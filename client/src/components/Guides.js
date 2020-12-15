@@ -35,7 +35,7 @@ function Guides(props) {
  
     //fetch plants from db based on plant id
     const fetchGuide = (id) => {
-        axios.get(`http://localhost:8080/guides/${id}`)
+        axios.get(`https://tranquil-taiga-06770.herokuapp.com/guides/${id}`)
         .then(response => {
             setGuides(response.data)
         })

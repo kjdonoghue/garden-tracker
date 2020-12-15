@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './css/message.css'
 
 
 function Message(props) {
@@ -7,7 +7,7 @@ function Message(props) {
     let message = props.message
 
     return(
-        <div>
+        <div className='message'>
                 {message}
         </div>
     )

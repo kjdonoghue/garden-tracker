@@ -43,7 +43,7 @@ function GardenTable(props) {
     //gets plants by garden id 
     const fetchGarden = (id) => {
        
-        axios.get(`http://localhost:8080/garden/${id}`)
+        axios.get(`https://tranquil-taiga-06770.herokuapp.com/garden/${id}`)
             .then(response => {
                 setPlants(response.data)
             })
@@ -67,7 +67,7 @@ function GardenTable(props) {
                     </div>
                 </div> : null}               
               
-                <div style={{ height: 250, width: '100%' }}>
+                <div style={{ height: 500, width: '100%' }}>
                     <DataGrid
                         columns={column}
                         rows={plants}

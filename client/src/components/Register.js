@@ -59,10 +59,10 @@ function Register(props) {
 
     //handles the save - sending info to database to create user
     const handleSubmit = (e) => {
-        if (register.username == '' || register.password == '' || register.zone == '') {
+        if (register.username === '' || register.password === '' || register.zone === '') {
             setMessage("You must enter a username, password, and growing zone to create an account")
         } else {
-            axios.post('http://localhost:8080/register', {
+            axios.post('https://tranquil-taiga-06770.herokuapp.com/register', {
                 data: register
             }).then(response => {
 

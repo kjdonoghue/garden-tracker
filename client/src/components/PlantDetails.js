@@ -9,22 +9,25 @@ import Container from '@material-ui/core/Container'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import './css/addPlant.css'
-
+import Message from './Message'
 
 function PlantDetails(props) {
 
-
+  //plant information pulled from db and modified on page
   const [plantDetails, setPlantDetails] = useState([])
-  let id = props.match.params.id
 
+  //set error message if does not save properly
+  const[message, setMessage] = useState()
+  
   useEffect(() => {
     let id = props.match.params.id
     fetchPlantDetails(id)
 
   }, [props.match.params.id])
 
+  //pulls plant information from db
   const fetchPlantDetails = (id) => {
-    axios.get(`http://localhost:8080/garden/plant/${id}`)
+    axios.get(`https://tranquil-taiga-06770.herokuapp.com/garden/plant/${id}`)
       .then(response => {
         setPlantDetails(response.data[0])
       })
@@ -78,7 +81,7 @@ function PlantDetails(props) {
   };
 
   const handleSave = () => {
-    axios.post('http://localhost:8080/garden/save-edit',
+    axios.post('https://tranquil-taiga-06770.herokuapp.com/garden/save-edit',
       {
         data: plantDetails
       })
@@ -89,7 +92,7 @@ function PlantDetails(props) {
         if (success) {
           props.history.push('/garden')
         } else {
-          console.log("did not update")
+          setMessage("An error has occurred, please try again")
         }
       })
   }
@@ -205,7 +208,7 @@ function PlantDetails(props) {
             Save
       </Button>
         </div>
-
+        <Message message={message} />       
       </div>
     </Container>
   )

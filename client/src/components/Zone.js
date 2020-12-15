@@ -35,7 +35,7 @@ function FindZone(props) {
   //  get zone info based on zone id
   const fetchZoneInformation = (id) => {
     if (id) {
-      axios.get(`http://localhost:8080/guides/zone-information/${id}`)
+      axios.get(`https://tranquil-taiga-06770.herokuapp.com/guides/zone-information/${id}`)      
         .then(response => {
           setZone(response.data)
         })
@@ -55,9 +55,9 @@ function FindZone(props) {
   const handleOnClick = (zip) => {
     const zipCodeRegex = /^\d{5}$/
 
-    if (zipCodeRegex.test(zip) == false) {
+    if (zipCodeRegex.test(zip) === false) {
       setMessage("Please enter a valid zip code")
-    } else if (zip == '') {
+    } else if (zip === '') {
       alert("Please enter a valid zip code")
     } else {
       setMessage('')

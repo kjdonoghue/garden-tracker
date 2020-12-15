@@ -41,7 +41,7 @@ function ChooseGarden(props) {
     //get all garden options
     const displayGardenOptions = () => {
 
-        axios.get('http://localhost:8080/garden/list-gardens')
+        axios.get('https://tranquil-taiga-06770.herokuapp.com/garden/list-gardens')
             .then(response => {
                 setGardens(response.data)
             })

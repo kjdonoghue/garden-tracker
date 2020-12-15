@@ -15,7 +15,7 @@ function AddGarden(props) {
     if (name.garden_name == '') {
       alert("Please enter the name of your garden")
     } else {
-      axios.post('http://localhost:8080/garden/new-garden',
+      axios.post('https://tranquil-taiga-06770.herokuapp.com/garden/new-garden',
         {
           data: name
         })
