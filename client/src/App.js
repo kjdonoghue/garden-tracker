@@ -18,8 +18,8 @@ function App() {
         <div className='appCopy'>
               
             <p>Whether you’re an experienced green thumb or a gardening newbie, Garden Tracker will help you organize and track your seed starting dates and gardening success.</p>
-            <p> Our grid style layout makes it easy see all your plant information at once, and sort by name, planting and harvesting dates, and where you purchased your plants or seeds making planning for next a breeze. </p>
-              <p>Plus our gardening guide provide detailed information on the needs of each variety of vegetable to ensure a productive season.</p>
+            <p> Our grid-style layout makes it easy to see all your plant information at once, and sort by name, planting and harvesting dates, and where you purchased your plants or seeds making planning for next year a breeze. </p>
+              <p>Plus, our gardening guides provide detailed information on the needs of each variety of vegetable to ensure a productive season.</p>
             </div>
           <div className='buttonContainer'>
             <div className="buttonItem">
