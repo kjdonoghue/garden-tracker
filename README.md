@@ -104,7 +104,7 @@ Use PostgresSQL or ElephantSQL to set up and connect to your own database.
 
 <!-- CONTACT -->
 ## Created & Built By:
-Kathryn Donoghue - (kathrynjdonoghue@gmail.com) - email (https://github.com/kjdonoghue) - github<br>
+Kathryn Donoghue - https://github.com/kjdonoghue
 
 Project Link: [https://github.com/kjdonoghue/garden-tracker](https://github.com/kjdonoghue/garden-tracker)
 
