@@ -44,7 +44,7 @@ function Guides(props) {
     //map through guides to set layout
     const guideItem = guides.map(guide => {
         return <div key={guide.id} className="guide">
-            <div className='imgContainer'><img src={`./images/${guide.vegetable}.jpeg`} alt={guide.vegetable}/></div>
+            <div className='imgContainer'><img src={`./images/${guide.vegetable}.jpg`} alt={guide.vegetable}/></div>
             <h2>{guide.vegetable}</h2>
             <label className='description'>{guide.description}</label>    
             <label><b>Days to Maturity:</b> {guide.days_maturity}</label>
