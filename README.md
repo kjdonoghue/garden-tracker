@@ -39,7 +39,6 @@ Full List of Tools & Technologies:
 * JavaScript
 * Node
 * Express
-* Express-Sessions
 * Pg-Promise
 * PostgresSQL
 * ElephantSQL
