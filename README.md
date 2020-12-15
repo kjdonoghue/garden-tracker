@@ -24,7 +24,7 @@ View the live version of Garden Tracker: http://garden-tracker-dc.surge.sh/</p>
 ## About The Project
 Garden Tracker was designed to assist gardeners in planning and organizing their gardens tasks, including tracking seed starting, planting, and harvest dates, as well as where the plants or seeds came from to make planning and purchasing for future years a breeze. 
 
-The app also include growing guides about specific plants, and frost dates by zone - which can be identified by zip code - so that gardeners have all the information they need in one app.
+The app also includes growing guides about specific plants, and frost dates by zone - which can be identified by zip code - so that gardeners have all the information they need in one app.
 
 Users can create multiple gardens, designate their primary garden, as well as add, edit, and delete plant information.
 
