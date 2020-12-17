@@ -30,7 +30,7 @@ Users can create multiple gardens, designate their primary garden, as well as ad
 
 
 ### Built With
-Garden Tracker was built and deployed as a mobile-reponsive, full-stack web app. The frontend of the project was built using React, written in JavaScript and deployed on Surge. The backend of the project was created using Node and a PostgreSQL database to store user information and gardening guides, and was deployed on Heroku. The Phzmapi API was implimented to allow users to find their gardening zones by zip code. Login information is encryted and access to the website and database require JWT authorization.
+Garden Tracker was built and deployed as a mobile-reponsive, full-stack web app. The frontend of the project was built using React, written in JavaScript. The backend of the project was created with Node and Express using an MVC design pattern and a PostgreSQL database to store user information and gardening guides. The frontend was deployed on surge and the backend was deployed on Heroku. The Phzmapi API was implimented to allow users to find their gardening zones by zip code. Login information is encryted using Bcrypts and routes on both the front and back ends require JWT authorization.
 
 Full List of Tools & Technologies:
 
@@ -42,7 +42,7 @@ Full List of Tools & Technologies:
 * Pg-Promise
 * PostgresSQL
 * ElephantSQL
-* Phzmapi API
+* RESTful API
 * HTML
 * CSS
 * Material-UI
