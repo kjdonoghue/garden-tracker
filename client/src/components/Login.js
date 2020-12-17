@@ -87,6 +87,7 @@ function Login(props) {
         }
     }
 
+    //button for guest log in
     const handleGuestLogin = () => {
         axios.post('https://tranquil-taiga-06770.herokuapp.com/guestlogin')
             .then(response => {
@@ -123,27 +124,27 @@ function Login(props) {
                     </Typography>
                 <form className={classes.form} noValidate>
                     <TextField
+                        name="username"
+                        onChange={handleOnChange}
+                        label="Username"
                         variant="outlined"
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
-                        label="Username"
-                        name="username"
-                        onChange={handleOnChange}
+                        id="email" 
                         autoFocus
                     />
                     <TextField
+                        name="password"
+                        onChange={handleOnChange}
+                        label="Password"
                         variant="outlined"
                         margin="normal"
                         required
-                        fullWidth
-                        name="password"
-                        label="Password"
+                        fullWidth                
                         type="password"
                         id="password"
-                        autoComplete="current-password"
-                        onChange={handleOnChange}
+                        autoComplete="current-password"            
                     />
                     <div className={classes.submit}>
                         <Button variant="contained" color="primary" fullWidth onClick={handleSubmit}>

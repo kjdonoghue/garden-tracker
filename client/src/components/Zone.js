@@ -57,8 +57,8 @@ function FindZone(props) {
 
     if (zipCodeRegex.test(zip) === false) {
       setMessage("Please enter a valid zip code")
-    } else if (zip === '') {
-      alert("Please enter a valid zip code")
+    } else if (zip == '') {
+      setMessage("Please enter a valid zip code")
     } else {
       setMessage('')
       fetch(`https://phzmapi.org/${zip}.json`)
@@ -104,7 +104,6 @@ function FindZone(props) {
       </div> : null}
 
       {props.isGuest ? <div className='zoneNum'>
-      
         <h4>Your Zone is: {props.setZone} </h4>
         {ZoneItem}
         <Button onClick={handleOnChangeGuest} variant="contained" color="primary">

@@ -31,7 +31,7 @@ function AddGarden(props) {
               garden_name: ''
             })
           } else {
-            console.log("did not update")
+            alert("did not update")
           }
         })
     }

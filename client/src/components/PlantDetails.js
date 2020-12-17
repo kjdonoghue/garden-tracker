@@ -80,6 +80,7 @@ function PlantDetails(props) {
     })
   };
 
+  //save to db and nav back to garden pg
   const handleSave = () => {
     axios.post('https://tranquil-taiga-06770.herokuapp.com/garden/save-edit',
       {
@@ -108,18 +109,18 @@ function PlantDetails(props) {
         <label className='addInput'>  Start From: <TextField fullWidth onChange={handleOnChange} id="standard-search" value={plantDetails.type} name="type" type="text" /> </label>
         <label className='addInput'> Quantity: <TextField fullWidth onChange={handleOnChange} id="standard-search" value={plantDetails.quantity} name="quantity" type="text" /> </label>
         <label className='addInput'>  Supplier: <TextField fullWidth onChange={handleOnChange} id="standard-search" value={plantDetails.company} name="company" type="text" /> </label>
-
         <label className='addInput'> Sow Date:
+        
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Grid container justify="space-around">
               <KeyboardDatePicker
+                name="sow_date"
+                value={plantDetails.sow_date}
+                onChange={handleSowChange}
                 margin="normal"
                 id="date-picker-dialog"
                 label=""
                 format="MM/dd/yyyy"
-                name="sow_date"
-                value={plantDetails.sow_date}
-                onChange={handleSowChange}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
@@ -133,13 +134,13 @@ function PlantDetails(props) {
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Grid container justify="space-around">
               <KeyboardDatePicker
+                name="planting_date"
+                value={plantDetails.planting_date}
+                onChange={handlePlantingChange}
                 margin="normal"
                 id="date-picker-dialog"
                 label=""
                 format="MM/dd/yyyy"
-                name="planting_date"
-                value={plantDetails.planting_date}
-                onChange={handlePlantingChange}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
@@ -153,13 +154,13 @@ function PlantDetails(props) {
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Grid container justify="space-around">
               <KeyboardDatePicker
-                margin="normal"
-                id="date-picker-dialog"
-                label=""
-                format="MM/dd/yyyy"
                 name="first_harvest"
                 value={plantDetails.first_harvest}
                 onChange={handleFirstHarvestChange}
+                margin="normal"
+                id="date-picker-dialog"
+                label=""
+                format="MM/dd/yyyy"          
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
@@ -173,13 +174,13 @@ function PlantDetails(props) {
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Grid container justify="space-around">
               <KeyboardDatePicker
+                name="last_harvest"
+                value={plantDetails.last_harvest}
+                onChange={handleLastHarvestChange}
                 margin="normal"
                 id="date-picker-dialog"
                 label=""
                 format="MM/dd/yyyy"
-                name="last_harvest"
-                value={plantDetails.last_harvest}
-                onChange={handleLastHarvestChange}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
@@ -203,12 +204,15 @@ function PlantDetails(props) {
           fullWidth
         />    
         </label>
-        <div className='saveNewPlant'>
+
+        <div className='saveNewPlant'>   
           <Button fullWidth onClick={handleSave} variant="contained" color="primary" href="#contained-buttons" >
             Save
-      </Button>
+          </Button>
         </div>
+
         <Message message={message} />       
+      
       </div>
     </Container>
   )

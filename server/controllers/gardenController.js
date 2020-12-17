@@ -15,7 +15,6 @@ class GardenController {
             })
     }
 
-
     //Choose Garden Component - get all user gardens from gardens db
     fetchAllUserGardens = async (req, res) => {
         let id = parseInt(res.locals.id)
@@ -117,7 +116,6 @@ class GardenController {
     fetchPlantDetails = async (req, res) => {
         let plant_id = parseInt(req.params.id)
 
-
         let plantDetails = await db.any('SELECT id, plant_name, plant_family, sow_date, planting_date, first_harvest, last_harvest, notes, company, type, quantity FROM garden_plants WHERE id = $1', [plant_id])
 
         if (plantDetails) {
@@ -133,7 +131,6 @@ class GardenController {
     fetchPlantsForTable = async (req, res) => {
         let garden_id = req.params.id
 
-        console.log()
         let plants = await db.any("SELECT id, garden_id, plant_name, plant_family, TO_CHAR(sow_date, 'MM/DD/YYYY') as sow_date, TO_CHAR(planting_date, 'MM/DD/YYYY') as planting_date, TO_CHAR(first_harvest, 'MM/DD/YYYY') as first_harvest, TO_CHAR(last_harvest, 'MM/DD/YYYY') as last_harvest, notes, company, type, quantity FROM garden_plants WHERE garden_id=$1", [garden_id])
 
         if (plants) {

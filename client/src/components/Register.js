@@ -55,8 +55,6 @@ function Register(props) {
         })
     }
 
-    //need to ensure all fields are filled out
-
     //handles the save - sending info to database to create user
     const handleSubmit = (e) => {
         if (register.username === '' || register.password === '' || register.zone === '') {
@@ -80,46 +78,23 @@ function Register(props) {
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
+
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
                 </Avatar>
+
                 <Typography component="h1" variant="h5">
                     Register
               </Typography>
+
                 <form className={classes.form} noValidate>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        label="Username"
-                        name="username"
-                        onChange={handleOnChange}
-                        autoFocus
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        onChange={handleOnChange}
-                    />
+                    <TextField name="username" onChange={handleOnChange} label="Username" variant="outlined" margin="normal" required fullWidth autoFocus />
+                    <TextField name="password" onChange={handleOnChange} label="Password" type="password" variant="outlined" margin="normal" required fullWidth id="password" autoComplete="current-password" />
+                    
                     <div className={classes.submit}>
                         <FormControl fullWidth variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Zone</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                name="zone"
-                                onChange={handleOnChange}
-                                label="Zone"
-
-                            >
+                            <Select name="zone" onChange={handleOnChange} label="Zone" labelId="demo-simple-select-outlined-label" id="demo-simple-select-outlined" >
                                 <MenuItem value="1a">1a</MenuItem>
                                 <MenuItem value="1b">1b</MenuItem>
                                 <MenuItem value="2a">2a</MenuItem>
@@ -143,19 +118,21 @@ function Register(props) {
                             </Select>
                         </FormControl>
                     </div>
+
                     <div className={classes.submit}>
                         <Button variant="contained" color="primary" fullWidth onClick={handleSubmit}>
                             Register
                     </Button>
                     </div>
+
                     <Grid container>
                         <Grid item xs>
-
                         </Grid>
                         <Grid item>
                             <NavLink to="/zone" variant="body2"> Don't know your zone? Find it here</NavLink>
                         </Grid>
                     </Grid>
+                    
                 </form>
                 <Message message={message} />
             </div>

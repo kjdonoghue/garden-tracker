@@ -3,6 +3,7 @@ var bcrypt = require('bcryptjs')
 
 class IndexController {
 
+    //register user
     registerUser = async (req, res) => {
 
         let username = req.body.data.username
@@ -30,6 +31,7 @@ class IndexController {
 
     }
 
+    //log in for user
     loginUser = async (req, res) => {
 
         let username = req.body.data.username
@@ -59,13 +61,12 @@ class IndexController {
 
     }
 
-
+    //log in for log in as guest button
     loginGuest = async (req, res) => {
 
         let username = "MontyDon"
         let password = "Nigel86"
 
-       
         //check to see if user is in db
         const user = await db.any('SELECT id, username, password, zone, garden_name, garden_id from users WHERE username = $1', [username])
     
@@ -87,8 +88,6 @@ class IndexController {
             }
 
     }
-
-
 
 
 }
