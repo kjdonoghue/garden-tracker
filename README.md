@@ -84,22 +84,9 @@ You can use Garden Tracker to create or modify your own gardening app, just fork
 
 ### Installation
 
-1. Clone to local machine
+Clone to local machine
 
 git clone https://github.com/kjdonoghue/garden-tracker
-
-2. Install NPM packages
-
-    npm install bcryptjs<br>
-    npm install dotenv<br>
-    npm install express<br>
-    npm install express-session<br>
-    npm install mustache-express<br>
-    npm install pg-promise<br>
-
-3. Create a database
-
-Use PostgresSQL or ElephantSQL to set up and connect to your own database.
 
 <!-- CONTACT -->
 ## Created & Built By:
