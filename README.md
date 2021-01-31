@@ -5,8 +5,9 @@
 
 # <p align="center"><b>Garden Tracker | Full Stack Web App</b>
 
+See a video walkthrough of Garden Tracker : [Garden Tracker](https://youtu.be/I1OJOzf24rE)
+<br>View the live version of Garden Tracker: http://garden-tracker-dc.surge.sh/</p>
 
-View the live version of Garden Tracker: http://garden-tracker-dc.surge.sh/</p>
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
